@@ -4,6 +4,7 @@ if(isset($_GET['act'])){
 }else{
     $act ="";
 }
+include "model/pdo.php";
 include "view/header.php";
 if(!empty($act)){
     switch($act){
