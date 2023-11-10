@@ -1,7 +1,11 @@
 <?php 
-include "view/header.php";
 if(isset($_GET['act'])){
     $act = $_GET['act'];
+}else{
+    $act ="";
+}
+include "view/header.php";
+if(!empty($act)){
     switch($act){
         case 'about':
             include "view/about.php";
@@ -22,6 +26,8 @@ if(isset($_GET['act'])){
             include "view/testimonial.php";
             break;
     }
+}else{
+    include "view/home.php";
 }
 include "view/footer.php";
 ?>
