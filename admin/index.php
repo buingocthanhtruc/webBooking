@@ -10,11 +10,11 @@ include "View/sideBar.php";
 
 if(!empty($act)){
     switch($act){
+        case 'formCreate':
+            include "View/formCreate.php";
+            break;
         case 'listBooking':
             include "View/listBooking.php";
-            break;
-        case 'service':
-            include "view/service.php";
             break;
         case 'menu':
             include "view/menu.php";
