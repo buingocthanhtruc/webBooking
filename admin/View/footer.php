@@ -27,6 +27,17 @@
 <!-- custom js -->
 <script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
 <script type="text/javascript" src="assets/js/script.js "></script>
+
+<!-- Lấy ngày không bị trong quá khứ -->
+<script language="javascript">
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+$('#date_picker').attr('min', today);
+</script>
 </body>
 
 </html>
