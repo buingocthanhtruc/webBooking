@@ -6,7 +6,6 @@ function pdo_get_connection(){
     try {
         $conn = new PDO("mysql:host=$servername;dbname=DB_BOOKING", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "success";
         return $conn;
 
     } catch(PDOException $e) {
