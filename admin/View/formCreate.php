@@ -43,7 +43,7 @@
                   </div>
 
                   <div class="form-group form-default">
-                    <input type="text" name="phone" class="form-control" required="" maxlength="6">
+                    <input type="text" name="phone" class="form-control" required="">
                     <span class="form-bar"></span>
                     <label class="float-label">Số điện thoại</label>
                   </div>
@@ -113,7 +113,7 @@
                     <div class="card-block">
                       <form class="form-material">
                         <div class="form-group form-default">
-                          <ul class="nav nav-tabs form-control d-flex">
+                          <ul class="nav nav-tabs form-control d-flex mb-4">
                             <li class="active mr-4"><a data-toggle="tab" href="#home">Món khai vị</a></li>
                             <li><a class="mr-4" data-toggle="tab" href="#menu1">Đồ uống</a></li>
                             <li><a class="mr-4" data-toggle="tab" href="#menu2">Món chính</a></li>
@@ -121,26 +121,38 @@
                           </ul>
 
                           <div class="tab-content">
-                            <div id="home"
-                              class="tab-pane fade in active mt-4 d-flex justify-content-between align-items-center">
-                              <h6>Bò K</h6>
+                            <div id="home" class="tab-pane fade in active">
                               <div class="d-flex align-items-center">
+                                <h6 class="col-3">Bò K</h6>
                                 <span class="mr-2">6.000.000đ</span>
-                                <select class="form-select form-control" aria-label="Default select example">
+                                <select class="form-select form-control" name="beef"
+                                  aria-label="Default select example">
                                   <option selected>Số lượng</option>
                                   <?php 
                                       for($i=0;$i<=70 ;$i++){
-                                        echo '<option value="1">'.$i.'</option>';
+                                        echo '<option value="'.$i.'">'.$i.'</option>';
                                       }
                                     ?>
                                   <span class="form-bar"></span>
                                 </select>
                               </div>
                             </div>
-                            <div id="menu1" class="tab-pane fade">
-                              <h3>Menu 1</h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                ea commodo consequat.</p>
+
+                            <div id="menu1" class="tab-pane fade in">
+                              <div class="d-flex align-items-center">
+                                <h6 class="col-3">Nước Cam</h6>
+                                <span class="mr-2">100.000đ</span>
+                                <select class="form-select form-control" name="beef"
+                                  aria-label="Default select example">
+                                  <option selected>Số lượng</option>
+                                  <?php 
+                                      for($i=0;$i<=70 ;$i++){
+                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                      }
+                                    ?>
+                                  <span class="form-bar"></span>
+                                </select>
+                              </div>
                             </div>
                           </div>
                         </div>
