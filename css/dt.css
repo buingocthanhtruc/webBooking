@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Poppins:wght@100;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+.head {
+    width: 100%;
+    height: 300px;
+}
+
+.head .logo {
+    width: 400px;
+    height: 50px;
+    padding: 10px 0;
+}
+
+.head .logo a {
+    list-style-type: none;
+    text-decoration: none;
+    color: #FEA116;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.infor {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+}
+
+.infor_restaurant {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.infor_cutomers {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.infor_bill {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#customers {
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FEA116;
+    color: white;
+}
+
+.total {
+    margin-top: 20px;
+    width: 39%;
+    float: right;
+    border-top: 1px solid #ddd;
+}
+
+.total td {
+    border: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.total td:nth-child(1) {
+    font-weight: 700;
+}
