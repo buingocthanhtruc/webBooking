@@ -126,7 +126,7 @@
                               <h6>Bò K</h6>
                               <div class="d-flex align-items-center">
                                 <span class="mr-2">6.000.000đ</span>
-                                <select class="form-select form-control" aria-label="Default select example">
+                                <select class="form-select form-control" aria-label="Default select example" name="test">
                                   <option selected>Số lượng</option>
                                   <?php 
                                       for($i=0;$i<=70 ;$i++){
