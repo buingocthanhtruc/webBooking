@@ -50,10 +50,11 @@
 
                   <div class="form-group form-default">
                     <select class="form-select form-control" name="numberOfPeople" aria-label="Default select example">
-                      <option selected>Số người</option>
+
                       <?php 
+                      echo '<option selected>Số người</option>';
                         for($i=0;$i<=100;$i++){
-                          echo '<option value="1">'.$i.'</option>';
+                          echo '<option value="'.$i.'">'.$i.'</option>';
                         }
                       ?>
                       <!-- <span class="form-bar"></span> -->
@@ -127,8 +128,8 @@
                                 <span class="mr-2">6.000.000đ</span>
                                 <select class="form-select form-control" name="beef"
                                   aria-label="Default select example">
-                                  <option selected>Số lượng</option>
                                   <?php 
+                                  echo '<option selected>Số lượng</option>';  
                                       for($i=0;$i<=70 ;$i++){
                                         echo '<option value="'.$i.'">'.$i.'</option>';
                                       }
@@ -142,10 +143,10 @@
                               <div class="d-flex align-items-center">
                                 <h6 class="col-3">Nước Cam</h6>
                                 <span class="mr-2">100.000đ</span>
-                                <select class="form-select form-control" name="beef"
+                                <select class="form-select form-control" name="orange"
                                   aria-label="Default select example">
-                                  <option selected>Số lượng</option>
                                   <?php 
+                                  echo '<option selected>Số lượng</option>';
                                       for($i=0;$i<=70 ;$i++){
                                         echo '<option value="'.$i.'">'.$i.'</option>';
                                       }
