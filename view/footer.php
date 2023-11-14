@@ -2,14 +2,14 @@
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
-                        <a class="btn btn-link" href="?act=about">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="?act=booking">Reservation</a>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Công Ty</h4>
+                        <a class="btn btn-link" href="?act=about">Về Chúng Tôi</a>
+                        <a class="btn btn-link" href="">Liên Hệ Với Chúng tôi</a>
+                        <a class="btn btn-link" href="?act=booking">Đặt Chỗ</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>FPT College Trinh Van Bo Street, Phuong Canh Ward, Tu Liem District</p>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Liên Hệ</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Phố Trịnh Văn Bô, Phường Phương Canh, Quận Nam Từ Liêm, TP.Hà Nội</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>0943143004</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>tltrestaurant@gmail.com</p>
                         <div class="d-flex pt-2">
@@ -20,18 +20,18 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
-                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Mở Cửa</h4>
+                        <h5 class="text-light fw-normal">Thứ Hai - Thứ Bảy</h5>
                         <p>09AM - 09PM</p>
-                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <h5 class="text-light fw-normal">Chủ Nhật</h5>
                         <p>10AM - 08PM</p>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Bản Tin</h4>
                         <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                         <div class="position-relative mx-auto" style="max-width: 400px;">
                             <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Đăng Ký</button>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
-                                <a href="">Home</a>
+                                <a href="">Trang Chủ</a>
                                 <a href="">Cookies</a>
-                                <a href="">Help</a>
+                                <a href="">trung Tâm Hỗ Trợ</a>
                                 <a href="">FQAs</a>
                             </div>
                         </div>

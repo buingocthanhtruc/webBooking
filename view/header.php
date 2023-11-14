@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Restoran - Bootstrap Restaurant Template</title>
+    <title>TLT Restaurant</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,30 +54,30 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
-                        <a href="index.php" class="nav-item nav-link <?= $act==""?"active":"" ?>">Home</a>
-                        <a href="index.php?act=about" class="nav-item nav-link <?= $act=="about"?"active":"" ?>">About</a>
-                        <a href="index.php?act=service" class="nav-item nav-link <?= $act=="service"?"active":"" ?>">Service</a>
-                        <a href="index.php?act=menu" class="nav-item nav-link <?= $act=="menu"?"active":"" ?>">Menu</a>
+                        <a href="index.php" class="nav-item nav-link <?= $act==""?"active":"" ?>">Trang Chủ</a>
+                        <a href="index.php?act=about" class="nav-item nav-link <?= $act=="about"?"active":"" ?>">Thông Tin</a>
+                        <a href="index.php?act=service" class="nav-item nav-link <?= $act=="service"?"active":"" ?>">Dịch Vụ</a>
+                        <a href="index.php?act=menu" class="nav-item nav-link <?= $act=="menu"?"active":"" ?>">Thực Đơn</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
                             <div class="dropdown-menu m-0">
-                                <a href="index.php?act=booking" class="dropdown-item">Booking</a>
-                                <a href="index.php?act=team" class="dropdown-item">Our Team</a>
-                                <a href="index.php?act=testimonial" class="dropdown-item">Testimonial</a>
+                                <a href="index.php?act=booking" class="dropdown-item">Đặt Trước</a>
+                                <a href="index.php?act=team" class="dropdown-item">Đội Của Chúng Tôi</a>
+                                <a href="index.php?act=testimonial" class="dropdown-item">Chứng Thực</a>
                             </div>
                         </div>
                         <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     </div>
-                    <a href="" class="btn btn-primary py-2 px-4">Book A Table</a>
+                    <a href="" class="btn btn-primary py-2 px-4">Đặt Bàn</a>
                 </div>
             </nav>
             <?php if(isset($act) && $act!="") :?>
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
                 <div class="container text-center my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">About Us</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Thông Tin Về Chúng Tôi</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
-                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
                             <li class="breadcrumb-item"><a href="?act=<?=$act?>"><?=$act ?></a></li>
                         </ol>
                     </nav>
@@ -89,9 +88,9 @@
                     <div class="container my-5 py-5">
                         <div class="row align-items-center g-5">
                             <div class="col-lg-6 text-center text-lg-start">
-                                <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
-                                <p class="text-white animated slideInLeft mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                                <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A Table</a>
+                                <h1 class="display-3 text-white animated slideInLeft">Tận Hưởng<br>Bữa Ăn Ngon</h1>
+                                <p class="text-white animated slideInLeft mb-4 pb-2">Nhà Hàng Chuẩn 5 SAO!</p>
+                                <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Đặt Bàn</a>
                             </div>
                             <div class="col-lg-6 text-center text-lg-end overflow-hidden">
                                 <img class="img-fluid" src="img/hero.png" alt="">
