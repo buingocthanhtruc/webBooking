@@ -18,14 +18,6 @@
           Dashboard
         </div>
         <ul class="pcoded-item pcoded-left-item">
-          <li class="active">
-            <!-- <li class="">
-            <a href="index.php" class="waves-effect waves-dark">
-              <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-              <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-              <span class="pcoded-mcaret"></span>
-            </a>
-          </li> -->
 
           <li>
             <a href="index.php?act=listBooking" class="waves-effect waves-dark">
@@ -38,7 +30,7 @@
 
         </ul>
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
-          Forms &amp; Tables
+          Quản lý danh mục sản phẩm
         </div>
         <ul class="pcoded-item pcoded-left-item">
           <li>
@@ -49,16 +41,16 @@
             </a>
           </li>
           <li>
-            <a href="bs-basic-table.html" class="waves-effect waves-dark">
+            <a href="?act=quanLyUser" class="waves-effect waves-dark">
               <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-              <span class="pcoded-mtext" data-i18n="nav.form-components.main">Basic Table</span>
+              <span class="pcoded-mtext" data-i18n="nav.form-components.main">Danh sách người dùng</span>
               <span class="pcoded-mcaret"></span>
             </a>
           </li>
         </ul>
 
         <div class="pcoded-navigation-label" data-i18n="nav.category.forms">
-          Chart &amp; Maps
+          Biểu đồ thống kê
         </div>
         <ul class="pcoded-item pcoded-left-item">
           <li>
@@ -66,12 +58,6 @@
               <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
               <span class="pcoded-mtext" data-i18n="nav.form-components.main">Chart</span>
               <span class="pcoded-mcaret"></span>
-            </a>
-          </li>
-          <li>
-            <a href="map-google.html" class="waves-effect waves-dark">
-              <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
-              <span class="pcoded-mtext" data-i18n="nav.form-components.main">Maps</span>
             </a>
           </li>
         </ul>

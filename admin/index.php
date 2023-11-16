@@ -4,10 +4,12 @@ if(isset($_GET['act'])){
 }else{
     $act ="";
 }
-// include "model/pdo.php";
+include "../model/pdo.php";
 include "View/header.php";
 include "View/sideBar.php";
-
+include "../model/category.php";
+include "../model/food.php";
+$allDanhMuc = loadall_danhmuc();
 if(!empty($act)){
     switch($act){
         case 'formCreate':
@@ -19,15 +21,22 @@ if(!empty($act)){
         case 'qlsp':
             include "view/quanLySP.php";
             break;
-        // case 'booking':
-        //     include "view/booking.php";
-        //     break;
-        // case 'team':
-        //     include "view/team.php";
-        //     break;
-        // case 'testimonial':
-        //     include "view/testimonial.php";
-        //     break;
+        case 'quanLyUser':
+            include "view/quanLyUser.php";
+            break;
+        case 'addDm':
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                addDanhMuc($_POST['category']);
+                echo "<script>location.href = '?act=qlsp'</script>";
+            }
+            break;
+        case 'editDm':
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                addDanhMuc($_POST['category']);
+                echo "<script>location.href = '?act=qlsp'</script>";
+            }
+            break;
+        
     }
 }else{
     include "View/home.php";

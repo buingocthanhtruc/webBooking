@@ -65,10 +65,13 @@
                                 <a href="index.php?act=team" class="dropdown-item">Đội Của Chúng Tôi</a>
                                 <a href="index.php?act=testimonial" class="dropdown-item">Chứng Thực</a>
                             </div>
-                        </div>
+                        </div> 
+                        <a href="?act=login" class="nav-link nav-item">Đăng nhập</a>
                         <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     </div>
                     <a href="" class="btn btn-primary py-2 px-4">Đặt Bàn</a>
+
+
                 </div>
             </nav>
             <?php if(isset($act) && $act!="") :?>

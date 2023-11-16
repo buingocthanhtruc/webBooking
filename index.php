@@ -26,6 +26,12 @@ if(!empty($act)){
         case 'testimonial':
             include "view/testimonial.php";
             break;
+        case 'login':
+            include "view/login.php";
+            break;
+        case 'signup':
+            include "view/signup.php";
+            break;
     }
 }else{
     include "view/home.php";
