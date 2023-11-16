@@ -13,9 +13,12 @@ if(isset($_GET['act'])) {
     $descriptions = "Thông Tin";
   }
   
+  if($_GET['act'] === 'qlsp') {
+    $title = "Quản Lý Sản Phẩm";
+    $descriptions = "Thông Tin";
+  }
+  
 }
-
-
 
 ?>
 
