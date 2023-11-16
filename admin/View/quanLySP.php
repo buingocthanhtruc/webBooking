@@ -224,7 +224,7 @@
                             <div class="modal-body">
                               <form>
                                 <div class="form-group">
-                                  <label for="recipient-name" class="col-form-label">Tên Danh Mục:</label>
+                                  <label for="recipient-name" class="col-form-label">Tên Món Ăn:</label>
                                   <input type="text" class="form-control" id="recipient-name" value="Nuoc Cam">
                                 </div>
                                 <div class="form-group">
