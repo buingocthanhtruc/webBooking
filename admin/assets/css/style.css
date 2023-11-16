@@ -23554,8 +23554,17 @@ td .up-de {
 }
 
 .up-de:nth-child(2) {
-  background-color: red;
+  background-color: #f30606;
 }
-.box-active a i{
+
+.box-active a i {
   margin-top: 20px;
+}
+
+.box-active a:hover {
+  background-color: #0180dd;
+}
+
+.box-active a:hover:nth-child(2) {
+  background: #ff5252;
 }
