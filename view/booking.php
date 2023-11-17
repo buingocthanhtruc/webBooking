@@ -72,7 +72,6 @@
         </div>
         <div class="col-md-6 ">
           <div class="p-2 wow fadeInUp row" data-wow-delay="0.2s">
-
             <ul class="nav nav-pills mb-2">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
                 <li class="nav-item">
@@ -85,8 +84,8 @@
                 <div class="row  container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
                   <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
                     <div class="row">
-                      <span class="text-white col-8"><?= $food["name"] ?> </span>
-                      <span class="col-2 text-white"><?= $food["price"] ?> VNĐ</span>
+                      <span class="text-white col-7"><?= $food["name"] ?> </span>
+                      <span class="col-3 text-white"><?= $food["price"] ?> VNĐ</span>
                       <input type="number" value="0" min="0" class="col-2 ">
                     </div>
                   <?php endforeach; ?>
@@ -94,6 +93,7 @@
               <?php endforeach ?>
             </div>
           </div>
+        </div>
           <div class=" d-flex justify-content-center mt-3 mb-3">
             <button class="btn bg-primary text-white col-1 ">Gửi</button>
           </div>
