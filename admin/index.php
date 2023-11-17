@@ -1,8 +1,8 @@
-<?php 
-if(isset($_GET['act'])){
+<?php
+if (isset($_GET['act'])) {
     $act = $_GET['act'];
-}else{
-    $act ="";
+} else {
+    $act = "";
 }
 include "../model/pdo.php";
 include "View/header.php";
@@ -10,8 +10,9 @@ include "View/sideBar.php";
 include "../model/category.php";
 include "../model/food.php";
 $allDanhMuc = loadall_danhmuc();
-if(!empty($act)){
-    switch($act){
+$allFood = all_food();
+if (!empty($act)) {
+    switch ($act) {
         case 'formCreate':
             include "View/formCreate.php";
             break;
@@ -25,22 +26,74 @@ if(!empty($act)){
             include "view/quanLyUser.php";
             break;
         case 'addDm':
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 addDanhMuc($_POST['category']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             break;
         case 'editDm':
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                addDanhMuc($_POST['category']);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                updateDanhMuc($_POST['id'], $_POST['category']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
+            if (!empty($_GET['id'])) {
+                include "view/editDm.php";
+            } else {
+                echo "<script>location.href = 'index.php'</script>";
+            }
             break;
-        
+        case 'deleteDm':
+            if (!empty($_GET['id'])) {
+                deleteDanhMuc($_GET['id']);
+                echo "<script>location.href = '?act=qlsp'</script>";
+            } else {
+                echo "<script>location.href = 'index.php'</script>";
+            }
+            break;
+        case "addFood":
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $name = $_POST['name'];
+                $price = $_POST['price'];
+                $img = $_FILES['image']['name'];
+                $iddm = $_POST['id_dm'];
+                if (uploadFile($_FILES['image'])) {
+                    addProduct($name, $price, $img, $iddm);
+                } else {
+                    echo "<script>alert('oke')</script>";
+                }
+            }
+            echo "<script>location.href = '?act=qlsp'</script>";
+            break;
+        case 'editFood':
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $id = $_POST["id"];
+                $name = $_POST['name'];
+                $price = $_POST['price'];
+                $iddm = $_POST['id_dm'];
+                if (!empty($_FILES["image"]["name"])) {
+                    $img = $_FILES["image"]["name"];
+                    uploadFile($_FILES['image']);
+                } else {
+                    $img = $_POST['imgOld'];
+                }
+                editProduct($name, $price, $img, $iddm, $id);
+            }
+            if (!empty($_GET['id'])) {
+                include "view/editFood.php";
+            } else {
+                echo "<script>location.href = 'index.php?act=qlsp'</script>";
+            }
+            break;
+        case 'deleteFood':
+            if (!empty($_GET['id'])) {
+                deleteProduct($_GET['id']);
+                echo "<script>location.href = '?act=qlsp'</script>";
+            } else {
+                echo "<script>location.href = 'index.php'</script>";
+            }
+            break;
     }
-}else{
+} else {
     include "View/home.php";
 }
 include "View/footer.php";
-
-?>

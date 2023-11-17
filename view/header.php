@@ -70,8 +70,6 @@
                         <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     </div>
                     <a href="" class="btn btn-primary py-2 px-4">Đặt Bàn</a>
-
-
                 </div>
             </nav>
             <?php if(isset($act) && $act!="") :?>

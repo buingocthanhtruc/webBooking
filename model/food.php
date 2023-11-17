@@ -9,6 +9,10 @@ function loadall_sanpham_top10(){
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }
+function all_food(){
+    $sql = "select * from `food` where 1 ";
+    return pdo_query($sql);
+}
 function loadall_sanpham($iddm=0){
     $sql="SELECT sanpham.* , COUNT(binhluan.id) 'soLuongCMT' FROM sanpham LEFT JOIN binhluan 
     ON sanpham.id = binhluan.idpro WHERE 1 GROUP BY sanpham.id";
@@ -23,7 +27,7 @@ function loadall_sanpham($iddm=0){
 
 // 
 function loadone_sanpham($id){
-    $sql = "select * from sanpham where id = $id";
+    $sql = "select * from food where id = $id";
     $result = pdo_query_one($sql);
     return $result;
 }
@@ -33,43 +37,41 @@ function load_sanpham_cungloai($id, $iddm){
     return $result;
 }
 
-function addProduct($name , $price , $img , $mota , $iddm){
-    $sql = "INSERT INTO `sanpham`( `name`, `price`, `img`, `mota`, `iddm`)
-     VALUES ('$name','$price','$img','$mota','$iddm')";
+function addProduct($name , $price , $img , $iddm){
+    $sql = "INSERT INTO `food`( `name`, `price`, `image`, `id_dm`)
+     VALUES ('$name','$price','$img','$iddm')";
     pdo_execute($sql);
 }
 
 function getProductEdit($id){
-    $sql = "SELECT * FROM `sanpham` WHERE `id` = '$id'";
+    $sql = "SELECT * FROM `food` WHERE `id` = '$id'";
     return pdo_query_one($sql);
 }
-function editProduct($name , $price , $img , $mota  , $iddm , $id){
-    $sql = "UPDATE `sanpham` SET `name`='$name',`price`='$price'
-    ,`img`='$img',`mota`='$mota',`iddm`='$iddm' WHERE id =$id";
+function editProduct($name , $price , $img  , $iddm , $id){
+    $sql = "UPDATE `food` SET `name`='$name',`price`='$price'
+    ,`image`='$img',`id_dm`='$iddm' WHERE id =$id";
     pdo_execute($sql);
 }
 
 function deleteProduct($id){
-    $sql = "DELETE FROM `sanpham` WHERE id ='$id'";
-    $sql1 = "DELETE FROM `binhluan` WHERE idpro = $id";
-    pdo_execute($sql1);
+    $sql = "DELETE FROM `food` WHERE id ='$id'";
     pdo_execute($sql);
 }
 
 function searchProduct($name){
-    $sql = "SELECT * FROM `sanpham` WHERE `name` LIKE '%$name%'";
+    $sql = "SELECT * FROM `food` WHERE `name` LIKE '%$name%'";
     return pdo_query($sql);
 }
 
 function updateView($id){
-    $sql = "SELECT * FROM `sanpham` WHERE `id`=$id";
+    $sql = "SELECT * FROM `food` WHERE `id`=$id";
     $sp =pdo_query_one($sql);
     $viewCurent = $sp['luotxem']+1;
     $viewCurent;
-    $sqlUpdate = "UPDATE `sanpham` SET `luotxem`='$viewCurent' WHERE `id`=$id";
+    $sqlUpdate = "UPDATE `food` SET `luotxem`='$viewCurent' WHERE `id`=$id";
     pdo_execute($sqlUpdate);
 }
-function uploadFile($fileNameField,$target_dir = "../upload/"){
+function uploadFile($fileNameField,$target_dir = "assets/images/"){
     $target_file = $target_dir . basename($fileNameField["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
