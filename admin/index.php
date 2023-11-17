@@ -22,6 +22,9 @@ if (!empty($act)) {
         case 'quanLyUser':
             include "view/quanLyUser.php";
             break;
+        case 'quanLyBan':
+            include "view/quanLyBan.php";
+            break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 addDanhMuc($_POST['category'],$_POST['id_group']);
