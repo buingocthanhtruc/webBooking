@@ -30,6 +30,10 @@ include 'View/titleOfComponents.php';
                         <label for="recipient-name" class="col-form-label">Tên Danh Mục:</label>
                         <input type="text" class="form-control" id="recipient-name" name="category">
                       </div>
+                      <div class="form-group">
+                        <label for="ID_group" class="col-form-label">ID_group</label>
+                        <input type="text" class="form-control" id="ID_group" name="id_group" placeholder="yêu cầu viết liền">
+                      </div>
                       <button class="btn btn-success">Thêm</button>
                     </form>
                   </div>
@@ -42,8 +46,9 @@ include 'View/titleOfComponents.php';
               <table class="table">
                 <thead>
                   <tr>
-                    <th width="10%">STT</th>
-                    <th>Tên</th>
+                    <th width="20%">STT</th>
+                    <th width="30%">Tên</th>
+                    <th width="40%">ID Group</th>
                     <th width="10%">Hàng Động</th>
                   </tr>
                 </thead>
@@ -52,6 +57,7 @@ include 'View/titleOfComponents.php';
                     <tr>
                       <th scope="row"><?= $danhmuc["id"] ?></th>
                       <td><?= $danhmuc["name"] ?></td>
+                      <td><?= $danhmuc["id_group"] ?></td>
                       <td class="box-active">
                         <a href="?act=deleteDm&id=<?= $danhmuc["id"] ?>" onclick=" return confirm('Bạn có chắc muốn xóa không')"><button type="button" class="btn rounded btn-primary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

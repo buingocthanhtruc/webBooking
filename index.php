@@ -6,6 +6,10 @@ if(isset($_GET['act'])){
 }
 include "model/pdo.php";
 include "view/header.php";
+include "model/category.php";
+include "model/food.php";
+$allDanhMuc = loadall_danhmuc();
+$allFood = all_food();
 if(!empty($act)){
     switch($act){
         case 'about':

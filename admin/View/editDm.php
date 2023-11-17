@@ -15,6 +15,10 @@ include 'View/titleOfComponents.php';
                         <input type="hidden" value="<?= getNameDanhMuc($_GET['id'])['id']?>" name="id">
                         <input required type="text" class="form-control" placeholder="Tên danh mục" id="nameCategory" name="category" value="<?= getNameDanhMuc($_GET['id'])['name']?>">
                     </div>
+                    <div class="form-floating mt-3 mb-3">
+                        <label for="nameCategory" >ID group</label>
+                        <input required type="text" class="form-control" placeholder="yêu cầu không nhập khoảng trắng" id="nameCategory" name="id_group" value="<?= getNameDanhMuc($_GET['id'])['id_group']?>">
+                    </div>
                     <button class="btn bg-success">Gửi</button>
                 </form>
             </div>

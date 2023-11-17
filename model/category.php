@@ -19,12 +19,12 @@ function getNameDanhMuc($iddm){
     $sql="select * from category where id=".$iddm;
     return pdo_query_one($sql);
 }
-function addDanhMuc($name){
-    $sql="INSERT INTO `category`(`name`) VALUES ('$name')";
+function addDanhMuc($name , $id_group){
+    $sql="INSERT INTO `category`(`name` , `id_group`) VALUES ('$name' ,'$id_group')";
     pdo_execute($sql);
 }
-function updateDanhMuc($id,$name){
-    $sql ="UPDATE `category` SET `name`='$name' WHERE id=$id";
+function updateDanhMuc($id,$name , $id_group){
+    $sql ="UPDATE `category` SET `name`='$name',`id_group`=' $id_group' WHERE id=$id";
     pdo_execute($sql);
 }
 function deleteDanhMuc($id){

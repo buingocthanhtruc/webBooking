@@ -75,7 +75,7 @@
           <div class="p-2 wow fadeInUp row" data-wow-delay="0.2s">
             <ul class="nav nav-pills mb-2">
               <li class="nav-item">
-                <a href="#drinks" class="nav-link " data-bs-toggle="pill">Đồ Uống </a>
+                <a href="#drinks" class="nav-link " data-bs-toggle="pill">name danh mục </a>
               </li>
               <li class="nav-item">
                 <a href="#Appetizer" class="nav-link " data-bs-toggle="pill">Món Khai vị </a>
@@ -109,6 +109,4 @@
     </form>
   </div>
 </div>
-oke
-
 <!-- Reservation Start -->

@@ -1,27 +1,21 @@
-<?php 
-  $title = "ádsdsa";
-  $descriptions = "ádsad";
+<?php
+$title = "Danh Sách Đặt Bàn";
+$descriptions = "Thông tin đặt bàn";
 
-if(isset($_GET['act'])) {
-  if($_GET['act'] === 'formCreate') {
+if (isset($_GET['act'])) {
+  if ($_GET['act'] === 'formCreate') {
     $title = "Đặt Bàn Ăn";
     $descriptions = "Món ăn Việt - Yêu thương quay về";
   }
 
-  if($_GET['act'] === 'listBooking') {
-    $title = "Danh Sách Đặt Bàn";
-    $descriptions = "Thông tin đặt bàn ";
-  }
-  
-  if($_GET['act'] === 'qlsp') {
+  if ($_GET['act'] === 'qlsp') {
     $title = "Quản Lý Sản Phẩm";
     $descriptions = "Thông Tin về sản phẩm và danh mục sản phẩm";
   }
-  if($_GET['act'] === 'quanLyUser') {
+  if ($_GET['act'] === 'quanLyUser') {
     $title = "Danh sách người dùng";
     $descriptions = "Thông Tin người dùng ";
   }
-  
 }
 
 ?>

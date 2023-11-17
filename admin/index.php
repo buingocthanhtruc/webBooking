@@ -16,9 +16,6 @@ if (!empty($act)) {
         case 'formCreate':
             include "View/formCreate.php";
             break;
-        case 'listBooking':
-            include "View/listBooking.php";
-            break;
         case 'qlsp':
             include "view/quanLySP.php";
             break;
@@ -27,13 +24,13 @@ if (!empty($act)) {
             break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                addDanhMuc($_POST['category']);
+                addDanhMuc($_POST['category'] , $_POST['id_group']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             break;
         case 'editDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                updateDanhMuc($_POST['id'], $_POST['category']);
+                updateDanhMuc($_POST['id'], $_POST['category'] , $_POST['id_group']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             if (!empty($_GET['id'])) {
@@ -94,6 +91,6 @@ if (!empty($act)) {
             break;
     }
 } else {
-    include "View/home.php";
+    include "View/listBooking.php";
 }
 include "View/footer.php";
