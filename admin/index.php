@@ -24,7 +24,7 @@ if (!empty($act)) {
             break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                addDanhMuc($_POST['category'] , $_POST['id_group']);
+                addDanhMuc($_POST['category'],$_POST['id_group']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             break;

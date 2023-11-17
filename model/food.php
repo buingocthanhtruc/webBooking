@@ -31,8 +31,8 @@ function loadone_sanpham($id){
     $result = pdo_query_one($sql);
     return $result;
 }
-function load_sanpham_cungloai($id, $iddm){
-    $sql = "select * from sanpham where iddm = $iddm and id <> $id";
+function getFoodsByCategory($iddm){
+    $sql = "select * from food where id_dm = $iddm ";
     $result = pdo_query($sql);
     return $result;
 }

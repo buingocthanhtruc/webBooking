@@ -19,7 +19,7 @@ function getNameDanhMuc($iddm){
     $sql="select * from category where id=".$iddm;
     return pdo_query_one($sql);
 }
-function addDanhMuc($name , $id_group){
+function addDanhMuc($name,$id_group){
     $sql="INSERT INTO `category`(`name` , `id_group`) VALUES ('$name' ,'$id_group')";
     pdo_execute($sql);
 }
