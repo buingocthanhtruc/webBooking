@@ -81,7 +81,7 @@
             </ul>
             <div class="tab-content">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
-                <div class="row  container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
+                <div class="row  container tab-pane " id="<?= $danhMuc["id_group"] ?>">
                   <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
                     <div class="row">
                       <span class="text-white col-7"><?= $food["name"] ?> </span>
