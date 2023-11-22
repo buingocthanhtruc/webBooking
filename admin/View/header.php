@@ -180,7 +180,7 @@
                   </li>
                   <li class="waves-effect waves-light">
                     <a href="user-profile.html">
-                      <i class="ti-user"></i> Profile
+                      <i class="ti-user"></i> ADMIN
                     </a>
                   </li>
                   <li class="waves-effect waves-light">
@@ -194,7 +194,7 @@
                     </a>
                   </li>
                   <li class="waves-effect waves-light">
-                    <a href="auth-normal-sign-in.html">
+                    <a href="index.php?act=logout">
                       <i class="ti-layout-sidebar-left"></i> Logout
                     </a>
                   </li>
