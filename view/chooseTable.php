@@ -21,8 +21,8 @@
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
   <div class="row g-0">
     <h1 class="text-primary text-center col-12">Chọn Bàn</h1>
-    <form class="bg-dark py-2" method="post" action="index.php">
-      <div class="grid-container m-3">
+    <form class="bg-dark py-2" method="post">
+      <div class=" grid-container m-3">
 
         <?php
 
@@ -39,10 +39,12 @@ echo '<br />';
           $end22 = $_SESSION['end'];
           $dateBook = $_SESSION['date'];
 
+          echo $start22;
+          echo '<br />';
+          echo $end22;
           echo $dateBook;
           // echo $dateBook;
-          echo '<br />';
-          echo $_SESSION['date'];
+          // echo $_SESSION['date'];
           // echo $start22;
           // echo $end22;
 
@@ -52,15 +54,12 @@ echo '<br />';
           // echo $string;
 
           // CÂU LỆNH NÀY ĐỂ LẤY RA ID NHỮNG BÀN BỊ ĐẶT RỒI TRONG KHOẢNG THỜI GIAN ... BETWEEEN ...
-          $sql = "SELECT id_table FROM `bill` WHERE DATE(time_start) = DATE($dateBook) AND $start22 BETWEEN HOUR(time_start) AND HOUR(time_end)
-           OR $end22 BETWEEN HOUR(time_start) AND HOUR(time_end)";
-           
-          //  echo $sql;
+          // $sql = "SELECT id_table FROM `bill` WHERE DATE(time_start) = DATE($dateBook) AND $start22 BETWEEN HOUR(time_start) AND HOUR(time_end)
+          //  OR $end22 BETWEEN HOUR(time_start) AND HOUR(time_end)";
+          $sql = "SELECT id_table FROM `bill` WHERE DATE(time_start) = DATE($dateBook) AND $start22 >= HOUR(time_start) AND $start22 < HOUR(time_end)
+           OR $end22 > HOUR(time_start) AND $end22 <= HOUR(time_end)";
+
           
-          // $sql = "SELECT bill.id_table AS `id`, `table`.name 
-          //   FROM bill 
-          //   INNER JOIN `table` ON bill.id_table = `table`.id WHERE DATE(time_start) = DATE(NOW()) AND $start22  BETWEEN HOUR(time_start) AND HOUR(time_end)
-          //   OR $end22  BETWEEN HOUR(time_start) AND HOUR(time_end)";
           $result = pdo_query($sql);
             // echo $result;
             // print_r($result);
@@ -77,7 +76,7 @@ echo '<br />';
               echo '<div class="grid-item">'.$name.'<br><input type="checkbox" class="" value='.$id.' name="" id=""></div>';
             endforeach;
             } 
-            
+
           else {
             $arr_dis = [];
             foreach($result as $value):
@@ -91,11 +90,11 @@ echo '<br />';
                 echo '<div class="grid-item item-disabled">'.$name.'<br><input type="checkbox" class="inp" value='.$id.' name="table[]" disabled id=""></div>';
             } else {
                 echo '<div class="grid-item">'.$name.'<br><input type="checkbox" class="inp" value='.$id.' name="table[]" id=""></div>';
-                
+
             }
             endforeach;
-           
-            
+
+
           }  
         ?>
       </div>
@@ -154,6 +153,6 @@ echo '<br />';
 
 
 <?php 
-  
-  
+
+
   ?>

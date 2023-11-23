@@ -30,9 +30,9 @@
                 <div class="form-floating">
                   <select name="time_order" id="timeBook" class="valid form-select" aria-invalid="false">
                     <option value="1">11h - 13h</option>
-                    <option value="2">12h - 14h</option>
-                    <option value="3">13h - 15h</option>
-                    <option value="4">14h - 16h</option>
+                    <option value="2">13h - 15h</option>
+                    <option value="3">15h - 17h</option>
+                    <option value="4">17h - 19h</option>
                   </select>
                   <label for="">Chọn giờ</label>
                 </div>
@@ -41,7 +41,7 @@
               <div class="col-md-6">
                 <div class="form-floating">
                   <select class="form-select choose-people" id="people">
-                    <?php for ($i = 1; $i < 61; $i++) : ?>
+                    <?php for ($i = 1; $i < 7; $i++) : ?>
                     <?= '<option value=' . $i . '>' . $i . ' người</option>' ?>
                     <?php endfor ?>
                   </select>
@@ -94,12 +94,22 @@
 <!-- Reservation Start -->
 <?php
 
-// $_SESSION['id_user'] = 1;
+$_SESSION['id_user'] = 1;
 // echo $_SESSION['id_user'];
 // echo '<br />';
-// $date = date('Y-m-d H:i');
+// $date = date('i:s');
 // echo $date;
+
 // echo' <br />';
+// Tạo một đối tượng DateTime với múi giờ mặc định
+// $now = new DateTime();
+
+// Lấy giờ và phút
+// $phut = $now->format('i'); // 'i' là định dạng cho phút
+// $giay = $now->format('s'); // 'H' là định dạng cho giờ trong định dạng 24 giờ
+
+// echo "Giờ hiện tại là: $phut:$giay";
+
 // echo $_SESSION['start'];
  ?>
 <!-- Logic -->

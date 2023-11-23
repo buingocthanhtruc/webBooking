@@ -24,23 +24,14 @@
       return;
     } else {
       if($_POST['timeBook'] == 1) {
-        $start = 12;
-        $end = 22;
+        $start = 11;
+        $end = 13;
         $_SESSION['start'] = 11;
         $_SESSION['end'] = 13;
         
         addInFoBook(1, $start, $end);
       }
       if($_POST['timeBook'] == 2) {
-        $start = 12;
-        $end = 22;
-        $_SESSION['start'] = 12;
-        $_SESSION['end'] = 14;
-        
-        addInFoBook(1, $start, $end);
-      }
-
-      if($_POST['timeBook'] == 3) {
         $start = 13;
         $end = 15;
         $_SESSION['start'] = 13;
@@ -48,12 +39,21 @@
         
         addInFoBook(1, $start, $end);
       }
+
+      if($_POST['timeBook'] == 3) {
+        $start = 15;
+        $end = 17;
+        $_SESSION['start'] = 15;
+        $_SESSION['end'] = 17;
+        
+        addInFoBook(1, $start, $end);
+      }
       
       if($_POST['timeBook'] == 4) {
-        $start = 14;
-        $end = 16;
-        $_SESSION['start'] = 14;
-        $_SESSION['end'] = 16;
+        $start = 17;
+        $end = 19;
+        $_SESSION['start'] = 17;
+        $_SESSION['end'] = 19;
         
         addInFoBook(1, $start, $end);
       }

@@ -97,3 +97,4 @@ function uploadFile($fileNameField,$target_dir = "assets/images/"){
         }
     }
 }
+?>

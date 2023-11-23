@@ -1,4 +1,5 @@
 <?php
+// session_unset();
 session_start();
 // ob_start()
 if (isset($_GET['act'])) {
@@ -60,35 +61,68 @@ if (!empty($act)) {
             include "view/testimonial.php";
             break;
         case 'login':
-            if ((isset($_POST['btnlogin'])) && ($_POST['btnlogin'])) {
+            // if ((isset($_POST['btnlogin'])) && ($_POST['btnlogin'])) {
+            //     $phone_number = $_POST['phone_number'];
+            //     $password = $_POST['password'];
+            //     $role = checkUser($phone_number, $password);
+            //     $_SESSION['role'] = $role;
+            //     if ($role == 1) {
+            //         header('location: admin/index.php');
+            //     } else {
+            //         header('location: index.php');
+            //     }
+            // }
+            // include "view/login.php";
+            // break;
+
+            // CODE OF LUONG
+            if (isset($_POST['btnlogin'])){
                 $phone_number = $_POST['phone_number'];
                 $password = $_POST['password'];
-                $role = checkUser($phone_number, $password);
-                $_SESSION['role'] = $role;
-                if ($role == 1) {
-                    header('location: admin/index.php');
-                } else {
-                    header('location: index.php');
+                $thongbao = dangnhap($phone_number, $password);
+
+                if(isset($_SESSION['role']) && $_SESSION['role'] == 1){
+                    echo "<script>location.href = 'admin/index.php'</script>";
+                }
+                
+                if(isset($_SESSION['role']) && $_SESSION['role'] == 0){
+                    echo "<script>location.href = '?act=booking'</script>";
                 }
             }
             include "view/login.php";
-            break;
+             break;
+                
         case 'logout':
-            if (isset($_SESSION['role'])) unset($_SESSION['role']);
-            header('location: index.php');
+                dangxuat();
+                include "view/home.php";
+                echo "<script>location.href = '?act=login'</script>";
+            break;
         case 'signup':
-            if ((isset($_POST['btnsignup'])) && ($_POST['btnsignup'])) {
-                $phone_number = $_POST['phone_number'];
-                $password = $_POST['password'];
-                $fullname = $_POST['fullname'];
-                $email = $_POST['email'];
+            // if ((isset($_POST['btnsignup'])) && ($_POST['btnsignup'])) {
+            //     $phone_number = $_POST['phone_number'];
+            //     $password = $_POST['password'];
+            //     $fullname = $_POST['fullname'];
+            //     $email = $_POST['email'];
 
-                if (empty($phone_number) && empty($password) && empty($email) && empty($fullname)) {
-                    echo "Bạn cần nhập đầy đủ thông tin!";
-                } else {
-                    user_insert($phone_number, $password, $fullname, $email);
+            //     if (empty($phone_number) && empty($password) && empty($email) && empty($fullname)) {
+            //         echo "Bạn cần nhập đầy đủ thông tin!";
+            //     } else {
+            //         user_insert($phone_number, $password, $fullname, $email);
+            //     }
+            // }
+            // include "view/signup.php";
+            
+            // CODE OF LUONG
+                if (isset($_POST['btnsignup'])) {
+                    $phone_number = $_POST['phone_number'];
+                    $email = $_POST['email'];
+                    $fullname = $_POST['fullname'];
+                    $password = $_POST['password'];
+                    $re_password = $_POST['cpassword'];
+
+                    $thongbao = dangky($phone_number, $password, $re_password, $fullname, $email);
                 }
-            }
+
             include "view/signup.php";
             break;
     }
@@ -96,3 +130,4 @@ if (!empty($act)) {
     include "view/home.php";
 }
 include "view/footer.php";
+?>

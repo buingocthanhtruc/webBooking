@@ -36,12 +36,12 @@
 <body>
   <div class="container-xxl bg-white p-0">
     <!-- Spinner Start -->
-    <div id="spinner"
+    <!-- <div id="spinner"
       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
       <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-    </div>
+    </div> -->
     <!-- Spinner End -->
 
 
@@ -64,43 +64,56 @@
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
               <div class="dropdown-menu m-0">
-                <a href="index.php?act=booking" class="dropdown-item">Đặt Trước</a>
-                <a href="index.php?act=team" class="dropdown-item">Đội Của Chúng Tôi</a>
+                <a href="index.php?act=booking" class="dropdown-item">Đặt Bàn</a>
                 <a href="index.php?act=testimonial" class="dropdown-item">Chứng Thực</a>
+                <a href="index.php?act=team" class="dropdown-item">Đội Của Chúng Tôi</a>
               </div>
             </div>
+
+            <?php 
+            
+            if(!isset($_SESSION['fullname'])) { ?>
             <a href="?act=login" class="nav-link nav-item">Đăng nhập</a>
-            <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+            <?php }; ?>
+
+            <?php 
+              if(isset($_SESSION['fullname']) && $_SESSION['fullname'] != "") {
+                echo '<a href="index.php?act=profile" class="nav-item nav-link <?= $act=="service"?"active":"" ?>'.$_SESSION['fullname'].'</a>';
+            echo '<a href="index.php?act=logout" class="nav-item nav-link <?= $act=="service"?"active":"" ?>Đăng Xuất</a>';
+
+            }
+            ?>
+
           </div>
-          <a href="" class="btn btn-primary py-2 px-4">Đặt Bàn</a>
         </div>
       </nav>
       <?php if(isset($act) && $act!="") :?>
-      <div class="container-xxl py-5 bg-dark hero-header mb-5">
-        <div class="container text-center my-5 pt-5 pb-4">
-          <h1 class="display-3 text-white mb-3 animated slideInDown">Thông Tin Về Chúng Tôi</h1>
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center text-uppercase">
-              <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="?act=<?=$act?>"><?=$act ?></a></li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <?php else :?>
-      <div class="container-xxl py-5 bg-dark hero-header mb-5">
-        <div class="container my-5 py-5">
-          <div class="row align-items-center g-5">
-            <div class="col-lg-6 text-center text-lg-start">
-              <h1 class="display-3 text-white animated slideInLeft">Tận Hưởng<br>Bữa Ăn Ngon</h1>
-              <p class="text-white animated slideInLeft mb-4 pb-2">Nhà Hàng Chuẩn 5 SAO!</p>
-              <a href="" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Đặt Bàn</a>
-            </div>
-            <div class="col-lg-6 text-center text-lg-end overflow-hidden">
-              <img class="img-fluid" src="img/hero.png" alt="">
+      <div class=" container-xxl py-5 bg-dark hero-header mb-5">
+              <div class="container text-center my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Thông Tin Về Chúng Tôi</h1>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="?act=<?=$act?>"><?=$act ?></a></li>
+                  </ol>
+                </nav>
+              </div>
+          </div>
+          <?php else :?>
+          <div class="container-xxl py-5 bg-dark hero-header mb-5">
+            <div class="container my-5 py-5">
+              <div class="row align-items-center g-5">
+                <div class="col-lg-6 text-center text-lg-start">
+                  <h1 class="display-3 text-white animated slideInLeft">Tận Hưởng<br>Bữa Ăn Ngon</h1>
+                  <p class="text-white animated slideInLeft mb-4 pb-2">Nhà Hàng Chuẩn 5 SAO!</p>
+                  <a href="index.php?act=booking" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Đặt
+                    Bàn</a>
+                </div>
+                <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                  <img class="img-fluid" src="img/hero.png" alt="">
+                </div>
+              </div>
             </div>
           </div>
+          <?php endif; ?>
         </div>
-      </div>
-      <?php endif; ?>
-    </div>
