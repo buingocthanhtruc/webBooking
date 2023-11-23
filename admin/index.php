@@ -53,11 +53,12 @@ if (!empty($act)) {
         case "addFood":
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $name = $_POST['name'];
+                $referred = $_POST['referred'];
                 $price = $_POST['price'];
                 $img = $_FILES['image']['name'];
                 $iddm = $_POST['id_dm'];
                 if (uploadFile($_FILES['image'])) {
-                    addProduct($name, $price, $img, $iddm);
+                    addProduct($name, $price, $img, $referred, $iddm);
                 } else {
                     echo "<script>alert('oke')</script>";
                 }

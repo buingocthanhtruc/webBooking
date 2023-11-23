@@ -1,6 +1,6 @@
 <?php
 session_start();
-ob_start();
+// ob_start()
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
 } else {
@@ -11,9 +11,15 @@ include "model/user.php";
 include "view/header.php";
 include "model/category.php";
 include "model/food.php";
+include "model/bill.php";
+include "model/api_book.php";
+include "model/table.php";
 
 $allDanhMuc = loadall_danhmuc();
 $allFood = all_food();
+$allBill = loadall_bill_home();
+$allTable = loadall_table();
+
 if (!empty($act)) {
     switch ($act) {
         case 'about':
@@ -27,7 +33,26 @@ if (!empty($act)) {
             break;
         case 'booking':
             include "view/booking.php";
-            break;
+            break;  
+        case 'chooseTable':
+            // SAU KHI CHỌN BÀN THÌ SẼ UPDATE BÀN CHO USER
+                if (isset($_POST['send_id_table'])) {
+                    $id = $_POST['id_of_book'];
+                    $id_user = $_SESSION['id_user'];
+                    if (isset($_POST['table']) && is_array($_POST['table'])) {
+                        $selectedOptions = $_POST['table'];
+                        $id_table = 0;
+                        foreach ($selectedOptions as $option) {
+                            // echo "Checkbox đã chọn: " . $option . "<br>";
+                            $id_table = $option;
+                        }
+                        insert_id_table($id, $id_user, $id_table);
+                    } else {
+                        echo "Không có checkbox nào được chọn.";
+                    }
+                }
+                include "view/chooseTable.php";
+                break;
         case 'team':
             include "view/team.php";
             break;

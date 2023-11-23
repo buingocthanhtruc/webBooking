@@ -37,9 +37,9 @@ function getFoodsByCategory($iddm){
     return $result;
 }
 
-function addProduct($name , $price , $img , $iddm){
-    $sql = "INSERT INTO `food`( `name`, `price`, `image`, `id_dm`)
-     VALUES ('$name','$price','$img','$iddm')";
+function addProduct($name, $price, $img, $referred, $iddm){
+    $sql = "INSERT INTO `food`( `name`, `price`, `image`, `referred`, `id_dm`)
+     VALUES ('$name','$price','$img', '$referred', '$iddm')";
     pdo_execute($sql);
 }
 
