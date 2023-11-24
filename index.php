@@ -39,7 +39,14 @@ if (!empty($act)) {
             // SAU KHI CHỌN BÀN THÌ SẼ UPDATE BÀN CHO USER
                 if (isset($_POST['send_id_table'])) {
                     $id = $_POST['id_of_book'];
-                    $id_user = $_SESSION['id_user'];
+                    $id_user = $_SESSION['id'];
+                    if($id_user == 0) {
+                        // echo "";
+                        echo '<h4 class="mt-3 pb-5 text-warning text-center">Admin sẽ liên lạc lại với bạn sau ít phút sau khi xem lịch book 😉😉😉</h4>';
+                        return;
+                    }
+                    // echo $id_user;
+                    // echo $id;
                     if (isset($_POST['table']) && is_array($_POST['table'])) {
                         $selectedOptions = $_POST['table'];
                         $id_table = 0;
@@ -48,6 +55,8 @@ if (!empty($act)) {
                             $id_table = $option;
                         }
                         insert_id_table($id, $id_user, $id_table);
+                        echo '<h4 class="mt-3 pb-5 text-success text-center">Cảm ơn quý khách đã book 😉😉😉</h4>';
+                        return;
                     } else {
                         echo "Không có checkbox nào được chọn.";
                     }
@@ -124,6 +133,10 @@ if (!empty($act)) {
                 }
 
             include "view/signup.php";
+            break;
+
+        case 'profile':
+            include "view/profile.php";
             break;
     }
 } else {

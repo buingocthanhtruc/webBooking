@@ -28,7 +28,7 @@ function dangnhap($phone_number, $password) {
     if($taikhoan != false) {
       $_SESSION['id'] = $taikhoan['id'];
       $_SESSION['phone_number'] = $taikhoan['phone_number'];
-      $_SESSION['password'] = $taikhoan['password'];
+      $_SESSION['passwords'] = $taikhoan['passwords'];
       $_SESSION['fullname'] = $taikhoan['fullname'];
       $_SESSION['email'] = $taikhoan['email'];
       $_SESSION['role'] = $taikhoan['role'];

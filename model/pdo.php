@@ -1,5 +1,7 @@
 <?php
 function pdo_get_connection(){
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+
     $servername = "103.169.35.190";
     $username = "user_book";
     $password = "Trucdev7204#";

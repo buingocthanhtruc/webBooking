@@ -10,13 +10,13 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="name" placeholder="Your Name">
+                  <input type="text" class="form-control" id="name" placeholder="Your Name" required>
                   <label for="name">Họ tên</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="email" class="form-control" id="email" placeholder="Your Email">
+                  <input type="email" class="form-control" id="email" placeholder="Your Email" required>
                   <label for="email">Email</label>
                 </div>
               </div>
@@ -50,8 +50,9 @@
               </div>
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="email" class="form-control" id="phone" placeholder="Your Number Phone">
-                  <label for="email">Number Phone</label>
+                  <input type="number" class="form-control" id="phone" placeholder="Your Number Phone" maxlength="10"
+                    required>
+                  <label for="email">Phone Number</label>
                 </div>
               </div>
             </div>
@@ -93,9 +94,8 @@
 </div>
 <!-- Reservation Start -->
 <?php
+// echo $_SESSION['id'];
 
-$_SESSION['id_user'] = 1;
-// echo $_SESSION['id_user'];
 // echo '<br />';
 // $date = date('i:s');
 // echo $date;
@@ -119,7 +119,6 @@ $_SESSION['id_user'] = 1;
 function createObject(e) {
   // e.preventDefault();
   const inputElements = document.querySelectorAll(".ip");
-  // console.log(inputElements)
   const dataObject = {};
 
   for (let i = 0; i < inputElements.length; i++) {
@@ -129,9 +128,9 @@ function createObject(e) {
     // Sử dụng giá trị của trường input làm key và value làm giá trị trong object
     dataObject[key] = value;
   }
-
   console.log(JSON.stringify(dataObject));
   const datass = JSON.stringify(dataObject)
+
 
   // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
   const hidden = document.querySelector(".hidden_data");
@@ -146,13 +145,16 @@ function createObject(e) {
     date_picker: $('#date_picker').val(),
     timeBook: +$('#timeBook').val(),
     people: $('#people').val(),
+    id_of_user: +$('.id_of_user').val(),
     list_food: $('.hidden_data').text()
   };
   console.log(datas)
 
   $.ajax({
     // url: "http://localhost/duan1Copy/webBooking/model/api.php",
-    url: "http://localhost/duan1Copy/webBooking/index.php",
+
+    // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sễ đặt tên Folder khác nhau)
+    url: "http://localhost/DuAn1/webBooking/index.php",
     data: datas,
     method: "POST",
     dataType: "json",
