@@ -63,7 +63,7 @@
             <ul class="nav nav-pills mb-2">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
               <li class="nav-item">
-                <a href="<?= "#".$danhMuc["id_group"] ?>" class="nav-link "
+                <a href="<?= "#" . $danhMuc["id_group"] ?>" class="nav-link "
                   data-bs-toggle="pill"><?= $danhMuc["name"] ?> </a>
               </li>
               <?php endforeach; ?>
@@ -75,7 +75,10 @@
                 <div class="row">
                   <span class="text-white col-7"><?= $food["name"] ?> </span>
                   <span class="col-3 text-white"><?= $food["price"] ?> VNĐ</span>
-                  <input type="number" value="0" min="0" class="col-2 ip" data-name="<?= $food['referred']?>">
+                  <input type="hidden" class="product-name" value="<?= $food["name"] ?>">
+                  <input type="hidden" class="product-price" value="<?= $food["price"] ?>">
+                  <input type="number" value="0" min="0" class="col-2 product-quantity"
+                    data-name="<?= $food['referred'] ?>">
                 </div>
                 <?php endforeach; ?>
               </div>
@@ -83,7 +86,8 @@
             </div>
           </div>
         </div>
-        <input type="hidden" class="hidden_data">
+
+        <input type="hidden" name="" class="hidden_data" value="">
         <div id="error_msg"></div>
         <div class=" d-flex justify-content-center mt-3 mb-3">
           <button class="btn bg-primary text-white col-1" id="btnSubmit" name="sendIF">Gửi</button>
@@ -111,31 +115,41 @@
 // echo "Giờ hiện tại là: $phut:$giay";
 
 // echo $_SESSION['start'];
- ?>
+?>
 <!-- Logic -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
 function createObject(e) {
-  // e.preventDefault();
-  const inputElements = document.querySelectorAll(".ip");
-  const dataObject = {};
+  // e.preventDefault();  
+  const productData = [];
+  const productNames = document.querySelectorAll(".product-name");
+  const productPrices = document.querySelectorAll('.product-price');
+  const productQuantities = document.querySelectorAll('.product-quantity');
 
-  for (let i = 0; i < inputElements.length; i++) {
-    const key = inputElements[i].dataset.name;
-    const value = +inputElements[i].value;
+  // Lặp qua từng cặp input và tạo đối tượng cho mỗi sản phẩm
+  for (let i = 0; i < productNames.length; i++) {
+    const productName = productNames[i].value;
+    const productPrice = productPrices[i].value;
+    const productQuantity = productQuantities[i].value;
 
-    // Sử dụng giá trị của trường input làm key và value làm giá trị trong object
-    dataObject[key] = value;
+    const product = {
+      "name": productName,
+      "price": +productPrice,
+      "quantity": +productQuantity
+    };
+
+    productData.push(product);
   }
-  console.log(JSON.stringify(dataObject));
-  const datass = JSON.stringify(dataObject)
+  console.log(productData)
+  const jsonData = JSON.stringify(productData);
+  console.log(jsonData)
 
 
   // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
   const hidden = document.querySelector(".hidden_data");
-  hidden.innerHTML = datass
-  // console.log(hidden.textContent)
+  hidden.value = jsonData
+  console.log(hidden.textContent)
   // console.log(datass)
 
   const datas = {
@@ -145,16 +159,21 @@ function createObject(e) {
     date_picker: $('#date_picker').val(),
     timeBook: +$('#timeBook').val(),
     people: $('#people').val(),
-    id_of_user: +$('.id_of_user').val(),
-    list_food: $('.hidden_data').text()
+    // id_of_user: +$('.id_of_user').val(),
+    list_food: jsonData
   };
   console.log(datas)
 
   $.ajax({
+<<<<<<< HEAD
     // url: "http://localhost/duan1Copy/webBooking/model/api.php",
 
     // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sễ đặt tên Folder khác nhau)
     url: "http://localhost/booking/index.php",
+=======
+    // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
+    url: "http://localhost/DuAn1/webBooking/index.php?act=booking",
+>>>>>>> c345ce5b5d56ef4d105a44f2f572dd443dd1a7ce
     data: datas,
     method: "POST",
     dataType: "json",

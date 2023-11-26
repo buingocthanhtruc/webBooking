@@ -61,6 +61,18 @@ function dangnhap($phone_number, $password) {
     return "Đăng ký thành công";
   }
 
+  function update_account($id, $fullname, $email, $phone_number) {
+    $sql = "UPDATE `user` SET `phone_number`='$phone_number',`fullname`='$fullname',`email`='$email'
+     WHERE id = $id";
+
+    $_SESSION['fullname'] = $fullname;
+    $_SESSION['email'] = $email;
+    $_SESSION['phone_number'] = $phone_number;
+
+     pdo_execute($sql);
+  }
+
+
 
 
 ?>
