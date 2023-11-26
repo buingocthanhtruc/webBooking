@@ -24,24 +24,40 @@
     <form class="bg-dark py-2" method="post">
       <div class="grid-container m-3">
         <?php
-          // echo '<br />';
 
-          // Ta lấy giờ mà user nhập để so sánh tgian trong database
-          $start = $_SESSION['start'];
-          $end = $_SESSION['end'];
+        function formartTime($time) {
+          $thoi_gian = new DateTime();
+          $thoi_gian->setTime($time, 0, 0);
+
+          // Format lại thời gian để hiển thị giờ, phút và giây
+          // echo $thoi_gian->format('H:i:s');
+          return $thoi_gian->format('H:i:s');
+        }
+
+          $start = formartTime($_SESSION['start']);
+          $end = formartTime($_SESSION['end']);
+          // echo '<br />';
+          // echo $start;
           // dataBook là năm, tháng, ngày -> Ta lấy để so sánh năm, tháng, ngày trong DB 
           $dateBook = $_SESSION['date'];
-
           echo '<br />';
-          echo $dateBook;
+          // echo $dateBook;
+
 
           // CÂU LỆNH NÀY ĐỂ LẤY RA ID NHỮNG BÀN BỊ ĐẶT RỒI TRONG KHOẢNG THỜI GIAN ... BETWEEEN ...
           
           // $sql = "SELECT id_table FROM `bill` WHERE DATE(time_start) = DATE($dateBook) AND $start BETWEEN HOUR(time_start) AND HOUR(time_end)
           //  OR $end BETWEEN HOUR(time_start) AND HOUR(time_end)";
-          $sql = "SELECT id_table FROM `bill` WHERE (DATE(time_start) = DATE($dateBook)) AND ($start >= HOUR(time_start) AND $start < HOUR(time_end))
-           OR ($end > HOUR(time_start) AND $end <= HOUR(time_end))";
+          // $sql = "SELECT id_table FROM `bill` WHERE (DATE(time_end) = DATE($dateBook)) AND ($start >= HOUR(time_start) AND $start < HOUR(time_end))
+          //  OR ($end > HOUR(time_start) AND $end <= HOUR(time_end))";
+          $sql = "SELECT id_table 
+          FROM `bill` 
+          WHERE DATE(time_end) = '$dateBook' 
+            AND TIME(time_start) BETWEEN '$start' AND '$end'
+            AND TIME(time_end) BETWEEN '$start' AND '$end'";
+          
           $result = pdo_query($sql);
+          // print_r($result);
  
             // Lấy id_user để SELECT đc id ở bảng bill mới nhất mà user này mới đặt
             $id_user = $_SESSION['id']; 
