@@ -154,7 +154,7 @@ function createObject(e) {
     // url: "http://localhost/duan1Copy/webBooking/model/api.php",
 
     // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sễ đặt tên Folder khác nhau)
-    url: "http://localhost/DuAn1/webBooking/index.php",
+    url: "http://localhost/booking/index.php",
     data: datas,
     method: "POST",
     dataType: "json",

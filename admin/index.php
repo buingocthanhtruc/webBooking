@@ -9,8 +9,10 @@ include "View/header.php";
 include "View/sideBar.php";
 include "../model/category.php";
 include "../model/food.php";
+include "../model/table.php";
 $allDanhMuc = loadall_danhmuc();
 $allFood = all_food();
+$allTable = loadall_table();
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
@@ -27,13 +29,13 @@ if (!empty($act)) {
             break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                addDanhMuc($_POST['category'],$_POST['id_group']);
+                addDanhMuc($_POST['category'], $_POST['id_group']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             break;
         case 'editDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                updateDanhMuc($_POST['id'], $_POST['category'] , $_POST['id_group']);
+                updateDanhMuc($_POST['id'], $_POST['category'], $_POST['id_group']);
                 echo "<script>location.href = '?act=qlsp'</script>";
             }
             if (!empty($_GET['id'])) {
@@ -92,6 +94,12 @@ if (!empty($act)) {
             } else {
                 echo "<script>location.href = 'index.php'</script>";
             }
+            break;
+        case "updateStatusTable":
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                updateStatusTable($_POST['id_table'], $_POST['statusTable']);
+            }
+            echo "<script>location.href = 'index.php?act=quanLyBan'</script>";
             break;
     }
 } else {
