@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Mega Able bootstrap admin template by codedthemes</title>
+  <title>Admin TLT Restaurant</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,6 +27,8 @@
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css" />
   <!-- am chart export.css -->
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <!-- Bootstrap -->
+  <link href="./css/bootstrap.min.css" rel="stylesheet">
   <!-- Style.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>

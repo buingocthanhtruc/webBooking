@@ -16,6 +16,11 @@ if (isset($_GET['act'])) {
     $title = "Danh sách người dùng";
     $descriptions = "Thông Tin người dùng ";
   }
+
+  if ($_GET['act'] === 'chooseTable') {
+    $title = "Chọn bàn";
+    $descriptions = "Trạng thái bàn";
+  }
 }
 
 ?>

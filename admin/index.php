@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
 } else {
@@ -10,13 +11,140 @@ include "View/sideBar.php";
 include "../model/category.php";
 include "../model/food.php";
 include "../model/table.php";
+include "../model/bill.php";
+include "../model/bill_detail.php";
+
 $allDanhMuc = loadall_danhmuc();
 $allFood = all_food();
 $allTable = loadall_table();
+
+// if (count($allBill) == 0) {
+// }
+
+
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
             include "View/formCreate.php";
+            function addInFoBook($start, $end)
+            {
+                $people = $_POST['people'];
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $status = $_POST['status'];
+                $status_pay = $_POST['status_pay'];
+
+                // Sesion này để lấy lấy năm, tháng ngày để so sánh năm, tháng ngày 
+                // trong DB trùng nhau -> In ra bàn đang hoạt động 
+
+                $_SESSION['date'] = $_POST['date_picker'];
+                $timeBook = $_POST['timeBook'];
+
+                // Format cho đúng định dạng để insert vào đc Databasse 
+                $time_start = $_POST['date_picker'] . ' ' . $start;
+                $time_end = $_POST['date_picker'] . ' ' . $end;
+
+                $create_at = date('Y-m-d H:i');
+                $list_food = "" . $_POST['list_food'] . "";
+
+                $items = json_decode($list_food, true);
+
+                // Tính tổng tiền
+                if ($items === null && json_last_error() !== JSON_ERROR_NONE) {
+                    echo "Có lỗi xảy ra trong quá trình chuyển đổi JSON.";
+                } else {
+                    $totalSum = 0;
+
+                    foreach ($items as $item) {
+                        $total = $item['price'] * $item['quantity'];
+                        $totalSum += $total;
+                    }
+                }
+
+
+                // Session này đc tạo khi user đăng nhập -> Trường hợp user ko đ/nhập thì cho id_user = 0
+                if (!isset($_SESSION['id'])) {
+                    // Khi ko có $_SESSION['id'], ta sẽ tạo $_SESSION['id'] biết user nào
+                    $id_user = 0;
+                    $_SESSION['id'] = $id_user;
+                } else {
+                    $id_user = $_SESSION['id'];
+                }
+
+                // Insert thông tin vào bảng bill
+                insert_bill($id_user, $time_start, $time_end, $create_at, $people);
+
+                // Insert thông tin vào bảng bill_detail
+                $result_id_bill = get_id_bill($id_user);
+                $id_bill = implode(', ', $result_id_bill);
+                insert_bill_detail($name, $email, $phone, $list_food, $id_bill, $totalSum, $status, $status_pay);
+            }
+
+
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
+                    return;
+                } else {
+                    $start = 0;
+                    $end = 0;
+                    if ($_POST['timeBook'] == 1) {
+                        $start = 11;
+                        $end = 13;
+                        $_SESSION['start'] = 11;
+                        $_SESSION['end'] = 13;
+                    }
+
+                    if ($_POST['timeBook'] == 2) {
+                        $start = 13;
+                        $end = 15;
+                        $_SESSION['start'] = 13;
+                        $_SESSION['end'] = 15;
+                    }
+
+                    if ($_POST['timeBook'] == 3) {
+                        $start = 15;
+                        $end = 17;
+                        $_SESSION['start'] = 15;
+                        $_SESSION['end'] = 17;
+                    }
+
+                    if ($_POST['timeBook'] == 4) {
+                        $start = 17;
+                        $end = 19;
+                        $_SESSION['start'] = 17;
+                        $_SESSION['end'] = 19;
+                    }
+                    addInFoBook($start, $end);
+                }
+            }
+            break;
+        case 'chooseTable':
+            // SAU KHI CHỌN BÀN THÌ SẼ UPDATE BÀN CHO USER
+            include "View/chooseTable.php";
+            if (isset($_POST['send_id_table'])) {
+                $id = $_POST['id_of_book'];
+                $id_user = $_SESSION['id'];
+                if (isset($_POST['table']) && is_array($_POST['table'])) {
+                    $selectedOptions = $_POST['table'];
+                    $id_table = 0;
+                    foreach ($selectedOptions as $option) {
+                        // echo "Checkbox đã chọn: " . $option . "<br>";
+                        $id_table = $option;
+                    }
+                    update_id_table($id, $id_user, $id_table);
+                    echo '<h4 class="mt-3 pb-5 text-success text-center">Thành Công !!!</h4>';
+                    echo "<script>
+                        function reloadPage() {
+                            location.href = 'index.php?act=chooseTable'
+                        }
+
+                        setTimeout(reloadPage, 1000);
+                    </script>";
+                } else {
+                    echo '<h4 class="mt-3 pb-5 text-danger text-center">Không có checkbox nào được chọn.</h4>';
+                }
+            }
             break;
         case 'qlsp':
             include "view/quanLySP.php";
@@ -26,6 +154,23 @@ if (!empty($act)) {
             break;
         case 'quanLyBan':
             include "view/quanLyBan.php";
+            break;
+        case 'updateStatusPay':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $status = 1;
+                $id = $_GET['id'];
+                update_status_pay($status, $id);
+                echo "<script>location.href = 'index.php'</script>";
+            }
+            break;
+
+        case 'updateStatus':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $status = 1;
+                $id = $_GET['id'];
+                update_status($status, $id);
+                echo "<script>location.href = 'index.php'</script>";
+            }
             break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -103,6 +248,31 @@ if (!empty($act)) {
             break;
     }
 } else {
+    // echo $_SESSION['id'];
+
+    if (isset($_POST['searchInfo'])) {
+        $name = $_POST['name_user'];
+        $status = $_POST['status_bill'];
+    } else {
+        $name = "";
+        $status = 2;
+    }
+
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = '';
+    }
+
+    if ($page == '' || $page == 1) {
+        $page_1 = 0;
+    } else {
+        $page_1 = ($page * 5) - 5;
+    }
+
+    $allBill = loadall_bill($name, $status, $page_1);
+    $count_all_bill = get_count_all_bill();
+
     include "View/listBooking.php";
 }
 include "View/footer.php";

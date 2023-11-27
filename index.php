@@ -60,6 +60,20 @@ if (!empty($act)) {
                 $create_at = date('Y-m-d H:i');
                 $list_food = "" . $_POST['list_food'] . "";
 
+                $items = json_decode($list_food, true);
+
+                // Tính tổng tiền
+                if ($items === null && json_last_error() !== JSON_ERROR_NONE) {
+                    echo "Có lỗi xảy ra trong quá trình chuyển đổi JSON.";
+                } else {
+                    $totalSum = 0;
+
+                    foreach ($items as $item) {
+                        $total = $item['price'] * $item['quantity'];
+                        $totalSum += $total;
+                    }
+                }
+
 
                 // Session này đc tạo khi user đăng nhập -> Trường hợp user ko đ/nhập thì cho id_user = 0
                 if (!isset($_SESSION['id'])) {
@@ -76,8 +90,9 @@ if (!empty($act)) {
                 // Insert thông tin vào bảng bill_detail
                 $result_id_bill = get_id_bill($id_user);
                 $id_bill = implode(', ', $result_id_bill);
-                insert_bill_detail($name, $email, $phone, $list_food, $id_bill);
+                insert_bill_detail($name, $email, $phone, $list_food, $id_bill, $totalSum);
             }
+
 
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
@@ -122,12 +137,10 @@ if (!empty($act)) {
             if (isset($_POST['send_id_table'])) {
                 $id = $_POST['id_of_book'];
                 $id_user = $_SESSION['id'];
-                if ($id_user == 0) {
-                    echo '<h4 class="mt-3 pb-5 text-warning text-center">Admin sẽ liên lạc lại với bạn sau ít phút sau khi xem lịch book 😉😉😉</h4>';
-                    return;
-                }
-                // echo $id_user;
-                // echo $id;
+                // if ($id_user == 0) {
+                //     echo '<h4 class="mt-3 pb-5 text-warning text-center">Admin sẽ liên lạc lại với bạn sau ít phút sau khi xem lịch book 😉😉😉</h4>';
+                //     return;
+                // }
                 if (isset($_POST['table']) && is_array($_POST['table'])) {
                     $selectedOptions = $_POST['table'];
                     $id_table = 0;

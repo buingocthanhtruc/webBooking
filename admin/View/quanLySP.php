@@ -123,9 +123,9 @@ include 'View/titleOfComponents.php';
                       <div class="form-group">
                         <label class="col-form-label">Danh Mục:</label>
                         <select class="form-control" name="id_dm">
-                          <?php foreach($allDanhMuc as $danhmuc): ?>
+                          <?php foreach ($allDanhMuc as $danhmuc) : ?>
                           <option value="<?= $danhmuc["id"] ?>"><?= $danhmuc["name"] ?></option>
-                          <?php endforeach ;?>
+                          <?php endforeach; ?>
                         </select>
                       </div>
                       <div class="form-group">
@@ -158,13 +158,13 @@ include 'View/titleOfComponents.php';
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($allFood as $food) :?>
+                  <?php foreach ($allFood as $food) : ?>
                   <tr>
                     <td><?= $food["id"] ?></td>
                     <td><img src="assets/images/<?= $food["image"] ?>" alt="IMG" width="50px"></td>
                     <td><?= $food["name"] ?></td>
-                    <td><?= $food["price"] ?>VND</td>
-                    <td><?=getNameDanhMuc($food["id_dm"])["name"] ?></td>
+                    <td><?= number_format($food["price"]) ?> VNĐ</td>
+                    <td><?= getNameDanhMuc($food["id_dm"])["name"] ?></td>
                     <td class="box-active">
                       <a href="?act=deleteFood&id=<?= $food["id"] ?>"
                         onclick=" return confirm('Bạn có chắc muốn xóa không')"><button type="button"
@@ -180,7 +180,7 @@ include 'View/titleOfComponents.php';
                           </svg>
                         </button>
                       </a>
-                      <a href="?act=editFood&id=<?=$food["id"] ?>" class="btn btn-success rounded">
+                      <a href="?act=editFood&id=<?= $food["id"] ?>" class="btn btn-success rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                           class="bi bi-pen" viewBox="0 0 16 16">
                           <path
