@@ -21,6 +21,11 @@ if (isset($_GET['act'])) {
     $title = "Chọn bàn";
     $descriptions = "Trạng thái bàn";
   }
+
+  if ($_GET['act'] === 'chart') {
+    $title = "Thống kê hoạt động";
+    $descriptions = "Nhà hàng hoạt động";
+  }
 }
 
 ?>

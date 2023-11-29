@@ -10,7 +10,7 @@
 //     $kq = $stmt -> fetchAll();
 //     if(count($kq) > 0) return $kq[0]['role'];
 //     else return 0;
-   
+
 // }
 
 // function user_insert($phone_number, $password, $fullname, $email)
@@ -20,59 +20,69 @@
 //     pdo_execute($sql);
 // }
 
-// CODE OF LUONG
-function dangnhap($phone_number, $password) {
-    $sql = "SELECT * FROM user WHERE phone_number = '$phone_number' and passwords = '$password'";
-    $taikhoan = pdo_query_one($sql);
-    
-    if($taikhoan != false) {
-      $_SESSION['id'] = $taikhoan['id'];
-      $_SESSION['phone_number'] = $taikhoan['phone_number'];
-      $_SESSION['passwords'] = $taikhoan['passwords'];
-      $_SESSION['fullname'] = $taikhoan['fullname'];
-      $_SESSION['email'] = $taikhoan['email'];
-      $_SESSION['role'] = $taikhoan['role'];
-    } else {
-      return "Đăng nhập sai !!!";
-    }
+function dangnhap($phone_number, $password)
+{
+  $sql = "SELECT * FROM user WHERE phone_number = '$phone_number' and passwords = '$password'";
+  $taikhoan = pdo_query_one($sql);
+
+  if ($taikhoan != false) {
+    $_SESSION['id'] = $taikhoan['id'];
+    $_SESSION['phone_number'] = $taikhoan['phone_number'];
+    $_SESSION['passwords'] = $taikhoan['passwords'];
+    $_SESSION['fullname'] = $taikhoan['fullname'];
+    $_SESSION['email'] = $taikhoan['email'];
+    $_SESSION['role'] = $taikhoan['role'];
+  } else {
+    return "Đăng nhập sai !!!";
+  }
+}
+
+function dangxuat()
+{
+  if (isset($_SESSION['id'])) {
+    // unset($_SESSION['user']);
+    // unset($_SESSION['id']);
+    // unset($_SESSION['email']);
+    // unset($_SESSION['address']);
+    // unset($_SESSION['tel']);
+    session_unset();
+  }
+}
+
+function dangky($phone_number, $password, $re_password, $fullname, $email)
+{
+  if ($phone_number == "" || $password == "" || $fullname == "" || $email == "") {
+    return "Bạn nhập thiếu dữ liệu";
   }
 
-  function dangxuat() {
-    if(isset($_SESSION['id'])) {
-      // unset($_SESSION['user']);
-      // unset($_SESSION['id']);
-      // unset($_SESSION['email']);
-      // unset($_SESSION['address']);
-      // unset($_SESSION['tel']);
-      session_unset(); 
-    }
+  if ($password != $re_password) {
+    return "Mật khẩu không khớp !!!";
   }
+  $sql = "INSERT INTO user(phone_number, passwords, fullname, email, role) VALUES ('$phone_number', '$password', '$fullname', '$email', 0) ";
+  pdo_execute($sql);
+  return "Đăng ký thành công";
+}
 
-  function dangky($phone_number, $password, $re_password, $fullname, $email){
-    if($phone_number == "" || $password == "" || $fullname == "" || $email == "") {
-      return "Bạn nhập thiếu dữ liệu";
-    }
-
-    if($password != $re_password) {
-      return "Mật khẩu không khớp !!!";
-    }
-    $sql = "INSERT INTO user(phone_number, passwords, fullname, email, role) VALUES ('$phone_number', '$password', '$fullname', '$email', 0) ";
-    pdo_execute($sql);
-    return "Đăng ký thành công";
-  }
-
-  function update_account($id, $fullname, $email, $phone_number) {
-    $sql = "UPDATE `user` SET `phone_number`='$phone_number',`fullname`='$fullname',`email`='$email'
+function update_account($id, $fullname, $email, $phone_number)
+{
+  $sql = "UPDATE `user` SET `phone_number`='$phone_number',`fullname`='$fullname',`email`='$email'
      WHERE id = $id";
 
-    $_SESSION['fullname'] = $fullname;
-    $_SESSION['email'] = $email;
-    $_SESSION['phone_number'] = $phone_number;
+  $_SESSION['fullname'] = $fullname;
+  $_SESSION['email'] = $email;
+  $_SESSION['phone_number'] = $phone_number;
 
-     pdo_execute($sql);
-  }
+  pdo_execute($sql);
+}
 
+function get_info_user()
+{
+  $sql = "SELECT id, phone_number, fullname, email FROM user WHERE role = 0";
+  return pdo_query($sql);
+}
 
-
-
-?>
+// function get_count()
+// {
+//   $sql = "SELECT COUNT(id) FROM `user` WHERE 1";
+//   return pdo_query($sql);
+// }

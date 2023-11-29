@@ -3,19 +3,19 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
-}
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+  }
 
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 3px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 </style>
 
 <div class="pcoded-inner-content">
@@ -35,8 +35,8 @@ include 'View/titleOfComponents.php';
                 <div class="form-row">
                   <div class="col mr-4">
                     <select name="id_table" class="form-control" id="">
-                      <?php foreach($allTable as $table): ?>
-                      <option value="<?=$table['id']?>"><?=$table['name']?></option>
+                      <?php foreach ($allTable as $table) : ?>
+                        <option value="<?= $table['id'] ?>"><?= $table['name'] ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -58,8 +58,7 @@ include 'View/titleOfComponents.php';
 
 
         <div class="grid-container">
-          <?php foreach($allTable as $table): ?>
-                <div class="grid-item <?= $table['status']?'bg-success':''?>"><?= $table['name']?></div>
-            <?php endforeach; ?>
+          <?php foreach ($allTable as $table) : ?>
+            <div class="grid-item <?= $table['status'] ? 'bg-success' : '' ?>"><?= $table['name'] ?></div>
+          <?php endforeach; ?>
         </div>
-        

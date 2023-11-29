@@ -28,6 +28,11 @@
 <script type="text/javascript" src="assets/pages/dashboard/custom-dashboard.js"></script>
 <script type="text/javascript" src="assets/js/script.js "></script>
 
+<!-- Chart
+<script src="assets/js/raphael/raphael.min.js"></script>
+<script src="assets/js/morris.js/morris.js"></script>
+<script src="assets/js/morris-custom-chart.js"></script> -->
+
 <!-- Lấy ngày không bị trong quá khứ -->
 <script language="javascript">
 var today = new Date();

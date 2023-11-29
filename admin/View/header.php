@@ -3,7 +3,7 @@
 
 <head>
   <title>Admin TLT Restaurant</title>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description"
@@ -27,15 +27,20 @@
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css" />
   <!-- am chart export.css -->
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <!-- morris chart -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <!-- Bootstrap -->
-  <link href="./css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="./css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- Style.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 </head>
 
 <body>
   <!-- Pre-loader start -->
-  <div class="theme-loader">
+  <!-- <div class="theme-loader">
     <div class="loader-track">
       <div class="preloader-wrapper">
         <div class="spinner-layer spinner-blue">
@@ -86,7 +91,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Pre-loader end -->
   <div id="pcoded" class="pcoded">
     <div class="pcoded-overlay-box"></div>

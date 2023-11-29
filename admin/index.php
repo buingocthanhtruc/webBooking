@@ -13,13 +13,21 @@ include "../model/food.php";
 include "../model/table.php";
 include "../model/bill.php";
 include "../model/bill_detail.php";
+include "../model/user.php";
 
 $allDanhMuc = loadall_danhmuc();
 $allFood = all_food();
 $allTable = loadall_table();
+$allUser = get_info_user();
 
-// if (count($allBill) == 0) {
-// }
+$total_money_today = get_total_money_today();
+$total_money_cur_week = get_total_money_cur_week();
+$total_money_cur_month = get_total_money_cur_month();
+$total_money_cur_year = get_total_money_cur_year();
+$get_total_money_month = get_total_money_month();
+$get_total_money_year = get_total_money_year();
+
+
 
 
 if (!empty($act)) {
@@ -155,6 +163,9 @@ if (!empty($act)) {
         case 'quanLyBan':
             include "view/quanLyBan.php";
             break;
+        case 'chart':
+            include "view/thongKe.php";
+            break;
         case 'updateStatusPay':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $status = 1;
@@ -205,7 +216,7 @@ if (!empty($act)) {
                 $img = $_FILES['image']['name'];
                 $iddm = $_POST['id_dm'];
                 if (uploadFile($_FILES['image'])) {
-                    addProduct($name, $price, $img, $referred, $iddm);
+                    addProduct($name, $price, $img, $iddm);
                 } else {
                     echo "<script>alert('oke')</script>";
                 }
@@ -271,7 +282,8 @@ if (!empty($act)) {
     }
 
     $allBill = loadall_bill($name, $status, $page_1);
-    $count_all_bill = get_count_all_bill();
+    // $count_all_bill = get_count_all_bill();
+    $count_all_bill = get_count_all_bill($name, $status, $page_1);
 
     include "View/listBooking.php";
 }

@@ -19,22 +19,32 @@ include 'View/titleOfComponents.php';
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th width="5%">STT</th>
-                                        <th width="20%">Tên khách hàng</th>
-                                        <th width="20%"> Email</th>
-                                        <th width="15%">Số điện Thoại</th>
-                                        <th width="40%">Địa chỉ</th>
+                                        <th>ID</th>
+                                        <th>Tên khách hàng</th>
+                                        <th> Email</th>
+                                        <th>Số điện Thoại</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <!-- <th scope="row">1</th> -->
-                                        <td>1</td>
-                                        <td>Bùi Ngọc Thanh Trúc</td>
-                                        <td>Trucbntph33131@gmail.com</td>
-                                        <td>0975107204</td>
-                                        <td>Số 9 ngõ 138 , Mễ Trì Thượng</td>
-                                    </tr>
+                                    <!-- <tr>
+                    <td>1</td>
+                    <td>Bùi Ngọc Thanh Trúc</td>
+                    <td>Trucbntph33131@gmail.com</td>
+                    <td>0975107204</td>
+                  </tr> -->
+
+                                    <?php
+                                    foreach ($allUser as $user) :
+                                        extract($user);
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $id; ?></td>
+                                            <td><?php echo $fullname; ?></td>
+                                            <td><?php echo $email; ?></td>
+                                            <td><?php echo $phone_number; ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+
 
                                 </tbody>
                             </table>
