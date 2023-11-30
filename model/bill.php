@@ -1,4 +1,14 @@
 <?php
+// Fomat thoi gian
+function formartTime($time)
+{
+  $thoi_gian = new DateTime();
+  $thoi_gian->setTime($time, 0, 0);
+
+  // Format lại thời gian để hiển thị giờ, phút và giây
+  return $thoi_gian->format('H:i:s');
+}
+
 function loadall_bill_home()
 {
   $sql = "select * from bill where 1 order by id desc";
@@ -150,3 +160,46 @@ function deleteBill($id)
   pdo_execute($sql);
   pdo_execute($sql_bill_detail);
 }
+
+
+function searchStatusTable($khung_gio = 1, $day = null)
+{
+  if ($day === null) {
+    $day = date("Y-m-d H:i:s");
+    // $day = '2023-11-30 13:00:00';
+  }
+  if ($khung_gio == 1) {
+    $time_start = formartTime(11);
+    $time_end = formartTime(13);
+  }
+
+  if ($khung_gio == 2) {
+    $time_start = formartTime(13);
+    $time_end = formartTime(15);
+  }
+
+  if ($khung_gio == 3) {
+    $time_start = formartTime(15);
+    $time_end = formartTime(17);
+  }
+
+  if ($khung_gio == 4) {
+    $time_start = formartTime(15);
+    $time_end = formartTime(17);
+  }
+
+  $sql = "SELECT id_table 
+  FROM `bill` 
+  WHERE DATE(time_end) = DATE('$day') 
+    AND TIME(time_start) BETWEEN '$time_start' AND '$time_end'
+    AND TIME(time_end) BETWEEN '$time_start' AND '$time_end'";
+
+  return pdo_query($sql);
+}
+
+
+// SELECT id_table 
+//   FROM `bill` 
+//   WHERE DATE(time_end) = DATE('2023-12-03 19:00:00')
+//     AND TIME(time_start) BETWEEN '2023-12-03 17:00:00' AND '2023-12-03 19:00:00'
+//     AND TIME(time_end) BETWEEN '2023-12-03 17:00:00' AND '2023-12-03 19:00:00'

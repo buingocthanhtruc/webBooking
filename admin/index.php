@@ -30,6 +30,8 @@ $get_total_money_year = get_total_money_year();
 
 
 
+
+
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
@@ -161,6 +163,17 @@ if (!empty($act)) {
             include "view/quanLyUser.php";
             break;
         case 'quanLyBan':
+            if (isset($_POST['searchTable'])) {
+                $khung_gio = (int)$_POST['time_order'];
+                $day = $_POST['day_book'];
+                echo $day;
+                echo $khung_gio;
+                $table_booked = searchStatusTable($khung_gio, $day);
+            } else {
+                $khung_gio = 1;
+                $day = null;
+            }
+            $table_booked = searchStatusTable($khung_gio, $day);
             include "view/quanLyBan.php";
             break;
         case 'chart':
@@ -259,12 +272,18 @@ if (!empty($act)) {
                 echo "<script>location.href = 'index.php'</script>";
             }
             break;
-        case "updateStatusTable":
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                updateStatusTable($_POST['id_table'], $_POST['statusTable']);
-            }
-            echo "<script>location.href = 'index.php?act=quanLyBan'</script>";
-            break;
+            // case "updateStatusTable":
+            //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //         updateStatusTable($_POST['id_table'], $_POST['statusTable']);
+            //     }
+            //     echo "<script>location.href = 'index.php?act=quanLyBan'</script>";
+            //     break;
+
+            // case 'searchStatusTable':
+            //     if (isset($_POST['searchTable'])) {
+            //         echo $_POST['day'];
+            //     }
+            //     break;
     }
 } else {
     // echo $_SESSION['id'];

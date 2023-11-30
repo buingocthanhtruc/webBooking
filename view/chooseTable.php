@@ -25,15 +25,15 @@
       <div class="grid-container m-3">
         <?php
 
-        function formartTime($time)
-        {
-          $thoi_gian = new DateTime();
-          $thoi_gian->setTime($time, 0, 0);
+        // function formartTime($time)
+        // {
+        //   $thoi_gian = new DateTime();
+        //   $thoi_gian->setTime($time, 0, 0);
 
-          // Format lại thời gian để hiển thị giờ, phút và giây
-          // echo $thoi_gian->format('H:i:s');
-          return $thoi_gian->format('H:i:s');
-        }
+        //   // Format lại thời gian để hiển thị giờ, phút và giây
+        //   // echo $thoi_gian->format('H:i:s');
+        //   return $thoi_gian->format('H:i:s');
+        // }
 
         $start = formartTime($_SESSION['start']);
         $end = formartTime($_SESSION['end']);
@@ -74,7 +74,7 @@
           // $allTable là câu lệnh SELECT tất cả cái bàn ko dựa vào WHERE gì -> Vì lúc này không có bàn nào đc book
           foreach ($allTable as $table) :
             extract($table);
-            echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="" value=' . $id . ' name="" id=""></div>';
+            echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="" id=""></div>';
           endforeach;
         }
 
