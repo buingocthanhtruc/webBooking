@@ -141,3 +141,12 @@ function get_count_all_bill($name = "", $status = 0, $page_1)
 
   return pdo_query($sql);
 }
+
+function deleteBill($id)
+{
+  $sql = "DELETE FROM `bill` WHERE id = $id";
+  $sql_bill_detail = "DELETE FROM `bill_detail` WHERE id_bill = $id";
+
+  pdo_execute($sql);
+  pdo_execute($sql_bill_detail);
+}

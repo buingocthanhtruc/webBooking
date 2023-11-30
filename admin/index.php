@@ -183,6 +183,14 @@ if (!empty($act)) {
                 echo "<script>location.href = 'index.php'</script>";
             }
             break;
+
+        case 'deleteBill':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                $id = $_GET['id'];
+                deleteBill($id);
+                echo "<script>location.href = 'index.php'</script>";
+            }
+            break;
         case 'addDm':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 addDanhMuc($_POST['category'], $_POST['id_group']);
