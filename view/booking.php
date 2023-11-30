@@ -164,7 +164,7 @@
 
     $.ajax({
       // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
-      url: "http://localhost/DuAn1/webBooking/index.php?act=booking",
+      url: "http://localhost/project1/webBooking/index.php?act=booking",
       data: datas,
       method: "POST",
       dataType: "json",
