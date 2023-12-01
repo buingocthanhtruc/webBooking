@@ -51,16 +51,7 @@ include 'View/titleOfComponents.php';
                 // echo $start;
                 // dataBook là năm, tháng, ngày -> Ta lấy để so sánh năm, tháng, ngày trong DB 
                 $dateBook = $_SESSION['date'];
-                // echo '<br />';
-                // echo $dateBook;
 
-
-                // CÂU LỆNH NÀY ĐỂ LẤY RA ID NHỮNG BÀN BỊ ĐẶT RỒI TRONG KHOẢNG THỜI GIAN ... BETWEEEN ...
-
-                // $sql = "SELECT id_table FROM `bill` WHERE DATE(time_start) = DATE($dateBook) AND $start BETWEEN HOUR(time_start) AND HOUR(time_end)
-                //  OR $end BETWEEN HOUR(time_start) AND HOUR(time_end)";
-                // $sql = "SELECT id_table FROM `bill` WHERE (DATE(time_end) = DATE($dateBook)) AND ($start >= HOUR(time_start) AND $start < HOUR(time_end))
-                //  OR ($end > HOUR(time_start) AND $end <= HOUR(time_end))";
                 $sql = "SELECT id_table 
           FROM `bill` 
           WHERE DATE(time_end) = '$dateBook' 
