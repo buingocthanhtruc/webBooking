@@ -12,7 +12,7 @@
     <div class="col-lg-3 col-sm-6">
       <p>Khách hàng</p>
       <?php
-      extract($result);
+      extract($bill_detail);
       // Format thời gian
       $dateString = $time_start;
       $dateTime = new DateTime($dateString);

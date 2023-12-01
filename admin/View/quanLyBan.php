@@ -55,27 +55,6 @@ include 'View/titleOfComponents.php';
                 </div>
               </form>
             </li>
-
-            <!-- <li class="list-group-item">
-              <form class="mb-5" action="index.php?act=updateStatusTable" method="post">
-                <div class="form-row">
-                  <div class="col mr-4">
-                    <select name="id_table" class="form-control" id="">
-                     
-                    </select>
-                  </div>
-                  <div class="col mr-4">
-                    <select name="statusTable" class="form-control" id="">
-                      <option value="0">Nghỉ</option>
-                      <option value="1">Hoạt Động</option>
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <button class="btn btn-success form-control">Cập Nhật</button>
-                  </div>
-                </div>
-              </form>
-            </li> -->
           </ul>
 
         </div>

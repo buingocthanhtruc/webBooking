@@ -137,19 +137,10 @@ if (!empty($act)) {
             if (isset($_POST['send_id_table'])) {
                 $id = $_POST['id_of_book'];
                 $id_user = $_SESSION['id'];
-                // if ($id_user == 0) {
-                //     echo '<h4 class="mt-3 pb-5 text-warning text-center">Admin sẽ liên lạc lại với bạn sau ít phút sau khi xem lịch book 😉😉😉</h4>';
-                //     return;
-                // }
                 if (isset($_POST['table']) && is_array($_POST['table'])) {
-                    $selectedOptions = $_POST['table'];
-                    $id_table = 0;
-                    foreach ($selectedOptions as $option) {
-                        // echo "Checkbox đã chọn: " . $option . "<br>";
-                        $id_table = $option;
-                    }
+                    $id_table = $_POST['table'][0];
                     update_id_table($id, $id_user, $id_table);
-                    echo '<h4 class="mt-3 pb-5 text-success text-center">Cảm ơn quý khách đã book 😉😉😉</h4>';
+                    echo "<script>location.href = '?act=payOnline&idBill=$id'</script>";
                     return;
                 } else {
                     echo "Không có checkbox nào được chọn.";
@@ -223,9 +214,95 @@ if (!empty($act)) {
         case 'bill_detail':
             if (isset($_GET['id'])) {
                 $id = $_GET['id'];
-                $result = bill_detail($id);
+                $bill_detail = bill_detail($id);
             }
             include 'view/bill_detail.php';
+            break;
+        case 'payOnline':
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $payment = $_POST['payment'];
+                $total_monney = $_POST['total_money'];
+                switch ($payment) {
+                    case 'cash':
+                        echo "<script> alert('Đặt bàn thành công. Quý khách vui lòng đến đúng hẹn.'); </script>";
+                        break;
+                    case 'vnpay':
+                        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+                        $vnp_Returnurl = "http://localhost/booking/index.php?act=ReturnPay&id_bill=".$_POST['id_bill'];
+                        $vnp_TmnCode = "0LXMRAJ0"; //Mã website tại VNPAY 
+                        $vnp_HashSecret = "KHSGRJGQZXNATRFLJVLAVFNIYMTCNNFT"; //Chuỗi bí mật
+
+                        $vnp_TxnRef = rand(0, 99999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+                        $vnp_OrderInfo = 'Thanh toan dat ban';
+                        $vnp_OrderType = 'billpayment';
+                        $vnp_Amount = $total_monney*100;
+                        $vnp_Locale = 'vn';
+                        $vnp_BankCode = 'NCB';
+                        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+                        //Add Params of 2.0.1 Version
+                        //$vnp_ExpireDate = $expire;
+                        $inputData = array(
+                            "vnp_Version" => "2.1.0",
+                            "vnp_TmnCode" => $vnp_TmnCode,
+                            "vnp_Amount" => $vnp_Amount,
+                            "vnp_Command" => "pay",
+                            "vnp_CreateDate" => date('YmdHis'),
+                            "vnp_CurrCode" => "VND",
+                            "vnp_IpAddr" => $vnp_IpAddr,
+                            "vnp_Locale" => $vnp_Locale,
+                            "vnp_OrderInfo" => $vnp_OrderInfo,
+                            "vnp_OrderType" => $vnp_OrderType,
+                            "vnp_ReturnUrl" => $vnp_Returnurl,
+                            "vnp_TxnRef" => $vnp_TxnRef,
+                            //"vnp_ExpireDate" => $vnp_ExpireDate,
+                        );
+
+                        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                            $inputData['vnp_BankCode'] = $vnp_BankCode;
+                        }
+                        //var_dump($inputData);
+                        ksort($inputData);
+                        $query = "";
+                        $i = 0;
+                        $hashdata = "";
+                        foreach ($inputData as $key => $value) {
+                            if ($i == 1) {
+                                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                            } else {
+                                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                                $i = 1;
+                            }
+                            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+                        }
+
+                        $vnp_Url = $vnp_Url . "?" . $query;
+                        if (isset($vnp_HashSecret)) {
+                            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);
+                            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+                        }
+                        $returnData = array(
+                            'code' => '1', 'message' => 'success', 'data' => $vnp_Url
+                        );
+                        if (isset($_POST['redirect'])) {
+                            echo "<script>location.href = '$vnp_Url'</script>";
+                            die();
+                        }
+                        break;
+                }
+            }
+            if(isset($_GET['idBill'])){
+                $bill_detail = bill_detail($_GET['idBill']);
+            }
+            include 'view/payOnline.php';
+            break;
+        case "ReturnPay":
+            if(isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == "00"){
+                $status = 1;
+                $id = $_GET['id_bill'];
+                update_status_pay($status, $id);
+                update_status($status, $id);
+                echo "Thanh toán thành công";
+            }
             break;
     }
 } else {

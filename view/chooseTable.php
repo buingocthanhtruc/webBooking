@@ -21,7 +21,7 @@
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
   <div class="row g-0">
     <h1 class="text-primary text-center col-12">Chọn Bàn</h1>
-    <form class="bg-dark py-2" method="post">
+    <form class="bg-dark py-2" method="post" action="">
       <div class="grid-container m-3">
         <?php
 
@@ -41,7 +41,6 @@
         // echo $start;
         // dataBook là năm, tháng, ngày -> Ta lấy để so sánh năm, tháng, ngày trong DB 
         $dateBook = $_SESSION['date'];
-        echo '<br />';
         // echo $dateBook;
 
 
@@ -67,7 +66,6 @@
 
         // Chuyển từ mảng sang String để ta lưu vào 1 input hidden -> Khi ấn gửi thì ta sẽ qua index xử lý 
         $string = implode(', ', $id);
-        echo $string;
 
         // HIỂN THỊ RA TẤT CẢ CÁ BÀN (BÀN NÀO CŨNG CHỌN ĐC)
         if ($result == false) {
@@ -100,7 +98,7 @@
       </div>
       <div class=" d-flex justify-content-center mt-3 mb-3">
         <!-- Ta gửi $string này là id mới nhất ở DB bill của user -->
-        <input type="hidden" name="id_of_book" value="<?php echo $string ?>">
+        <input type="text" name="id_of_book" value="<?php echo $string ?>">
         <button class="btn bg-primary text-white col-1" id="btnSubmit" name="send_id_table">Gửi</button>
       </div>
     </form>

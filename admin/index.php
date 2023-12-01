@@ -26,12 +26,6 @@ $total_money_cur_month = get_total_money_cur_month();
 $total_money_cur_year = get_total_money_cur_year();
 $get_total_money_month = get_total_money_month();
 $get_total_money_year = get_total_money_year();
-
-
-
-
-
-
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
