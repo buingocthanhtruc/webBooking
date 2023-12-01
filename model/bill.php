@@ -56,26 +56,6 @@ function bill_detail($id)
   return pdo_query_one($sql);
 }
 
-// function loadall_bill()
-// {
-//   $sql = "SELECT
-//       bill.time_start,
-//       bill.people,
-//       bill_detail.list_food,
-//       bill_detail.name,
-//       bill_detail.email,
-//       bill_detail.phone,
-//       bill_detail.total,
-//       bill_detail.status,
-//       bill_detail.status_pay,
-//       bill_detail.id_bill
-//     FROM
-//       bill
-//     INNER JOIN bill_detail ON bill.id = bill_detail.id_bill ORDER BY bill.id DESC";
-
-//   return pdo_query($sql);
-// }
-
 function loadall_bill($name = "", $status = 0, $page_1)
 {
   $sql = "SELECT
@@ -121,6 +101,7 @@ function get_count_all_bill($name = "", $status = 0, $page_1)
       bill.id_table,
       bill.time_start,
       bill.people,
+      bill.create_at,
       bill_detail.list_food,
       bill_detail.name,
       bill_detail.email,
@@ -196,10 +177,24 @@ function searchStatusTable($khung_gio = 1, $day = null)
 
   return pdo_query($sql);
 }
-
-
-// SELECT id_table 
-//   FROM `bill` 
-//   WHERE DATE(time_end) = DATE('2023-12-03 19:00:00')
-//     AND TIME(time_start) BETWEEN '2023-12-03 17:00:00' AND '2023-12-03 19:00:00'
-//     AND TIME(time_end) BETWEEN '2023-12-03 17:00:00' AND '2023-12-03 19:00:00'
+function load_bill_notifi($sl){
+  $sql = "SELECT
+  bill.id,
+  bill.id_table,
+  bill.time_start,
+  bill.people,
+  bill.create_at,
+  bill_detail.list_food,
+  bill_detail.name,
+  bill_detail.email,
+  bill_detail.phone,
+  bill_detail.total,
+  bill_detail.status,
+  bill_detail.status_pay,
+  bill_detail.id_bill
+FROM
+  bill
+INNER JOIN bill_detail ON bill.id = bill_detail.id_bill 
+WHERE bill.id > 0 ORDER BY bill.id DESC LIMIT $sl";
+  return pdo_query($sql);
+}

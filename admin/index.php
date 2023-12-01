@@ -5,14 +5,19 @@ if (isset($_GET['act'])) {
 } else {
     $act = "";
 }
+
+if (isset($_SESSION['id']) && $_SESSION['id'] !=0):
+include "../model/bill.php";
+include "../model/bill_detail.php";
 include "../model/pdo.php";
+$bill_notify = load_bill_notifi(3);
 include "View/header.php";
 include "View/sideBar.php";
 include "../model/category.php";
 include "../model/food.php";
 include "../model/table.php";
-include "../model/bill.php";
-include "../model/bill_detail.php";
+
+
 include "../model/user.php";
 
 $allDanhMuc = loadall_danhmuc();
@@ -26,6 +31,7 @@ $total_money_cur_month = get_total_money_cur_month();
 $total_money_cur_year = get_total_money_cur_year();
 $get_total_money_month = get_total_money_month();
 $get_total_money_year = get_total_money_year();
+
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
@@ -309,3 +315,6 @@ if (!empty($act)) {
     include "View/listBooking.php";
 }
 include "View/footer.php";
+else:
+    echo "<script>location.href = 'http://localhost/Booking/?act=login'</script>";
+endif;
