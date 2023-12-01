@@ -26,12 +26,6 @@ $total_money_cur_month = get_total_money_cur_month();
 $total_money_cur_year = get_total_money_cur_year();
 $get_total_money_month = get_total_money_month();
 $get_total_money_year = get_total_money_year();
-
-
-
-
-
-
 if (!empty($act)) {
     switch ($act) {
         case 'formCreate':
@@ -166,8 +160,6 @@ if (!empty($act)) {
             if (isset($_POST['searchTable'])) {
                 $khung_gio = (int)$_POST['time_order'];
                 $day = $_POST['day_book'];
-                echo $day;
-                echo $khung_gio;
                 $table_booked = searchStatusTable($khung_gio, $day);
             } else {
                 $khung_gio = 1;

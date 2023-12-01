@@ -3,23 +3,23 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
-}
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+  }
 
-.grid-item {
-  background-color: var(--bs-gray);
-  border: 3px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+  .grid-item {
+    background-color: var(--bs-gray);
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 
-.item-disabled {
-  background-color: #20c997 !important;
-}
+  .item-disabled {
+    background-color: #20c997 !important;
+  }
 </style>
 <div class="pcoded-inner-content">
   <!-- Main-body start -->
@@ -83,7 +83,7 @@ include 'View/titleOfComponents.php';
                   // $allTable là câu lệnh SELECT tất cả cái bàn ko dựa vào WHERE gì -> Vì lúc này không có bàn nào đc book
                   foreach ($allTable as $table) :
                     extract($table);
-                    echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="" value=' . $id . ' name="" id=""></div>';
+                    echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
                   endforeach;
                 }
 
@@ -117,39 +117,39 @@ include 'View/titleOfComponents.php';
         </div>
 
         <script>
-        // const btnSubmit = document.querySelector('#btnSubmit');
-        // // btnSubmit.addEventListener('click', e => {
-        // // e.preventDefault();
+          // const btnSubmit = document.querySelector('#btnSubmit');
+          // // btnSubmit.addEventListener('click', e => {
+          // // e.preventDefault();
 
-        // // })
-
-
-        const checkboxes = document.querySelectorAll('.inp');
-        let checkedCount = 0;
-        let arr = 0;
-
-        // function getCheckedCheckboxes() {
-        // const checkedCheckboxes = [];
+          // // })
 
 
-        for (let i = 0; i < checkboxes.length; i++) {
-          checkboxes[i].addEventListener('change', function() {
-            if (this.checked) {
-              checkedCount += 1;
-              console.log(this.value)
-              arr = this.value
-              // checkedCheckboxes.push(checkbox.name)
+          const checkboxes = document.querySelectorAll('.inp');
+          let checkedCount = 0;
+          let arr = 0;
 
-              if (checkedCount > 1) {
-                this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+          // function getCheckedCheckboxes() {
+          // const checkedCheckboxes = [];
+
+
+          for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function() {
+              if (this.checked) {
+                checkedCount += 1;
+                console.log(this.value)
+                arr = this.value
+                // checkedCheckboxes.push(checkbox.name)
+
+                if (checkedCount > 1) {
+                  this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+                  checkedCount -= 1;
+                }
+
+              } else {
                 checkedCount -= 1;
               }
-
-            } else {
-              checkedCount -= 1;
-            }
-          })
-        }
+            })
+          }
         </script>
 
 

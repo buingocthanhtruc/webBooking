@@ -21,8 +21,10 @@
   <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all" />
   <!-- themify icon -->
   <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="./assets/icon/themify-icons/themify-icons.css" /> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css" />
+
   <!-- scrollbar.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css" />
   <!-- am chart export.css -->
@@ -203,6 +205,7 @@
                   <li class="waves-effect waves-light">
                     <a href="index.php?act=logout">
                       <i class="ti-layout-sidebar-left"></i> Logout
+
                     </a>
                   </li>
                 </ul>

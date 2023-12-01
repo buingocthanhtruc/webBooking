@@ -4,9 +4,10 @@ include 'View/titleOfComponents.php';
 
 <style>
   .grid-container {
+    margin-left: 20px;
     display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
+    grid-template-columns: auto auto auto auto;
+    gap: 5px;
   }
 
   .grid-item {
@@ -15,6 +16,15 @@ include 'View/titleOfComponents.php';
     padding: 20px;
     font-size: 30px;
     text-align: center;
+  }
+
+  .img-tables {
+    filter: contrast(200%);
+    width: 65%;
+  }
+
+  .img-tables_active {
+    filter: contrast(2000%);
   }
 </style>
 
@@ -49,48 +59,27 @@ include 'View/titleOfComponents.php';
                     </div>
                   </div>
 
+                  <input type="hidden" class="data_id_table" value="" name="id_table">
+
                   <div class="col-3">
                     <button class="btn btn-primary form-control" name="searchTable">Tìm kiếm</button>
                   </div>
                 </div>
               </form>
             </li>
-
-            <!-- <li class="list-group-item">
-              <form class="mb-5" action="index.php?act=updateStatusTable" method="post">
-                <div class="form-row">
-                  <div class="col mr-4">
-                    <select name="id_table" class="form-control" id="">
-                     
-                    </select>
-                  </div>
-                  <div class="col mr-4">
-                    <select name="statusTable" class="form-control" id="">
-                      <option value="0">Nghỉ</option>
-                      <option value="1">Hoạt Động</option>
-                    </select>
-                  </div>
-                  <div class="col-3">
-                    <button class="btn btn-success form-control">Cập Nhật</button>
-                  </div>
-                </div>
-              </form>
-            </li> -->
           </ul>
 
         </div>
       </div>
 
-
       <div class="grid-container">
-
-
         <?php
         if ($table_booked == false) {
           // $allTable là câu lệnh SELECT tất cả cái bàn ko dựa vào WHERE gì -> Vì lúc này không có bàn nào đc book
           foreach ($allTable as $table) :
             extract($table);
-            echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="" id=""></div>';
+            // echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="" id=""></div>';
+            echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '">';
           endforeach;
         }
 
@@ -105,9 +94,10 @@ include 'View/titleOfComponents.php';
             extract($table);
             $key = array_search($id, $arr_dis);
             if ($key !== false) {
-              echo '<div class="grid-item item-disabled">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" disabled id=""></div>';
+              echo '<img class="img-tables" src="assets/images/hollow.png" alt="Error Image Table" data-image="' . $id . '>';
             } else {
-              echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
+              // echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
+              echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '>';
             }
           endforeach;
         }
@@ -115,45 +105,22 @@ include 'View/titleOfComponents.php';
         ?>
       </div>
 
-      <?php
-      // $currentTime = date("Y-m-d H:i:s");
-      // echo "Thời gian hiện tại là: " . $currentTime;
-      print_r($table_booked);
-
-      ?>
 
       <script>
-        // const btnSubmit = document.querySelector('#btnSubmit');
-        // // btnSubmit.addEventListener('click', e => {
-        // // e.preventDefault();
+        const images = document.querySelectorAll('.img-tables');
 
-        // // })
+        const grid_container = document.querySelector('.grid-container');
+        grid_container.addEventListener('click', function(e) {
+          const chooseTable = e.target.closest('.img-tables');
+          console.log(chooseTable)
 
+          if (!chooseTable) return;
 
-        const checkboxes = document.querySelectorAll('.inp');
-        let checkedCount = 0;
-        let arr = 0;
+          images.forEach(img => img.classList.remove('img-tables_active'));
 
-        // function getCheckedCheckboxes() {
-        // const checkedCheckboxes = [];
+          chooseTable.classList.add('img-tables_active');
 
+          document.querySelector('.data_id_table').value = chooseTable.dataset.image;
 
-        for (let i = 0; i < checkboxes.length; i++) {
-          checkboxes[i].addEventListener('change', function() {
-            if (this.checked) {
-              checkedCount += 1;
-              console.log(this.value)
-              arr = this.value
-              // checkedCheckboxes.push(checkbox.name)
-
-              if (checkedCount > 1) {
-                this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
-                checkedCount -= 1;
-              }
-
-            } else {
-              checkedCount -= 1;
-            }
-          })
-        }
+        })
       </script>

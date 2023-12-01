@@ -162,9 +162,9 @@ function deleteBill($id)
 }
 
 
-function searchStatusTable($khung_gio = 1, $day = null)
+function searchStatusTable($khung_gio = 1, $day = '')
 {
-  if ($day === null) {
+  if ($day === '') {
     $day = date("Y-m-d H:i:s");
     // $day = '2023-11-30 13:00:00';
   }
@@ -184,8 +184,8 @@ function searchStatusTable($khung_gio = 1, $day = null)
   }
 
   if ($khung_gio == 4) {
-    $time_start = formartTime(15);
-    $time_end = formartTime(17);
+    $time_start = formartTime(17);
+    $time_end = formartTime(19);
   }
 
   $sql = "SELECT id_table 

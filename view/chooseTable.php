@@ -1,27 +1,27 @@
 <style>
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
-  }
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}
 
-  .grid-item {
-    background-color: var(--bs-gray);
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-  }
+.grid-item {
+  background-color: var(--bs-gray);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
 
-  .item-disabled {
-    background-color: var(--bs-teal) !important;
-  }
+.item-disabled {
+  background-color: var(--bs-teal) !important;
+}
 </style>
 
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
   <div class="row g-0">
     <h1 class="text-primary text-center col-12">Chọn Bàn</h1>
-    <form class="bg-dark py-2" method="post">
+    <form class="bg-dark py-2" method="post" action="">
       <div class="grid-container m-3">
         <?php
 
@@ -41,7 +41,6 @@
         // echo $start;
         // dataBook là năm, tháng, ngày -> Ta lấy để so sánh năm, tháng, ngày trong DB 
         $dateBook = $_SESSION['date'];
-        echo '<br />';
         // echo $dateBook;
 
 
@@ -67,7 +66,6 @@
 
         // Chuyển từ mảng sang String để ta lưu vào 1 input hidden -> Khi ấn gửi thì ta sẽ qua index xử lý 
         $string = implode(', ', $id);
-        echo $string;
 
         // HIỂN THỊ RA TẤT CẢ CÁ BÀN (BÀN NÀO CŨNG CHỌN ĐC)
         if ($result == false) {
@@ -108,48 +106,48 @@
 </div>
 
 <script>
-  // const btnSubmit = document.querySelector('#btnSubmit');
-  // // btnSubmit.addEventListener('click', e => {
-  // // e.preventDefault();
+// const btnSubmit = document.querySelector('#btnSubmit');
+// // btnSubmit.addEventListener('click', e => {
+// // e.preventDefault();
 
-  // // })
-
-
-  const checkboxes = document.querySelectorAll('.inp');
-  let checkedCount = 0;
-  let arr = 0;
-
-  // function getCheckedCheckboxes() {
-  // const checkedCheckboxes = [];
+// // })
 
 
-  for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].addEventListener('change', function() {
-      if (this.checked) {
-        checkedCount += 1;
-        console.log(this.value)
-        arr = this.value
-        // checkedCheckboxes.push(checkbox.name)
+const checkboxes = document.querySelectorAll('.inp');
+let checkedCount = 0;
+let arr = 0;
 
-        if (checkedCount > 1) {
-          this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
-          checkedCount -= 1;
-        }
+// function getCheckedCheckboxes() {
+// const checkedCheckboxes = [];
 
-      } else {
+
+for (let i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener('change', function() {
+    if (this.checked) {
+      checkedCount += 1;
+      console.log(this.value)
+      arr = this.value
+      // checkedCheckboxes.push(checkbox.name)
+
+      if (checkedCount > 1) {
+        this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
         checkedCount -= 1;
       }
-    })
-  }
+
+    } else {
+      checkedCount -= 1;
+    }
+  })
+}
 
 
 
-  // Send id_table:
-  // function sendIdTable() {
-  //   const datas = {
+// Send id_table:
+// function sendIdTable() {
+//   const datas = {
 
-  //   }
-  // }
+//   }
+// }
 </script>
 
 
