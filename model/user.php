@@ -40,11 +40,6 @@ function dangnhap($phone_number, $password)
 function dangxuat()
 {
   if (isset($_SESSION['id'])) {
-    // unset($_SESSION['user']);
-    // unset($_SESSION['id']);
-    // unset($_SESSION['email']);
-    // unset($_SESSION['address']);
-    // unset($_SESSION['tel']);
     session_unset();
   }
 }

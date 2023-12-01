@@ -31,6 +31,11 @@
 
   <!-- Template Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
+  <style>
+    .invalid{
+      border: 1px solid red;
+    }
+  </style>
 </head>
 
 <body>

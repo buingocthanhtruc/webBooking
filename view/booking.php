@@ -3,7 +3,7 @@
   <div class="row g-0">
     <h1 class="text-primary text-center col-6">Đặt bàn trực tuyến</h1>
     <h1 class="text-primary text-center col-6">Menu</h1>
-    <form action="index.php?act=chooseTable" class="bg-dark py-2" method="post">
+    <form action="index.php?act=chooseTable" class="bg-dark py-2 " method="post">
       <div class="row">
         <div class="col-md-6 ">
           <div class="p-2 wow fadeInUp" data-wow-delay="0.2s">
@@ -42,7 +42,7 @@
                 <div class="form-floating">
                   <select class="form-select choose-people" id="people">
                     <?php for ($i = 1; $i < 7; $i++) : ?>
-                    <?= '<option value=' . $i . '>' . $i . ' người</option>' ?>
+                      <?= '<option value=' . $i . '>' . $i . ' người</option>' ?>
                     <?php endfor ?>
                   </select>
                   <label>Số người </label>
@@ -50,9 +50,8 @@
               </div>
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="number" class="form-control" id="phone" placeholder="Your Number Phone" maxlength="10"
-                    required>
-                  <label for="email">Phone Number</label>
+                  <input type="text" class="form-control" id="phone" placeholder="Your Number Phone" maxlength="10" required>
+                  <label id="label_phone" for="phone">Phone Number</label>
                 </div>
               </div>
             </div>
@@ -62,26 +61,25 @@
           <div class="p-2 wow fadeInUp row" data-wow-delay="0.2s">
             <ul class="nav nav-pills mb-2">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
-              <li class="nav-item">
-                <a href="<?= "#" . $danhMuc["id_group"] ?>" class="nav-link "
-                  data-bs-toggle="pill"><?= $danhMuc["name"] ?> </a>
-              </li>
+                <li class="nav-item">
+                  <a href="<?= "#" . $danhMuc["id_group"] ?>" class="nav-link " data-bs-toggle="pill"><?= $danhMuc["name"] ?> </a>
+                </li>
               <?php endforeach; ?>
             </ul>
 
             <div class="tab-content">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
-              <div class="row  container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
-                <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
-                <div class="row">
-                  <span class="text-white col-7"><?= $food["name"] ?> </span>
-                  <span class="col-3 text-white"><?= $food["price"] ?> VNĐ</span>
-                  <input type="hidden" class="product-name" value="<?= $food["name"] ?>">
-                  <input type="hidden" class="product-price" value="<?= $food["price"] ?>">
-                  <input type="number" value="0" min="0" class="col-2 product-quantity">
+                <div class="row  container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
+                  <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
+                    <div class="row">
+                      <span class="text-white col-7"><?= $food["name"] ?> </span>
+                      <span class="col-3 text-white"><?= $food["price"] ?> VNĐ</span>
+                      <input type="hidden" class="product-name" value="<?= $food["name"] ?>">
+                      <input type="hidden" class="product-price" value="<?= $food["price"] ?>">
+                      <input type="number" value="0" min="0" class="col-2 product-quantity">
+                    </div>
+                  <?php endforeach; ?>
                 </div>
-                <?php endforeach; ?>
-              </div>
               <?php endforeach ?>
             </div>
           </div>
@@ -97,81 +95,67 @@
   </div>
 </div>
 <!-- Reservation Start -->
-<?php
-// echo $_SESSION['id'];
 
-// echo '<br />';
-// $date = date('i:s');
-// echo $date;
-
-// echo' <br />';
-// Tạo một đối tượng DateTime với múi giờ mặc định
-// $now = new DateTime();
-
-// Lấy giờ và phút
-// $phut = $now->format('i'); // 'i' là định dạng cho phút
-// $giay = $now->format('s'); // 'H' là định dạng cho giờ trong định dạng 24 giờ
-
-// echo "Giờ hiện tại là: $phut:$giay";
-
-// echo $_SESSION['start'];
-?>
 <!-- Logic -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
-function createObject(e) {
-  // e.preventDefault();  
-  const productData = [];
-  const productNames = document.querySelectorAll(".product-name");
-  const productPrices = document.querySelectorAll('.product-price');
-  const productQuantities = document.querySelectorAll('.product-quantity');
+  function createObject(e) {
+    const productData = [];
+    const productNames = document.querySelectorAll(".product-name");
+    const productPrices = document.querySelectorAll('.product-price');
+    const productQuantities = document.querySelectorAll('.product-quantity');
 
-  // Lặp qua từng cặp input và tạo đối tượng cho mỗi sản phẩm
-  for (let i = 0; i < productNames.length; i++) {
-    const productName = productNames[i].value;
-    const productPrice = productPrices[i].value;
-    const productQuantity = productQuantities[i].value;
+    // Lặp qua từng cặp input và tạo đối tượng cho mỗi sản phẩm
+    for (let i = 0; i < productNames.length; i++) {
+      const productName = productNames[i].value;
+      const productPrice = productPrices[i].value;
+      const productQuantity = productQuantities[i].value;
 
-    const product = {
-      "name": productName,
-      "price": +productPrice,
-      "quantity": +productQuantity
+      const product = {
+        "name": productName,
+        "price": +productPrice,
+        "quantity": +productQuantity
+      };
+
+      productData.push(product);
+    }
+    console.log(productData)
+    const jsonData = JSON.stringify(productData);
+    console.log(jsonData)
+
+
+    // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
+    const hidden = document.querySelector(".hidden_data");
+    hidden.value = jsonData
+    console.log(hidden.textContent)
+    // console.log(datass)
+
+    const datas = {
+      name: $('#name').val(),
+      email: $('#email').val(),
+      phone: $('#phone').val(),
+      date_picker: $('#date_picker').val(),
+      timeBook: +$('#timeBook').val(),
+      people: $('#people').val(),
+      // id_of_user: +$('.id_of_user').val(),
+      list_food: jsonData
     };
+    const pattern = /^0[0-9]{9}/;
+    if (pattern.test(datas.phone)) {
+      $.ajax({
+        // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
+        url: "http://localhost/Booking/index.php?act=booking",
+        data: datas,
+        method: "POST",
+        dataType: "json",
+      })
+    }else{
+      $("#label_phone").text("Số điện thoại không đúng").addClass("text-danger");
+      e.preventDefault();
+    }
 
-    productData.push(product);
   }
-  console.log(productData)
-  const jsonData = JSON.stringify(productData);
-  console.log(jsonData)
-
-
-  // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
-  const hidden = document.querySelector(".hidden_data");
-  hidden.value = jsonData
-  console.log(hidden.textContent)
-  // console.log(datass)
-
-  const datas = {
-    name: $('#name').val(),
-    email: $('#email').val(),
-    phone: $('#phone').val(),
-    date_picker: $('#date_picker').val(),
-    timeBook: +$('#timeBook').val(),
-    people: $('#people').val(),
-    // id_of_user: +$('.id_of_user').val(),
-    list_food: jsonData
-  };
-  console.log(datas)
-
-  $.ajax({
-    // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
-    url: "http://localhost/Booking/index.php?act=booking",
-    data: datas,
-    method: "POST",
-    dataType: "json",
-  })
-}
-const btnSubmit = document.querySelector('#btnSubmit');
-btnSubmit.addEventListener('click', createObject)
+  const btnSubmit = document.querySelector('#btnSubmit');
+  btnSubmit.addEventListener('click', createObject)
 </script>

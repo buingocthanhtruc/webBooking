@@ -159,7 +159,6 @@ if (!empty($act)) {
                 $phone_number = $_POST['phone_number'];
                 $password = $_POST['password'];
                 $thongbao = dangnhap($phone_number, $password);
-
                 if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
                     echo "<script>location.href = 'admin/index.php'</script>";
                 }
@@ -224,8 +223,7 @@ if (!empty($act)) {
                 $total_monney = $_POST['total_money'];
                 switch ($payment) {
                     case 'cash':
-                        echo "<script> alert('Đặt bàn thành công. Quý khách vui lòng đến đúng hẹn.'); </script>";
-                        break;
+                        include "view/payCash.php";
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                         $vnp_Returnurl = "http://localhost/booking/index.php?act=ReturnPay&id_bill=".$_POST['id_bill'];
@@ -301,7 +299,7 @@ if (!empty($act)) {
                 $id = $_GET['id_bill'];
                 update_status_pay($status, $id);
                 update_status($status, $id);
-                echo "Thanh toán thành công";
+                include 'view/paySuccess.php';
             }
             break;
     }

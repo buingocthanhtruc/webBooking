@@ -41,60 +41,6 @@
 </head>
 
 <body>
-  <!-- Pre-loader start -->
-  <!-- <div class="theme-loader">
-    <div class="loader-track">
-      <div class="preloader-wrapper">
-        <div class="spinner-layer spinner-blue">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-yellow">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-green">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- Pre-loader end -->
   <div id="pcoded" class="pcoded">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
@@ -133,54 +79,50 @@
                 </a>
                 <ul class="show-notification">
                   <li>
-                    <h6>Notifications</h6>
+                    <h6>Thông báo đơn hàng mới</h6>
                     <label class="label label-danger">New</label>
                   </li>
+                  <?php foreach($bill_notify as $bill): 
+                  $originalTime = $bill['time_start'];
+
+                  // Tạo một đối tượng DateTime từ chuỗi ban đầu
+                  $dateTime = new DateTime($originalTime);
+                  
+                  // Chuyển đổi đối tượng DateTime về định dạng mới (Y-m-d)
+                  $newFormat = $dateTime->format('Y-m-d');
+                    ?>
                   <li class="waves-effect waves-light">
                     <div class="media">
-                      <img class="d-flex align-self-center img-radius" src="assets/images/avatar-2.jpg"
+                    <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg"
                         alt="Generic placeholder image" />
                       <div class="media-body">
-                        <h5 class="notification-user">John Doe</h5>
+                        <h5 class="notification-user"><?= $bill['name']?></h5>
                         <p class="notification-msg">
-                          Lorem ipsum dolor sit amet, consectetuer elit.
+                             đặt bàn vào ngày <?=$newFormat?>  <br>
+                             số lượng người <?=$bill['people']?> <br>
+                             tổng hóa đơn là : <?=$bill['total']?> VNĐ <br>
+                             Trạng thái :  <?=$bill['status_pay']?'Đã thanh toán':'Chưa thanh toán'?>
+
                         </p>
-                        <span class="notification-time">30 minutes ago</span>
+                        <?php
+                          $orderTime = strtotime($bill['create_at']);
+                          $currentTime = time();
+                          $timeDifference = $currentTime - $orderTime;
+                          $minutesDifference = floor($timeDifference / 60);
+                        ?>
+                        <div class="d-flex justify-content-end">
+                          <span class="notification-time text"><?=$minutesDifference?> minutes ago</span>
+                        </div>
                       </div>
                     </div>
                   </li>
-                  <li class="waves-effect waves-light">
-                    <div class="media">
-                      <img class="d-flex align-self-center img-radius" src="assets/images/avatar-4.jpg"
-                        alt="Generic placeholder image" />
-                      <div class="media-body">
-                        <h5 class="notification-user">Joseph William</h5>
-                        <p class="notification-msg">
-                          Lorem ipsum dolor sit amet, consectetuer elit.
-                        </p>
-                        <span class="notification-time">30 minutes ago</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="waves-effect waves-light">
-                    <div class="media">
-                      <img class="d-flex align-self-center img-radius" src="assets/images/avatar-3.jpg"
-                        alt="Generic placeholder image" />
-                      <div class="media-body">
-                        <h5 class="notification-user">Sara Soudein</h5>
-                        <p class="notification-msg">
-                          Lorem ipsum dolor sit amet, consectetuer elit.
-                        </p>
-                        <span class="notification-time">30 minutes ago</span>
-                      </div>
-                    </div>
-                  </li>
+                  <?php endforeach; ?>
                 </ul>
               </li>
               <li class="user-profile header-notification">
                 <a href="#!" class="waves-effect waves-light">
-                  <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image" />
-                  <span>John Doe</span>
+                  <img src="assets/images/admin.jpg" class="img-radius" alt="User-Profile-Image" />
+                  <span>ADMIN</span>
                   <i class="ti-angle-down"></i>
                 </a>
                 <ul class="show-notification profile-notification">
