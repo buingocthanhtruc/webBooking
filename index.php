@@ -151,6 +151,9 @@ if (!empty($act)) {
         case 'team':
             include "view/team.php";
             break;
+        case 'testTable':
+            include "view/testTable.php";
+            break;
         case 'testimonial':
             include "view/testimonial.php";
             break;
@@ -182,7 +185,6 @@ if (!empty($act)) {
                 $fullname = $_POST['fullname'];
                 $password = $_POST['password'];
                 $re_password = $_POST['cpassword'];
-
                 $thongbao = dangky($phone_number, $password, $re_password, $fullname, $email);
             }
 

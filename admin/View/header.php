@@ -23,6 +23,7 @@
   <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css" />
   <!-- Font Awesome -->
   <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- scrollbar.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css" />
   <!-- am chart export.css -->
@@ -125,21 +126,12 @@
                 </a>
                 <ul class="show-notification profile-notification">
                   <li class="waves-effect waves-light">
-                    <a href="#!"> <i class="ti-settings"></i> Settings </a>
+                  
+                    <a href="http://localhost/Booking/index.php"><i class="fa-solid fa-house"></i>Trở về trang chủ</a>
                   </li>
                   <li class="waves-effect waves-light">
-                    <a href="user-profile.html">
-                      <i class="ti-user"></i> ADMIN
-                    </a>
-                  </li>
-                  <li class="waves-effect waves-light">
-                    <a href="email-inbox.html">
-                      <i class="ti-email"></i> My Messages
-                    </a>
-                  </li>
-                  <li class="waves-effect waves-light">
-                    <a href="auth-lock-screen.html">
-                      <i class="ti-lock"></i> Lock Screen
+                    <a href="?act=chart">
+                    <i class="fa-regular fa-money-bill-1"></i> Thông kê doanh thu
                     </a>
                   </li>
                   <li class="waves-effect waves-light">

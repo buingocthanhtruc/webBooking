@@ -43,13 +43,25 @@ function dangxuat()
     session_unset();
   }
 }
-
+function get_user_by_phone($phone){
+  $sql = "SELECT * FROM user WHERE phone_number = '$phone'";
+  return pdo_query_one($sql);
+}
+function get_user_by_email($email){
+  $sql = "SELECT * FROM user WHERE email = '$email'";
+  return pdo_query_one($sql);
+}
 function dangky($phone_number, $password, $re_password, $fullname, $email)
 {
-  if ($phone_number == "" || $password == "" || $fullname == "" || $email == "") {
-    return "Bạn nhập thiếu dữ liệu";
+  if(!preg_match("/^0[0-9]{9}/",$phone_number)){
+    return "vui lòng nhập đúng số điện thoại phù hợp";
   }
-
+  if(get_user_by_phone($phone_number)){
+    return "Số điện thoại đã được đăng kí vui lòng thử số khác";
+  }
+  if(get_user_by_email($email)){
+    return "Email đã được sử dụng";
+  }
   if ($password != $re_password) {
     return "Mật khẩu không khớp !!!";
   }
@@ -76,8 +88,3 @@ function get_info_user()
   return pdo_query($sql);
 }
 
-// function get_count()
-// {
-//   $sql = "SELECT COUNT(id) FROM `user` WHERE 1";
-//   return pdo_query($sql);
-// }

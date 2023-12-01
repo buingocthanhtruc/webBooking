@@ -5,13 +5,17 @@
         <div class="service-item-sub pt-3">
           <div class="p-4">
             <h3>Menu</h3>
-
             <a href="index.php?act=profile">
               <p>Thông tin</p>
             </a>
             <a href="index.php?act=history_booking">
               <p>Lịch sử</p>
             </a>
+            <?php if($_SESSION['role'] == 1) :?>
+            <a href="http://localhost/Booking/admin/index.php">
+              <p>Quản lý</p>
+            </a>
+            <?php endif; ?>
           </div>
         </div>
       </div>

@@ -2,6 +2,11 @@
   <div class="row d-flex justify-content-center">
     <div class="col-4">
       <form action="?act=signup" class="card p-4" method="POST">
+      <?php 
+        if(isset($thongbao) && $thongbao != "") {
+          echo '<p class="mt-3 text-danger text-center">'.$thongbao.'</p>';
+        }
+      ?>
         <h1 class="text-center">Đăng Ký</h1>
         <div class="col m-3">
           <div class="form-floating">
@@ -38,11 +43,6 @@
         </div>
         <a href="index.php?act=login" class="nav-link text-primary text-end h7">Đăng Nhập</a>
       </form>
-      <?php 
-        if(isset($thongbao) && $thongbao != "") {
-          echo '<p class="mt-3 text-success text-center">'.$thongbao.'</p>';
-        }
-      ?>
     </div>
 
   </div>
