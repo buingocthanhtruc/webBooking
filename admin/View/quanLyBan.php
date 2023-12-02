@@ -4,8 +4,8 @@ include 'View/titleOfComponents.php';
 
 <style>
   .grid-container {
-    margin-left: 20px;
     display: grid;
+    place-items: center;
     grid-template-columns: auto auto auto auto;
     gap: 5px;
   }

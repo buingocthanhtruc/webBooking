@@ -3,23 +3,29 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
-  }
+.grid-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+}
 
-  .grid-item {
-    background-color: var(--bs-gray);
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-  }
+.grid-item {
+  background-color: var(--bs-gray);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
 
-  .item-disabled {
-    background-color: #20c997 !important;
-  }
+.img-tables {
+  filter: contrast(200%);
+  width: 65%;
+}
+
+.img-tables_active {
+  filter: contrast(2000%);
+}
 </style>
 <div class="pcoded-inner-content">
   <!-- Main-body start -->
@@ -31,8 +37,8 @@ include 'View/titleOfComponents.php';
         <div class="container-xxl py-2 px-0 wow fadeInUp" data-wow-delay="0.1s">
           <div class="row">
             <h1 class="text-primary text-center col-12">Chọn Bàn</h1>
-            <form class="bg-dark py-2 col-12" method="post" id="myForm">
-              <div class="grid-container m-3">
+            <form class="py-2 col-12" method="post" id="myForm">
+              <div class="grid-container m-3 mb-5">
                 <?php
 
                 // function formartTime($time)
@@ -74,7 +80,8 @@ include 'View/titleOfComponents.php';
                   // $allTable là câu lệnh SELECT tất cả cái bàn ko dựa vào WHERE gì -> Vì lúc này không có bàn nào đc book
                   foreach ($allTable as $table) :
                     extract($table);
-                    echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
+                    // echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="" id=""></div>';
+                    echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '">';
                   endforeach;
                 }
 
@@ -89,9 +96,10 @@ include 'View/titleOfComponents.php';
                     extract($table);
                     $key = array_search($id, $arr_dis);
                     if ($key !== false) {
-                      echo '<div class="grid-item item-disabled">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" disabled id=""></div>';
+                      echo '<img class="img-tables" src="assets/images/hollow.png" alt="Error Image Table" data-image="">';
                     } else {
-                      echo '<div class="grid-item">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
+                      // echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
+                      echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '">';
                     }
                   endforeach;
                 }
@@ -101,6 +109,7 @@ include 'View/titleOfComponents.php';
               <div class=" d-flex justify-content-center mt-3 mb-3">
                 <!-- Ta gửi $string này là id mới nhất ở DB bill của user -->
                 <input type="hidden" name="id_of_book" value="<?php echo $string ?>">
+                <input type="hidden" class="data_id_table" value="" name="id_table">
                 <button class="btn bg-primary text-white col-1" id="btnSubmit" name="send_id_table">Gửi</button>
               </div>
             </form>
@@ -108,39 +117,46 @@ include 'View/titleOfComponents.php';
         </div>
 
         <script>
-          // const btnSubmit = document.querySelector('#btnSubmit');
-          // // btnSubmit.addEventListener('click', e => {
-          // // e.preventDefault();
+        // const checkboxes = document.querySelectorAll('.inp');
+        // let checkedCount = 0;
+        // let arr = 0;
 
-          // // })
+        // for (let i = 0; i < checkboxes.length; i++) {
+        //   checkboxes[i].addEventListener('change', function() {
+        //     if (this.checked) {
+        //       checkedCount += 1;
+        //       console.log(this.value)
+        //       arr = this.value
+        //       // checkedCheckboxes.push(checkbox.name)
 
+        //       if (checkedCount > 1) {
+        //         this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+        //         checkedCount -= 1;
+        //       }
 
-          const checkboxes = document.querySelectorAll('.inp');
-          let checkedCount = 0;
-          let arr = 0;
+        //     } else {
+        //       checkedCount -= 1;
+        //     }
+        //   })
+        // }
 
-          // function getCheckedCheckboxes() {
-          // const checkedCheckboxes = [];
+        const images = document.querySelectorAll('.img-tables');
 
+        const grid_container = document.querySelector('.grid-container');
+        grid_container.addEventListener('click', function(e) {
+          const chooseTable = e.target.closest('.img-tables');
+          console.log(chooseTable)
 
-          for (let i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-              if (this.checked) {
-                checkedCount += 1;
-                console.log(this.value)
-                arr = this.value
-                // checkedCheckboxes.push(checkbox.name)
+          if (!chooseTable) return;
+          if (chooseTable.dataset.image == '') alert('Bàn này đã được Book, Vui lòng chọn bàn khác')
 
-                if (checkedCount > 1) {
-                  this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
-                  checkedCount -= 1;
-                }
+          images.forEach(img => img.classList.remove('img-tables_active'));
 
-              } else {
-                checkedCount -= 1;
-              }
-            })
-          }
+          chooseTable.classList.add('img-tables_active');
+
+          document.querySelector('.data_id_table').value = chooseTable.dataset.image;
+
+        })
         </script>
 
 

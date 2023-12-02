@@ -137,8 +137,10 @@ if (!empty($act)) {
             if (isset($_POST['send_id_table'])) {
                 $id = $_POST['id_of_book'];
                 $id_user = $_SESSION['id'];
-                if (isset($_POST['table']) && is_array($_POST['table'])) {
-                    $id_table = $_POST['table'][0];
+                // if (isset($_POST['table']) && is_array($_POST['table'])) {
+                if (isset($_POST['id_table'])) {
+                    // $id_table = $_POST['table'][0];
+                    $id_table = $_POST['id_table'];
                     update_id_table($id, $id_user, $id_table);
                     echo "<script>location.href = '?act=payOnline&idBill=$id'</script>";
                     return;
