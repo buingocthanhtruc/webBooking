@@ -6,10 +6,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description"
-    content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-  <meta name="keywords"
-    content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+  <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+  <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
   <meta name="author" content="codedthemes" />
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
@@ -24,7 +22,6 @@
   <!-- <link rel="stylesheet" type="text/css" href="./assets/icon/themify-icons/themify-icons.css" /> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css" />
-
   <!-- scrollbar.css -->
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css" />
   <!-- am chart export.css -->
@@ -82,40 +79,39 @@
                     <h6>Thông báo đơn hàng mới</h6>
                     <label class="label label-danger">New</label>
                   </li>
-                  <?php foreach($bill_notify as $bill): 
-                  $originalTime = $bill['time_start'];
+                  <?php foreach ($bill_notify as $bill) :
+                    $originalTime = $bill['time_start'];
 
-                  // Tạo một đối tượng DateTime từ chuỗi ban đầu
-                  $dateTime = new DateTime($originalTime);
-                  
-                  // Chuyển đổi đối tượng DateTime về định dạng mới (Y-m-d)
-                  $newFormat = $dateTime->format('Y-m-d');
-                    ?>
-                  <li class="waves-effect waves-light">
-                    <div class="media">
-                    <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg"
-                        alt="Generic placeholder image" />
-                      <div class="media-body">
-                        <h5 class="notification-user"><?= $bill['name']?></h5>
-                        <p class="notification-msg">
-                             đặt bàn vào ngày <?=$newFormat?>  <br>
-                             số lượng người <?=$bill['people']?> <br>
-                             tổng hóa đơn là : <?=$bill['total']?> VNĐ <br>
-                             Trạng thái :  <?=$bill['status_pay']?'Đã thanh toán':'Chưa thanh toán'?>
+                    // Tạo một đối tượng DateTime từ chuỗi ban đầu
+                    $dateTime = new DateTime($originalTime);
 
-                        </p>
-                        <?php
+                    // Chuyển đổi đối tượng DateTime về định dạng mới (Y-m-d)
+                    $newFormat = $dateTime->format('Y-m-d');
+                  ?>
+                    <li class="waves-effect waves-light">
+                      <div class="media">
+                        <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image" />
+                        <div class="media-body">
+                          <h5 class="notification-user"><?= $bill['name'] ?></h5>
+                          <p class="notification-msg">
+                            đặt bàn vào ngày <?= $newFormat ?> <br>
+                            số lượng người <?= $bill['people'] ?> <br>
+                            tổng hóa đơn là : <?= $bill['total'] ?> VNĐ <br>
+                            Trạng thái : <?= $bill['status_pay'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?>
+
+                          </p>
+                          <?php
                           $orderTime = strtotime($bill['create_at']);
                           $currentTime = time();
                           $timeDifference = $currentTime - $orderTime;
                           $minutesDifference = floor($timeDifference / 60);
-                        ?>
-                        <div class="d-flex justify-content-end">
-                          <span class="notification-time text"><?=$minutesDifference?> minutes ago</span>
+                          ?>
+                          <div class="d-flex justify-content-end">
+                            <span class="notification-time text"><?= $minutesDifference ?> minutes ago</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
+                    </li>
                   <?php endforeach; ?>
                 </ul>
               </li>
@@ -127,21 +123,12 @@
                 </a>
                 <ul class="show-notification profile-notification">
                   <li class="waves-effect waves-light">
-                    <a href="#!"> <i class="ti-settings"></i> Settings </a>
+
+                    <a href="http://localhost/Booking/index.php"><i class="fa-solid fa-house"></i>Trở về trang chủ</a>
                   </li>
                   <li class="waves-effect waves-light">
-                    <a href="user-profile.html">
-                      <i class="ti-user"></i> ADMIN
-                    </a>
-                  </li>
-                  <li class="waves-effect waves-light">
-                    <a href="email-inbox.html">
-                      <i class="ti-email"></i> My Messages
-                    </a>
-                  </li>
-                  <li class="waves-effect waves-light">
-                    <a href="auth-lock-screen.html">
-                      <i class="ti-lock"></i> Lock Screen
+                    <a href="?act=chart">
+                      <i class="fa-regular fa-money-bill-1"></i> Thông kê doanh thu
                     </a>
                   </li>
                   <li class="waves-effect waves-light">
