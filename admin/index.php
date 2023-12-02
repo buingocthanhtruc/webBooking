@@ -6,7 +6,7 @@ if (isset($_GET['act'])) {
     $act = "";
 }
 
-if (isset($_SESSION['id']) && $_SESSION['id'] != 0) :
+if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
     include "../model/bill.php";
     include "../model/bill_detail.php";
     include "../model/pdo.php";

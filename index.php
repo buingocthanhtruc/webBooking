@@ -230,7 +230,7 @@ if (!empty($act)) {
                         include "view/payCash.php";
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                        $vnp_Returnurl = "http://localhost/DuAn1/webBooking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
+                        $vnp_Returnurl = "http://localhost/Booking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
                         $vnp_TmnCode = "0LXMRAJ0"; //Mã website tại VNPAY 
                         $vnp_HashSecret = "KHSGRJGQZXNATRFLJVLAVFNIYMTCNNFT"; //Chuỗi bí mật
 
