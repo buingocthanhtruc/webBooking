@@ -226,14 +226,14 @@ if (!empty($act)) {
                         include "view/payCash.php";
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                        $vnp_Returnurl = "http://localhost/booking/index.php?act=ReturnPay&id_bill=".$_POST['id_bill'];
+                        $vnp_Returnurl = "http://localhost/DuAn1/webBooking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
                         $vnp_TmnCode = "0LXMRAJ0"; //Mã website tại VNPAY 
                         $vnp_HashSecret = "KHSGRJGQZXNATRFLJVLAVFNIYMTCNNFT"; //Chuỗi bí mật
 
                         $vnp_TxnRef = rand(0, 99999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
                         $vnp_OrderInfo = 'Thanh toan dat ban';
                         $vnp_OrderType = 'billpayment';
-                        $vnp_Amount = $total_monney*100;
+                        $vnp_Amount = $total_monney * 100;
                         $vnp_Locale = 'vn';
                         $vnp_BankCode = 'NCB';
                         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -288,13 +288,13 @@ if (!empty($act)) {
                         break;
                 }
             }
-            if(isset($_GET['idBill'])){
+            if (isset($_GET['idBill'])) {
                 $bill_detail = bill_detail($_GET['idBill']);
             }
             include 'view/payOnline.php';
             break;
         case "ReturnPay":
-            if(isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == "00"){
+            if (isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == "00") {
                 $status = 1;
                 $id = $_GET['id_bill'];
                 update_status_pay($status, $id);

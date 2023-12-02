@@ -94,10 +94,10 @@ include 'View/titleOfComponents.php';
             extract($table);
             $key = array_search($id, $arr_dis);
             if ($key !== false) {
-              echo '<img class="img-tables" src="assets/images/hollow.png" alt="Error Image Table" data-image="' . $id . '>';
+              echo '<img class="img-tables" src="assets/images/hollow.png" alt="Error Image Table" data-image="' . $id . '">';
             } else {
               // echo '<div class="grid-item bg-success">' . $name . '<br><input type="checkbox" class="inp" value=' . $id . ' name="table[]" id=""></div>';
-              echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '>';
+              echo '<img class="img-tables" src="assets/images/full.png" alt="Error Image Table" data-image="' . $id . '">';
             }
           endforeach;
         }

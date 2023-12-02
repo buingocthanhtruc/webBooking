@@ -1,21 +1,21 @@
 <style>
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 10px;
-}
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+  }
 
-.grid-item {
-  background-color: var(--bs-gray);
-  border: 3px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+  .grid-item {
+    background-color: var(--bs-gray);
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 
-.item-disabled {
-  background-color: var(--bs-teal) !important;
-}
+  .item-disabled {
+    background-color: var(--bs-teal) !important;
+  }
 </style>
 
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
@@ -34,7 +34,7 @@
         //   // echo $thoi_gian->format('H:i:s');
         //   return $thoi_gian->format('H:i:s');
         // }
-
+        // echo $_SESSION['id'];
         $start = formartTime($_SESSION['start']);
         $end = formartTime($_SESSION['end']);
         // echo '<br />';
@@ -106,48 +106,48 @@
 </div>
 
 <script>
-// const btnSubmit = document.querySelector('#btnSubmit');
-// // btnSubmit.addEventListener('click', e => {
-// // e.preventDefault();
+  // const btnSubmit = document.querySelector('#btnSubmit');
+  // // btnSubmit.addEventListener('click', e => {
+  // // e.preventDefault();
 
-// // })
-
-
-const checkboxes = document.querySelectorAll('.inp');
-let checkedCount = 0;
-let arr = 0;
-
-// function getCheckedCheckboxes() {
-// const checkedCheckboxes = [];
+  // // })
 
 
-for (let i = 0; i < checkboxes.length; i++) {
-  checkboxes[i].addEventListener('change', function() {
-    if (this.checked) {
-      checkedCount += 1;
-      console.log(this.value)
-      arr = this.value
-      // checkedCheckboxes.push(checkbox.name)
+  const checkboxes = document.querySelectorAll('.inp');
+  let checkedCount = 0;
+  let arr = 0;
 
-      if (checkedCount > 1) {
-        this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+  // function getCheckedCheckboxes() {
+  // const checkedCheckboxes = [];
+
+
+  for (let i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener('change', function() {
+      if (this.checked) {
+        checkedCount += 1;
+        console.log(this.value)
+        arr = this.value
+        // checkedCheckboxes.push(checkbox.name)
+
+        if (checkedCount > 1) {
+          this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+          checkedCount -= 1;
+        }
+
+      } else {
         checkedCount -= 1;
       }
-
-    } else {
-      checkedCount -= 1;
-    }
-  })
-}
+    })
+  }
 
 
 
-// Send id_table:
-// function sendIdTable() {
-//   const datas = {
+  // Send id_table:
+  // function sendIdTable() {
+  //   const datas = {
 
-//   }
-// }
+  //   }
+  // }
 </script>
 
 

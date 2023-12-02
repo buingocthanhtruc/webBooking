@@ -32,9 +32,9 @@
   <!-- Template Stylesheet -->
   <link href="css/style.css" rel="stylesheet">
   <style>
-    .invalid{
-      border: 1px solid red;
-    }
+  .invalid {
+    border: 1px solid red;
+  }
   </style>
 </head>
 
@@ -62,10 +62,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav ms-auto py-0 pe-4">
-            <a href="index.php" class="nav-item nav-link <?= $act==""?"active":"" ?>">Trang Chủ</a>
-            <a href="index.php?act=about" class="nav-item nav-link <?= $act=="about"?"active":"" ?>">Thông Tin</a>
-            <a href="index.php?act=service" class="nav-item nav-link <?= $act=="service"?"active":"" ?>">Dịch Vụ</a>
-            <a href="index.php?act=menu" class="nav-item nav-link <?= $act=="menu"?"active":"" ?>">Thực Đơn</a>
+            <a href="index.php" class="nav-item nav-link <?= $act == "" ? "active" : "" ?>">Trang Chủ</a>
+            <a href="index.php?act=about" class="nav-item nav-link <?= $act == "about" ? "active" : "" ?>">Thông Tin</a>
+            <a href="index.php?act=service" class="nav-item nav-link <?= $act == "service" ? "active" : "" ?>">Dịch
+              Vụ</a>
+            <a href="index.php?act=menu" class="nav-item nav-link <?= $act == "menu" ? "active" : "" ?>">Thực Đơn</a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Trang</a>
               <div class="dropdown-menu m-0">
@@ -75,36 +76,36 @@
               </div>
             </div>
 
-            <?php 
-            
-            if(!isset($_SESSION['fullname'])) { ?>
+            <?php
+
+            if (!isset($_SESSION['fullname'])) { ?>
             <a href="?act=login" class="nav-link nav-item">Đăng nhập</a>
             <?php }; ?>
 
-            <?php 
-              if(isset($_SESSION['fullname']) && $_SESSION['fullname'] != "") {
-                echo '<a href="index.php?act=profile" class="nav-item nav-link <?= $act=="service"?"active":"" ?>'.$_SESSION['fullname'].'</a>';
+            <?php
+            if (isset($_SESSION['fullname']) && $_SESSION['fullname'] != "") {
+              echo '<a href="index.php?act=profile" class="nav-item nav-link <?= $act=="service"?"active":"" ?>' .
+            $_SESSION['fullname'] . '</a>';
             echo '<a href="index.php?act=logout" class="nav-item nav-link <?= $act=="service"?"active":"" ?>Đăng Xuất</a>';
-
             }
             ?>
 
           </div>
         </div>
       </nav>
-      <?php if(isset($act) && $act!="") :?>
-      <div class=" container-xxl py-5 bg-dark hero-header mb-5">
+      <?php if (isset($act) && $act != "") : ?>
+        <div class=" container-xxl py-5 bg-dark hero-header mb-5">
               <div class="container text-center my-5 pt-5 pb-4">
                 <h1 class="display-3 text-white mb-3 animated slideInDown">Thông Tin Về Chúng Tôi</h1>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-center text-uppercase">
                     <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
-                    <li class="breadcrumb-item"><a href="?act=<?=$act?>"><?=$act ?></a></li>
+                    <li class="breadcrumb-item"><a href="?act=<?= $act ?>"><?= $act ?></a></li>
                   </ol>
                 </nav>
               </div>
           </div>
-          <?php else :?>
+          <?php else : ?>
           <div class="container-xxl py-5 bg-dark hero-header mb-5">
             <div class="container my-5 py-5">
               <div class="row align-items-center g-5">
