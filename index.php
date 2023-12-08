@@ -170,8 +170,10 @@ if (!empty($act)) {
                 $total_monney = $_POST['total_money'];
                 switch ($payment) {
                     case 'cash':
+                        $status = 1;
                         update_status_order($status, $_POST['id_bill']);
-                        include "view/payCash.php";
+                        echo "<script>location.href = '?act=payCashSuccess'</script>"; 
+                        break;
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                         $vnp_Returnurl = "http://localhost/Booking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
@@ -301,6 +303,9 @@ if (!empty($act)) {
             }else {
                 include 'view/payFail.php';
             }
+            break;
+        case "payCashSuccess":
+            include 'view/payCash.php';
             break;
     }
 } else {
