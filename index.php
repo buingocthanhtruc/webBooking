@@ -15,7 +15,8 @@ include "model/food.php";
 include "model/bill.php";
 include "model/bill_detail.php";
 include "model/table.php";
-
+include "model/booking.php";
+include "model/payOnline.php";
 $allDanhMuc = loadall_danhmuc();
 $allFood = all_food();
 $allBill = loadall_bill_home();
@@ -39,61 +40,6 @@ if (!empty($act)) {
             break;
         case 'booking':
             include "view/booking.php";
-
-            function addInFoBook($start, $end)
-            {
-                $people = $_POST['people'];
-                $name = $_POST['name'];
-                $email = $_POST['email'];
-                $phone = $_POST['phone'];
-
-                // Sesion này để lấy lấy năm, tháng ngày để so sánh năm, tháng ngày 
-                // trong DB trùng nhau -> In ra bàn đang hoạt động 
-
-                $_SESSION['date'] = $_POST['date_picker'];
-                $timeBook = $_POST['timeBook'];
-
-                // Format cho đúng định dạng để insert vào đc Databasse 
-                $time_start = $_POST['date_picker'] . ' ' . $start;
-                $time_end = $_POST['date_picker'] . ' ' . $end;
-
-                $create_at = date('Y-m-d H:i');
-                $list_food = "" . $_POST['list_food'] . "";
-
-                $items = json_decode($list_food, true);
-
-                // Tính tổng tiền
-                if ($items === null && json_last_error() !== JSON_ERROR_NONE) {
-                    echo "Có lỗi xảy ra trong quá trình chuyển đổi JSON.";
-                } else {
-                    $totalSum = 0;
-
-                    foreach ($items as $item) {
-                        $total = $item['price'] * $item['quantity'];
-                        $totalSum += $total;
-                    }
-                }
-
-
-                // Session này đc tạo khi user đăng nhập -> Trường hợp user ko đ/nhập thì cho id_user = 0
-                if (!isset($_SESSION['id'])) {
-                    // Khi ko có $_SESSION['id'], ta sẽ tạo $_SESSION['id'] biết user nào
-                    $id_user = 0;
-                    $_SESSION['id'] = $id_user;
-                } else {
-                    $id_user = $_SESSION['id'];
-                }
-
-                // Insert thông tin vào bảng bill
-                insert_bill($id_user, $time_start, $time_end, $create_at, $people);
-
-                // Insert thông tin vào bảng bill_detail
-                $result_id_bill = get_id_bill($id_user);
-                $id_bill = implode(', ', $result_id_bill);
-                insert_bill_detail($name, $email, $phone, $list_food, $id_bill, $totalSum);
-            }
-
-
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
                     return;
@@ -137,9 +83,7 @@ if (!empty($act)) {
             if (isset($_POST['send_id_table'])) {
                 $id = $_POST['id_of_book'];
                 $id_user = $_SESSION['id'];
-                // if (isset($_POST['table']) && is_array($_POST['table'])) {
                 if (isset($_POST['id_table'])) {
-                    // $id_table = $_POST['table'][0];
                     $id_table = $_POST['id_table'];
                     update_id_table($id, $id_user, $id_table);
                     echo "<script>location.href = '?act=payOnline&idBill=$id'</script>";
@@ -189,7 +133,6 @@ if (!empty($act)) {
                 $re_password = $_POST['cpassword'];
                 $thongbao = dangky($phone_number, $password, $re_password, $fullname, $email);
             }
-
             include "view/signup.php";
             break;
 
@@ -227,13 +170,13 @@ if (!empty($act)) {
                 $total_monney = $_POST['total_money'];
                 switch ($payment) {
                     case 'cash':
+                        update_status_order($status, $_POST['id_bill']);
                         include "view/payCash.php";
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                         $vnp_Returnurl = "http://localhost/Booking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
                         $vnp_TmnCode = "0LXMRAJ0"; //Mã website tại VNPAY 
                         $vnp_HashSecret = "KHSGRJGQZXNATRFLJVLAVFNIYMTCNNFT"; //Chuỗi bí mật
-
                         $vnp_TxnRef = rand(0, 99999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
                         $vnp_OrderInfo = 'Thanh toan dat ban';
                         $vnp_OrderType = 'billpayment';
@@ -290,6 +233,44 @@ if (!empty($act)) {
                             die();
                         }
                         break;
+                    case "momo":
+                        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+                        $partnerCode = 'MOMOBKUN20180529';
+                        $accessKey = 'klm05TvNBzhg7h7j';
+                        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+                        $orderInfo = "Thanh toán qua MoMo";
+                        $amount = $total_monney;
+                        $orderId = rand(0, 99999);
+                        $redirectUrl = "http://localhost/Booking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
+                        $ipnUrl = "http://localhost/Booking/index.php?act=ReturnPay&id_bill=" . $_POST['id_bill'];
+                        $extraData = "";
+                        $requestId = time() . "";
+                        $requestType = "payWithATM";
+                        //before sign HMAC SHA256 signature
+                        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+                        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+                        $data = array(
+                            'partnerCode' => $partnerCode,
+                            'partnerName' => "Test",
+                            "storeId" => "MomoTestStore",
+                            'requestId' => $requestId,
+                            'amount' => $amount,
+                            'orderId' => $orderId,
+                            'orderInfo' => $orderInfo,
+                            'redirectUrl' => $redirectUrl,
+                            'ipnUrl' => $ipnUrl,
+                            'lang' => 'vi',
+                            'extraData' => $extraData,
+                            'requestType' => $requestType,
+                            'signature' => $signature
+                        );
+                        $result = execPostRequest($endpoint, json_encode($data));
+                        $jsonResult = json_decode($result, true);  // decode json
+
+                        //Just a example, please check more in there
+                        $myPayUrl = $jsonResult['payUrl'];
+                        echo "<script>location.href = '$myPayUrl'</script>"; 
+                        break;
                 }
             }
             if (isset($_GET['idBill'])) {
@@ -301,9 +282,24 @@ if (!empty($act)) {
             if (isset($_GET['vnp_ResponseCode']) && $_GET['vnp_ResponseCode'] == "00") {
                 $status = 1;
                 $id = $_GET['id_bill'];
+                $time = DateTime::createFromFormat('YmdHis', $_GET['vnp_PayDate'])->format('Y-m-d H:i:s');
+                update_time_pay($time, $id);
                 update_status_pay($status, $id);
                 update_status($status, $id);
+                update_status_order($status, $id);
                 include 'view/paySuccess.php';
+            }
+            if (isset($_GET['resultCode']) && $_GET['resultCode'] == "0") {
+                $status = 1;
+                $id = $_GET['id_bill'];
+                $time = date('Y-m-d H:i:s' ,$_GET['responseTime']/1000);
+                update_time_pay($time, $id);
+                update_status_pay($status, $id);
+                update_status($status, $id);
+                update_status_order($status, $id);
+                include 'view/paySuccess.php';
+            }else {
+                include 'view/payFail.php';
             }
             break;
     }

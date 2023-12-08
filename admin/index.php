@@ -16,10 +16,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
     include "../model/category.php";
     include "../model/food.php";
     include "../model/table.php";
-
-
     include "../model/user.php";
-
+    include "../model/booking.php";
     $allDanhMuc = loadall_danhmuc();
     $allFood = all_food();
     $allTable = loadall_table();

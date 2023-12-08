@@ -74,7 +74,7 @@ function loadall_bill($name = "", $status = 0, $page_1)
     FROM
       bill
     INNER JOIN bill_detail ON bill.id = bill_detail.id_bill 
-    WHERE bill.id > 0 ";
+    WHERE bill.status_order = 1";
 
   if ($name != '') {
     $sql .= "AND bill_detail.name LIKE '%$name%' ";
@@ -197,4 +197,9 @@ FROM
 INNER JOIN bill_detail ON bill.id = bill_detail.id_bill 
 WHERE bill.id > 0 ORDER BY bill.id DESC LIMIT $sl";
   return pdo_query($sql);
+}
+function update_time_pay($time, $id)
+{
+  $sql =  "UPDATE bill SET time_pay = '$time' WHERE id = $id";
+  pdo_execute($sql);
 }

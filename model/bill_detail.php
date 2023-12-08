@@ -21,11 +21,17 @@ function update_status($status, $id)
   pdo_execute($sql);
 }
 
+function update_status_order($status, $id)
+{
+  $sql =  "UPDATE bill_detail SET status = $status WHERE id_bill = $id";
+  pdo_execute($sql);
+}
+
 function get_total_money_today()
 {
   $sql = "SELECT SUM(bill_detail.total) AS total
   FROM bill_detail INNER JOIN bill ON bill_detail.id_bill = bill.id
-  WHERE DATE(bill.time_start) = CURDATE()
+  WHERE DATE(bill.time_pay) = CURDATE()
   AND status = 1 AND status_pay = 1
   ";
   return pdo_query($sql);
@@ -39,9 +45,8 @@ function get_total_money_cur_week()
         bill
       INNER JOIN bill_detail ON bill.id = bill_detail.id_bill
       WHERE
-        YEARWEEK(time_start, 1) = YEARWEEK(CURDATE(), 1)
+        YEARWEEK(time_pay, 1) = YEARWEEK(CURDATE(), 1)
         AND status = 1 AND status_pay = 1";
-
   return pdo_query($sql);
 }
 
@@ -53,8 +58,8 @@ function get_total_money_cur_month()
       bill
     INNER JOIN bill_detail ON bill.id = bill_detail.id_bill
     WHERE
-      YEAR(bill.time_start) = YEAR(CURDATE()) AND
-      MONTH(bill.time_start) = MONTH(CURDATE())
+      YEAR(bill.time_pay) = YEAR(CURDATE()) AND
+      MONTH(bill.time_pay) = MONTH(CURDATE())
       AND status = 1 AND status_pay = 1";
 
   return pdo_query($sql);
@@ -68,9 +73,8 @@ function get_total_money_cur_year()
       bill
     INNER JOIN bill_detail ON bill.id = bill_detail.id_bill
     WHERE
-      YEAR(bill.time_start) = YEAR(CURDATE())
+      YEAR(bill.time_pay) = YEAR(CURDATE())
       AND status = 1 AND status_pay = 1";
-
   return pdo_query($sql);
 }
 
@@ -78,26 +82,25 @@ function get_total_money_cur_year()
 function get_total_money_month()
 {
   $sql = "SELECT
-      MONTH(bill.time_start) AS month,
+      MONTH(bill.time_pay) AS month,
       SUM(bill_detail.total) AS total
     FROM
       bill
     INNER JOIN bill_detail ON bill.id = bill_detail.id_bill
     WHERE
-    YEAR(bill.time_start) = YEAR(CURDATE()) 
+    YEAR(bill.time_pay) = YEAR(CURDATE()) 
       AND STATUS = 1 AND status_pay = 1
     GROUP BY
-      MONTH(bill.time_start)";
+      MONTH(bill.time_pay)";
 
   return pdo_query($sql);
 }
-
 
 // ---- LẤY TỔNG TIỀN GIỮA CÁC NĂM -----
 function get_total_money_year()
 {
   $sql = "SELECT
-      YEAR(bill.time_start) AS year,
+      YEAR(bill.time_pay) AS year,
       SUM(bill_detail.total) AS total
     FROM
       bill
@@ -105,7 +108,6 @@ function get_total_money_year()
     WHERE
       STATUS = 1 AND status_pay = 1
     GROUP BY
-      YEAR(bill.time_start)";
-
+      YEAR(bill.time_pay)";
   return pdo_query($sql);
 }
