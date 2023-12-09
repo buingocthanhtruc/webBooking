@@ -25,6 +25,17 @@
 
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
   <div class="row g-0">
+    <?php
+    if (!isset($_SESSION['start']) || !isset($_SESSION['end']) || !isset($_SESSION['date'])) {
+      echo '<div class="flex-column justify-content-center p-5" >
+                  <h4 class="text-danger text-center">Chọn bàn không thành công !</h4> <br>
+                  <div class="text-center"><strong class="text-primary">TLT restaurant</strong> mong quý khách có thể quay lại kiểm tra thông tin và thực hiện đặt bàn lại</div>
+                  <div class="text-center">Chúc quý khách có một trải nghiệm tuyệt vời với <strong class="text-primary">TLT restaurant</strong></div>
+            </div>';
+      die();
+    }
+    ?>
+
     <h1 class="text-primary text-center col-12">Chọn Bàn</h1>
     <form class="bg-dark py-2" method="post" action="">
       <div class="grid-container m-3">
@@ -114,41 +125,6 @@
 </div>
 
 <script>
-  // const btnSubmit = document.querySelector('#btnSubmit');
-  // // btnSubmit.addEventListener('click', e => {
-  // // e.preventDefault();
-
-  // // })
-
-
-  // const checkboxes = document.querySelectorAll('.inp');
-  // let checkedCount = 0;
-  // let arr = 0;
-
-  // // function getCheckedCheckboxes() {
-  // // const checkedCheckboxes = [];
-
-
-  // for (let i = 0; i < checkboxes.length; i++) {
-  //   checkboxes[i].addEventListener('change', function() {
-  //     if (this.checked) {
-  //       checkedCount += 1;
-  //       console.log(this.value)
-  //       arr = this.value
-  //       // checkedCheckboxes.push(checkbox.name)
-
-  //       if (checkedCount > 1) {
-  //         this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
-  //         checkedCount -= 1;
-  //       }
-
-  //     } else {
-  //       checkedCount -= 1;
-  //     }
-  //   })
-  // }
-
-
   const images = document.querySelectorAll('.img-tables');
 
   const grid_container = document.querySelector('.grid-container');
@@ -167,9 +143,3 @@
 
   })
 </script>
-
-
-<?php
-
-
-?>

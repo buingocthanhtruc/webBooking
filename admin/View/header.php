@@ -6,8 +6,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
-  <meta name="keywords" content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
+  <meta name="description"
+    content="Mega Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+  <meta name="keywords"
+    content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
   <meta name="author" content="codedthemes" />
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
@@ -38,6 +40,60 @@
 </head>
 
 <body>
+  <!-- Pre-loader start -->
+  <!-- <div class="theme-loader">
+    <div class="loader-track">
+      <div class="preloader-wrapper">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Pre-loader end -->
   <div id="pcoded" class="pcoded">
     <div class="pcoded-overlay-box"></div>
     <div class="pcoded-container navbar-wrapper">
@@ -88,30 +144,31 @@
                     // Chuyển đổi đối tượng DateTime về định dạng mới (Y-m-d)
                     $newFormat = $dateTime->format('Y-m-d');
                   ?>
-                    <li class="waves-effect waves-light">
-                      <div class="media">
-                        <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg" alt="Generic placeholder image" />
-                        <div class="media-body">
-                          <h5 class="notification-user"><?= $bill['name'] ?></h5>
-                          <p class="notification-msg">
-                            đặt bàn vào ngày <?= $newFormat ?> <br>
-                            số lượng người <?= $bill['people'] ?> <br>
-                            tổng hóa đơn là : <?= $bill['total'] ?> VNĐ <br>
-                            Trạng thái : <?= $bill['status_pay'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?>
+                  <li class="waves-effect waves-light">
+                    <div class="media">
+                      <img class="d-flex align-self-center img-radius" src="assets/images/user.jpg"
+                        alt="Generic placeholder image" />
+                      <div class="media-body">
+                        <h5 class="notification-user"><?= $bill['name'] ?></h5>
+                        <p class="notification-msg">
+                          đặt bàn vào ngày <?= $newFormat ?> <br>
+                          số lượng người <?= $bill['people'] ?> <br>
+                          tổng hóa đơn là : <?= $bill['total'] ?> VNĐ <br>
+                          Trạng thái : <?= $bill['status_pay'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?>
 
-                          </p>
-                          <?php
+                        </p>
+                        <?php
                           $orderTime = strtotime($bill['create_at']);
                           $currentTime = time();
                           $timeDifference = $currentTime - $orderTime;
                           $minutesDifference = floor($timeDifference / 60);
                           ?>
-                          <div class="d-flex justify-content-end">
-                            <span class="notification-time text"><?= $minutesDifference ?> minutes ago</span>
-                          </div>
+                        <div class="d-flex justify-content-end">
+                          <span class="notification-time text"><?= $minutesDifference ?> minutes ago</span>
                         </div>
                       </div>
-                    </li>
+                    </div>
+                  </li>
                   <?php endforeach; ?>
                 </ul>
               </li>

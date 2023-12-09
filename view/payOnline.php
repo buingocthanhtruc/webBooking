@@ -1,4 +1,16 @@
 <?php
+if (!isset($bill_detail)) {
+    echo '<div class="flex-column justify-content-center p-5" >
+                <h4 class="text-danger text-center">Chọn phương thức thanh toán không thành công !</h4> <br>
+                <div class="text-center"><strong class="text-primary">TLT restaurant</strong> mong quý khách có thể quay lại kiểm tra phương thức thanh toán và thực hiện lại</div>
+                <div class="text-center">Chúc quý khách có một trải nghiệm tuyệt vời với <strong class="text-primary">TLT restaurant</strong></div>
+          </div>';
+    die();
+}
+
+?>
+
+<?php
 extract($bill_detail);
 // Format thời gian
 $dateString = $time_start;
@@ -44,36 +56,36 @@ $formattedHour = $dateTime->format('H:i');
             <th>Giá Món</th>
             <th>Tổng Tiền</th>
         </tr>
-        <?php 
-            $total = 0 ;
-            $stt = 1;
-            foreach ($list_food as $food) :
-                 if ($food->quantity != 0) :
+        <?php
+        $total = 0;
+        $stt = 1;
+        foreach ($list_food as $food) :
+            if ($food->quantity != 0) :
         ?>
                 <tr>
                     <td><?= $stt ?></td>
                     <td><?= $food->name ?></td>
                     <td><?= $food->quantity ?></td>
-                    <td><?= $food->price?> VNĐ</td>
-                    <td><?=$food->quantity*$food->price?> VNĐ</td>
+                    <td><?= $food->price ?> VNĐ</td>
+                    <td><?= $food->quantity * $food->price ?> VNĐ</td>
                 </tr>
         <?php
-            $stt++;
-            $total +=$food->quantity*$food->price; 
-                endif;
-            endforeach;
+                $stt++;
+                $total += $food->quantity * $food->price;
+            endif;
+        endforeach;
         ?>
     </table>
     <div class="d-flex justify-content-end">
         <span>Tổng tiền :</span>
-        <span class="mx-3"><?=$total?> VNĐ</span>
+        <span class="mx-3"><?= $total ?> VNĐ</span>
     </div>
     <div class="total">
         <h5 style="text-align: center; opacity: 80%;" class=" text-success">Lựa chọn phương thức thanh toán</h5>
         <form action="?act=payOnline" method="post">
             <div class="choose_payment d-flex justify-content-center p-3">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="cash" checked >
+                    <input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="cash" checked>
                     <label class="form-check-label" for="inlineRadio1">Thanh toán trực tiếp</label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -85,8 +97,8 @@ $formattedHour = $dateTime->format('H:i');
                     <label class="form-check-label" for="inlineRadio3">Momo</label>
                 </div>
             </div>
-            <input type="hidden" name="id_bill" value="<?=$_GET['idBill']?>">
-            <input type="hidden" name="total_money" value="<?=$total?>">
+            <input type="hidden" name="id_bill" value="<?= $_GET['idBill'] ?>">
+            <input type="hidden" name="total_money" value="<?= $total ?>">
             <div class="d-flex justify-content-center m-2">
                 <input type="submit" class="pay btn btn-primary" name="redirect" value="Tiến hành thanh toán">
             </div>

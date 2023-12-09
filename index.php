@@ -83,13 +83,13 @@ if (!empty($act)) {
             if (isset($_POST['send_id_table'])) {
                 $id = $_POST['id_of_book'];
                 $id_user = $_SESSION['id'];
-                if (isset($_POST['id_table'])) {
+                if (isset($_POST['id_table']) && $_POST['id_table'] != '') {
                     $id_table = $_POST['id_table'];
-                    update_id_table($id, $id_user, $id_table);
+                    update_table_temporary($id, $id_user, $id_table);
                     echo "<script>location.href = '?act=payOnline&idBill=$id'</script>";
                     return;
                 } else {
-                    echo "Không có checkbox nào được chọn.";
+                    echo '<script>alert("Quý khách chưa chọn bàn 😉😉😉 !!!")</script>';
                 }
             }
             include "view/chooseTable.php";
@@ -137,8 +137,8 @@ if (!empty($act)) {
             break;
 
         case 'profile':
-            $id = $_SESSION['id'];
             if (isset($_SESSION['id'])) {
+                $id = $_SESSION['id'];
                 if (isset($_POST['capnhat'])) {
                     $fullname = $_POST['fullname'];
                     $email = $_POST['email'];
@@ -147,8 +147,16 @@ if (!empty($act)) {
                     // echo "<script>location.href = '?act=profile'</script>";
                     $thongbao = "Cập nhật thành công";
                 }
+                include "view/profile.php";
+            } else {
+                echo '
+                <div class="flex-column justify-content-center p-5">
+                <h4 class="text-warning text-center">Quý khách phải đăng nhập vào tài khoản</h4> <br>
+                <div class="text-center">Nếu chưa có tài khoản, quý khách có thể đăng ký <a class="text-success" href="index.php?act=signup">Tại đây</a></div>
+              </div>
+                ';
             }
-            include "view/profile.php";
+
             break;
 
             // In ra bảng đặt bàn
@@ -172,7 +180,7 @@ if (!empty($act)) {
                     case 'cash':
                         $status = 1;
                         update_status_order($status, $_POST['id_bill']);
-                        echo "<script>location.href = '?act=payCashSuccess'</script>"; 
+                        echo "<script>location.href = '?act=payCashSuccess'</script>";
                         break;
                     case 'vnpay':
                         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -271,7 +279,7 @@ if (!empty($act)) {
 
                         //Just a example, please check more in there
                         $myPayUrl = $jsonResult['payUrl'];
-                        echo "<script>location.href = '$myPayUrl'</script>"; 
+                        echo "<script>location.href = '$myPayUrl'</script>";
                         break;
                 }
             }
@@ -289,18 +297,22 @@ if (!empty($act)) {
                 update_status_pay($status, $id);
                 update_status($status, $id);
                 update_status_order($status, $id);
+                update_id_table_pay($id);
                 include 'view/paySuccess.php';
+                return;
             }
             if (isset($_GET['resultCode']) && $_GET['resultCode'] == "0") {
                 $status = 1;
                 $id = $_GET['id_bill'];
-                $time = date('Y-m-d H:i:s' ,$_GET['responseTime']/1000);
+                $time = date('Y-m-d H:i:s', $_GET['responseTime'] / 1000);
                 update_time_pay($time, $id);
                 update_status_pay($status, $id);
                 update_status($status, $id);
                 update_status_order($status, $id);
+                update_id_table_pay($id);
                 include 'view/paySuccess.php';
-            }else {
+                return;
+            } else {
                 include 'view/payFail.php';
             }
             break;

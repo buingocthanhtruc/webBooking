@@ -10,13 +10,13 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="name" placeholder="Your Name" required value="<?=$_SESSION['fullname']??""?>">
+                  <input type="text" class="form-control" id="name" placeholder="Your Name" required value="<?= $_SESSION['fullname'] ?? "" ?>">
                   <label for="name">Họ tên</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="email" class="form-control" id="email" placeholder="Your Email" required value="<?=$_SESSION['email']??""?>">
+                  <input type="email" class="form-control" id="email" placeholder="Your Email" required value="<?= $_SESSION['email'] ?? "" ?>">
                   <label for="email">Email</label>
                 </div>
               </div>
@@ -50,7 +50,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-floating">
-                  <input type="text" class="form-control" id="phone" placeholder="Your Number Phone" maxlength="10" required value="<?=$_SESSION['phone_number']??""?>">
+                  <input type="text" class="form-control" id="phone" placeholder="Your Number Phone" maxlength="10" required value="<?= $_SESSION['phone_number'] ?? "" ?>">
                   <label id="label_phone" for="phone">Phone Number</label>
                 </div>
               </div>
@@ -69,7 +69,7 @@
 
             <div class="tab-content">
               <?php foreach ($allDanhMuc as $danhMuc) : ?>
-                <div class="row  container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
+                <div class="row container tab-pane fade" id="<?= $danhMuc["id_group"] ?>">
                   <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
                     <div class="row">
                       <span class="text-white col-7"><?= $food["name"] ?> </span>

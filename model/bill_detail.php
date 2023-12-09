@@ -23,8 +23,27 @@ function update_status($status, $id)
 
 function update_status_order($status, $id)
 {
-  $sql =  "UPDATE bill_detail SET status = $status WHERE id_bill = $id";
+  $sql =  "UPDATE bill SET status_order = $status WHERE id = $id";
   pdo_execute($sql);
+}
+
+function update_id_table_pay($id)
+{
+  $sql =  "UPDATE bill SET id_table = table_temporary WHERE id = $id";
+  pdo_execute($sql);
+}
+
+function update_time_pay_ad($id)
+{
+  $time_pay = date('Y-m-d H:i:s');
+  $sql =  "UPDATE bill SET time_pay = '$time_pay' WHERE id = $id";
+  pdo_execute($sql);
+}
+
+function get_status_id_bill($id)
+{
+  $sql =  "SELECT bill_detail.status FROM bill_detail WHERE id_bill = $id";
+  return pdo_query_one($sql);
 }
 
 function get_total_money_today()
