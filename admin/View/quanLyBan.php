@@ -104,23 +104,3 @@ include 'View/titleOfComponents.php';
 
         ?>
       </div>
-
-
-      <script>
-        const images = document.querySelectorAll('.img-tables');
-
-        const grid_container = document.querySelector('.grid-container');
-        grid_container.addEventListener('click', function(e) {
-          const chooseTable = e.target.closest('.img-tables');
-          console.log(chooseTable)
-
-          if (!chooseTable) return;
-
-          images.forEach(img => img.classList.remove('img-tables_active'));
-
-          chooseTable.classList.add('img-tables_active');
-
-          document.querySelector('.data_id_table').value = chooseTable.dataset.image;
-
-        })
-      </script>
