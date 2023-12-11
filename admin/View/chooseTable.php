@@ -3,29 +3,29 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-.grid-container {
-  display: grid;
-  place-items: center;
-  grid-template-columns: auto auto auto auto;
-  gap: 10px;
-}
+  .grid-container {
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+  }
 
-.grid-item {
-  background-color: var(--bs-gray);
-  border: 3px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+  .grid-item {
+    background-color: var(--bs-gray);
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 
-.img-tables {
-  filter: contrast(200%);
-  width: 65%;
-}
+  .img-tables {
+    filter: contrast(200%);
+    width: 65%;
+  }
 
-.img-tables_active {
-  filter: contrast(2000%);
-}
+  .img-tables_active {
+    filter: contrast(2000%);
+  }
 </style>
 <div class="pcoded-inner-content">
   <!-- Main-body start -->
@@ -117,46 +117,46 @@ include 'View/titleOfComponents.php';
         </div>
 
         <script>
-        // const checkboxes = document.querySelectorAll('.inp');
-        // let checkedCount = 0;
-        // let arr = 0;
+          // const checkboxes = document.querySelectorAll('.inp');
+          // let checkedCount = 0;
+          // let arr = 0;
 
-        // for (let i = 0; i < checkboxes.length; i++) {
-        //   checkboxes[i].addEventListener('change', function() {
-        //     if (this.checked) {
-        //       checkedCount += 1;
-        //       console.log(this.value)
-        //       arr = this.value
-        //       // checkedCheckboxes.push(checkbox.name)
+          // for (let i = 0; i < checkboxes.length; i++) {
+          //   checkboxes[i].addEventListener('change', function() {
+          //     if (this.checked) {
+          //       checkedCount += 1;
+          //       console.log(this.value)
+          //       arr = this.value
+          //       // checkedCheckboxes.push(checkbox.name)
 
-        //       if (checkedCount > 1) {
-        //         this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
-        //         checkedCount -= 1;
-        //       }
+          //       if (checkedCount > 1) {
+          //         this.checked = false; // Ngăn không cho chọn thêm khi đã đạt tối đa 1 mục
+          //         checkedCount -= 1;
+          //       }
 
-        //     } else {
-        //       checkedCount -= 1;
-        //     }
-        //   })
-        // }
+          //     } else {
+          //       checkedCount -= 1;
+          //     }
+          //   })
+          // }
 
-        const images = document.querySelectorAll('.img-tables');
+          const images = document.querySelectorAll('.img-tables');
 
-        const grid_container = document.querySelector('.grid-container');
-        grid_container.addEventListener('click', function(e) {
-          const chooseTable = e.target.closest('.img-tables');
-          console.log(chooseTable)
+          const grid_container = document.querySelector('.grid-container');
+          grid_container.addEventListener('click', function(e) {
+            const chooseTable = e.target.closest('.img-tables');
+            console.log(chooseTable)
 
-          if (!chooseTable) return;
-          if (chooseTable.dataset.image == '') alert('Bàn này đã được Book, Vui lòng chọn bàn khác')
+            if (!chooseTable) return;
+            if (chooseTable.dataset.image == '') alert('Bàn này đã được Book, Vui lòng chọn bàn khác')
 
-          images.forEach(img => img.classList.remove('img-tables_active'));
+            images.forEach(img => img.classList.remove('img-tables_active'));
 
-          chooseTable.classList.add('img-tables_active');
+            chooseTable.classList.add('img-tables_active');
 
-          document.querySelector('.data_id_table').value = chooseTable.dataset.image;
+            document.querySelector('.data_id_table').value = chooseTable.dataset.image;
 
-        })
+          })
         </script>
 
 

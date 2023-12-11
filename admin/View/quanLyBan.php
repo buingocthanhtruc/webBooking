@@ -3,29 +3,29 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-.grid-container {
-  display: grid;
-  place-items: center;
-  grid-template-columns: auto auto auto auto;
-  gap: 5px;
-}
+  .grid-container {
+    display: grid;
+    place-items: center;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+  }
 
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 3px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 3px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
 
-.img-tables {
-  filter: contrast(200%);
-  width: 65%;
-}
+  .img-tables {
+    filter: contrast(200%);
+    width: 65%;
+  }
 
-.img-tables_active {
-  filter: contrast(2000%);
-}
+  .img-tables_active {
+    filter: contrast(2000%);
+  }
 </style>
 
 <div class="pcoded-inner-content">

@@ -92,6 +92,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
                     $id = $_POST['id_of_book'];
                     $id_user = $_SESSION['id'];
                     $status_order = 1;
+
                     if (isset($_POST['id_table'])) {
                         // $selectedOptions = $_POST['table'];
                         // $id_table = 0;
@@ -102,6 +103,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
                         $id_table = $_POST['id_table'];
                         insert_id_table($id, $id_user, $id_table, $status_order);
                         update_table_temporary($id, $id_user, $id_table);
+                        update_status(1, $id);
+
                         echo '<h4 class="mt-3 pb-5 text-success text-center">Thành Công !!!</h4>';
                         echo "<script>
                         function reloadPage() {

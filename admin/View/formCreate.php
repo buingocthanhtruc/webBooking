@@ -192,15 +192,13 @@ include 'View/titleOfComponents.php';
             people: $('#people').val(),
             // id_of_user: +$('.id_of_user').val(),
             list_food: jsonData,
-            status: 1, // admin: 1
-            status_pay: 0 // admin: 0
           };
           console.log(datas)
 
           $.ajax({
             // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
-            url: "http://localhost/DuAn1/webBooking/admin/index.php?act=formCreate",
-            // url: "http://localhost/DuAn1/webBooking/index.php?act=booking",
+            // url: "http://localhost/DuAn1/webBooking/admin/index.php?act=formCreate",
+            url: "http://localhost/Booking/admin/index.php?act=formCreate",
             data: datas,
             method: "POST",
             dataType: "json",
