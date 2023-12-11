@@ -62,25 +62,28 @@ include 'View/titleOfComponents.php';
                       <option value="2">13h - 15h</option>
                       <option value="3">15h - 17h</option>
                       <option value="4">17h - 19h</option>
+                      <option value="5">19h - 21h</option>
+                      <option value="6">21h - 23h</option>
                     </select>
                     <label class="float-label">Giờ</label>
                   </div>
 
-                  <div class="form-group form-default">
+                  <!-- <div class="form-group form-default">
                     <select class="form-select form-control" id="status" name="state" aria-label="Default select example">
                       <option value="0">Chưa xác nhận</option>
                       <option value="1">Xác nhận</option>
                     </select>
                     <label class="float-label">Trạng thái</label>
-                  </div>
+                  </div> -->
 
-                  <div class="form-group form-default">
+                  <!-- <div class="form-group form-default">
                     <select class="form-select form-control" id="status_pay" name="state" aria-label="Default select example">
                       <option value="0">Chưa thanh toán</option>
                       <option value="1">Thanh toán</option>
                     </select>
                     <label class="float-label">Thanh toán</label>
-                  </div>
+                  </div> -->
+
                 </div>
               </div>
 
@@ -189,8 +192,8 @@ include 'View/titleOfComponents.php';
             people: $('#people').val(),
             // id_of_user: +$('.id_of_user').val(),
             list_food: jsonData,
-            status: +$('#status').val(), // admin: 1
-            status_pay: +$('#status_pay').val() // admin: 0
+            status: 1, // admin: 1
+            status_pay: 0 // admin: 0
           };
           console.log(datas)
 

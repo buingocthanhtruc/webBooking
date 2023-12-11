@@ -3,29 +3,29 @@ include 'View/titleOfComponents.php';
 ?>
 
 <style>
-  .grid-container {
-    display: grid;
-    place-items: center;
-    grid-template-columns: auto auto auto auto;
-    gap: 5px;
-  }
+.grid-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto auto auto auto;
+  gap: 5px;
+}
 
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-  }
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
 
-  .img-tables {
-    filter: contrast(200%);
-    width: 65%;
-  }
+.img-tables {
+  filter: contrast(200%);
+  width: 65%;
+}
 
-  .img-tables_active {
-    filter: contrast(2000%);
-  }
+.img-tables_active {
+  filter: contrast(2000%);
+}
 </style>
 
 <div class="pcoded-inner-content">
@@ -50,6 +50,8 @@ include 'View/titleOfComponents.php';
                       <option value="2">13h - 15h</option>
                       <option value="3">15h - 17h</option>
                       <option value="4">17h - 19h</option>
+                      <option value="5">19h - 21h</option>
+                      <option value="6">21h - 23h</option>
                     </select>
                   </div>
 

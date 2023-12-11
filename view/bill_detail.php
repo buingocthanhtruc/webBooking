@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
   <div class="row g-4">
     <div class="col-lg-3 col-sm-6 pr-4">
-      <p>Thông Tin Nhà hàng</p>
+      <p>Thông Tin Nhà Hàng</p>
       <h5>TLT Restaurant</h5>
       <p>Phố Trịnh Văn Bô, Phường Phương Canh, Quận Nam Từ Liêm, TP.Hà Nội</p>
       <p>Phone: 19009999</p>
@@ -10,7 +10,7 @@
     <div class="col-lg-3 col-sm-6">
     </div>
     <div class="col-lg-3 col-sm-6">
-      <p>Khách hàng</p>
+      <p>Khách Hàng</p>
       <?php
       extract($bill_detail);
       // Format thời gian

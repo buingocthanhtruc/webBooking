@@ -12,9 +12,9 @@ function update_table_temporary($id, $id_user, $id_table)
   pdo_execute($sql);
 }
 
-function insert_id_table($id, $id_user, $id_table)
+function insert_id_table($id, $id_user, $id_table, $status_order)
 {
-  $sql = "UPDATE bill SET id_table = $id_table WHERE id = $id AND id_user = $id_user";
+  $sql = "UPDATE bill SET id_table = $id_table, status_order = $status_order WHERE id = $id AND id_user = $id_user";
   // return pdo_query($sql);
   pdo_execute($sql);
 }

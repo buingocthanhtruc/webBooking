@@ -41,40 +41,51 @@ if (!empty($act)) {
         case 'booking':
             include "view/booking.php";
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
-                    return;
-                } else {
-                    $start = 0;
-                    $end = 0;
-                    if ($_POST['timeBook'] == 1) {
-                        $start = 11;
-                        $end = 13;
-                        $_SESSION['start'] = 11;
-                        $_SESSION['end'] = 13;
-                    }
-
-                    if ($_POST['timeBook'] == 2) {
-                        $start = 13;
-                        $end = 15;
-                        $_SESSION['start'] = 13;
-                        $_SESSION['end'] = 15;
-                    }
-
-                    if ($_POST['timeBook'] == 3) {
-                        $start = 15;
-                        $end = 17;
-                        $_SESSION['start'] = 15;
-                        $_SESSION['end'] = 17;
-                    }
-
-                    if ($_POST['timeBook'] == 4) {
-                        $start = 17;
-                        $end = 19;
-                        $_SESSION['start'] = 17;
-                        $_SESSION['end'] = 19;
-                    }
-                    addInFoBook($start, $end);
+                $start = 0;
+                $end = 0;
+                if ($_POST['timeBook'] == 1) {
+                    $start = 11;
+                    $end = 13;
+                    $_SESSION['start'] = 11;
+                    $_SESSION['end'] = 13;
                 }
+
+                if ($_POST['timeBook'] == 2) {
+                    $start = 13;
+                    $end = 15;
+                    $_SESSION['start'] = 13;
+                    $_SESSION['end'] = 15;
+                }
+
+                if ($_POST['timeBook'] == 3) {
+                    $start = 15;
+                    $end = 17;
+                    $_SESSION['start'] = 15;
+                    $_SESSION['end'] = 17;
+                }
+
+                if ($_POST['timeBook'] == 4) {
+                    $start = 17;
+                    $end = 19;
+                    $_SESSION['start'] = 17;
+                    $_SESSION['end'] = 19;
+                }
+
+                if ($_POST['timeBook'] == 5) {
+                    $start = 19;
+                    $end = 21;
+                    $_SESSION['start'] = 19;
+                    $_SESSION['end'] = 21;
+                }
+
+                if ($_POST['timeBook'] == 6) {
+                    $start = 21;
+                    $end = 23;
+                    $_SESSION['start'] = 21;
+                    $_SESSION['end'] = 23;
+                }
+
+                addInFoBook($start, $end);
             }
             break;
 

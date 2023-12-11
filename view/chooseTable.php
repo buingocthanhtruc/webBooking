@@ -1,26 +1,26 @@
 <style>
-  .grid-container {
-    display: grid;
-    place-items: center;
-    grid-template-columns: auto auto auto;
-    gap: 10px;
-  }
+.grid-container {
+  display: grid;
+  place-items: center;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+}
 
-  .grid-item {
-    background-color: var(--bs-gray);
-    border: 3px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-  }
+.grid-item {
+  background-color: var(--bs-gray);
+  border: 3px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
 
-  .item-disabled {
-    background-color: var(--bs-teal) !important;
-  }
+.item-disabled {
+  background-color: var(--bs-teal) !important;
+}
 
-  .img-tables_active {
-    filter: contrast(2000%);
-  }
+.img-tables_active {
+  filter: contrast(2000%);
+}
 </style>
 
 <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
@@ -125,21 +125,21 @@
 </div>
 
 <script>
-  const images = document.querySelectorAll('.img-tables');
+const images = document.querySelectorAll('.img-tables');
 
-  const grid_container = document.querySelector('.grid-container');
-  grid_container.addEventListener('click', function(e) {
-    const chooseTable = e.target.closest('.img-tables');
-    console.log(chooseTable)
+const grid_container = document.querySelector('.grid-container');
+grid_container.addEventListener('click', function(e) {
+  const chooseTable = e.target.closest('.img-tables');
+  console.log(chooseTable)
 
-    if (!chooseTable) return;
-    if (chooseTable.dataset.image == '') return alert('Bàn này đã được Book, Vui lòng chọn bàn khác')
+  if (!chooseTable) return;
+  if (chooseTable.dataset.image == '') return alert('Bàn này đã được Book, Vui lòng chọn bàn khác')
 
-    images.forEach(img => img.classList.remove('img-tables_active'));
+  images.forEach(img => img.classList.remove('img-tables_active'));
 
-    chooseTable.classList.add('img-tables_active');
+  chooseTable.classList.add('img-tables_active');
 
-    document.querySelector('.data_id_table').value = chooseTable.dataset.image;
+  document.querySelector('.data_id_table').value = chooseTable.dataset.image;
 
-  })
+})
 </script>

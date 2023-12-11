@@ -60,7 +60,7 @@ function loadall_bill($name = "", $status = 0, $page_1)
 {
   $sql = "SELECT
       bill.id,
-      bill.id_table,
+      bill.table_temporary,
       bill.time_start,
       bill.people,
       bill_detail.list_food,
@@ -169,6 +169,15 @@ function searchStatusTable($khung_gio = 1, $day = '')
     $time_end = formartTime(19);
   }
 
+  if ($khung_gio == 5) {
+    $time_start = formartTime(19);
+    $time_end = formartTime(21);
+  }
+  if ($khung_gio == 6) {
+    $time_start = formartTime(21);
+    $time_end = formartTime(23);
+  }
+
   $sql = "SELECT id_table 
   FROM `bill` 
   WHERE DATE(time_end) = DATE('$day') 
@@ -177,7 +186,8 @@ function searchStatusTable($khung_gio = 1, $day = '')
 
   return pdo_query($sql);
 }
-function load_bill_notifi($sl){
+function load_bill_notifi($sl)
+{
   $sql = "SELECT
   bill.id,
   bill.id_table,

@@ -7,9 +7,9 @@ if (isset($_GET['act'])) {
 }
 
 if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
+    include "../model/pdo.php";
     include "../model/bill.php";
     include "../model/bill_detail.php";
-    include "../model/pdo.php";
     $bill_notify = load_bill_notifi(3);
     include "View/header.php";
     include "View/sideBar.php";
@@ -35,41 +35,55 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
             case 'formCreate':
                 include "View/formCreate.php";
                 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                    if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
-                        return;
-                    } else {
-                        $start = 0;
-                        $end = 0;
-                        if ($_POST['timeBook'] == 1) {
-                            $start = 11;
-                            $end = 13;
-                            $_SESSION['start'] = 11;
-                            $_SESSION['end'] = 13;
-                        }
-
-                        if ($_POST['timeBook'] == 2) {
-                            $start = 13;
-                            $end = 15;
-                            $_SESSION['start'] = 13;
-                            $_SESSION['end'] = 15;
-                        }
-
-                        if ($_POST['timeBook'] == 3) {
-                            $start = 15;
-                            $end = 17;
-                            $_SESSION['start'] = 15;
-                            $_SESSION['end'] = 17;
-                        }
-
-                        if ($_POST['timeBook'] == 4) {
-                            $start = 17;
-                            $end = 19;
-                            $_SESSION['start'] = 17;
-                            $_SESSION['end'] = 19;
-                        }
-                        addInFoBook($start, $end);
+                    // if (!isset($_POST['date_picker']) || $_POST['date_picker'] === "") {
+                    //     return;
+                    // } else {
+                    $start = 0;
+                    $end = 0;
+                    if ($_POST['timeBook'] == 1) {
+                        $start = 11;
+                        $end = 13;
+                        $_SESSION['start'] = 11;
+                        $_SESSION['end'] = 13;
                     }
+
+                    if ($_POST['timeBook'] == 2) {
+                        $start = 13;
+                        $end = 15;
+                        $_SESSION['start'] = 13;
+                        $_SESSION['end'] = 15;
+                    }
+
+                    if ($_POST['timeBook'] == 3) {
+                        $start = 15;
+                        $end = 17;
+                        $_SESSION['start'] = 15;
+                        $_SESSION['end'] = 17;
+                    }
+
+                    if ($_POST['timeBook'] == 4) {
+                        $start = 17;
+                        $end = 19;
+                        $_SESSION['start'] = 17;
+                        $_SESSION['end'] = 19;
+                    }
+
+                    if ($_POST['timeBook'] == 5) {
+                        $start = 19;
+                        $end = 21;
+                        $_SESSION['start'] = 19;
+                        $_SESSION['end'] = 21;
+                    }
+
+                    if ($_POST['timeBook'] == 6) {
+                        $start = 21;
+                        $end = 23;
+                        $_SESSION['start'] = 21;
+                        $_SESSION['end'] = 23;
+                    }
+                    addInFoBook($start, $end);
                 }
+                // }
                 break;
             case 'chooseTable':
                 // SAU KHI CHỌN BÀN THÌ SẼ UPDATE BÀN CHO USER
@@ -77,6 +91,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
                 if (isset($_POST['send_id_table'])) {
                     $id = $_POST['id_of_book'];
                     $id_user = $_SESSION['id'];
+                    $status_order = 1;
                     if (isset($_POST['id_table'])) {
                         // $selectedOptions = $_POST['table'];
                         // $id_table = 0;
@@ -85,7 +100,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
                         //     $id_table = $option;
                         // }
                         $id_table = $_POST['id_table'];
-                        insert_id_table($id, $id_user, $id_table);
+                        insert_id_table($id, $id_user, $id_table, $status_order);
+                        update_table_temporary($id, $id_user, $id_table);
                         echo '<h4 class="mt-3 pb-5 text-success text-center">Thành Công !!!</h4>';
                         echo "<script>
                         function reloadPage() {
