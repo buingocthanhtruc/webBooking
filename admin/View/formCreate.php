@@ -33,7 +33,7 @@ include 'View/titleOfComponents.php';
                   </div>
                   <div class="form-group form-default mb-2">
                     <input id="date_picker" type="date" name="dataBook" class="form-control">
-                    <label class="float-label">
+                    <label class="float-label" id="label_date">
                     </label>
                   </div>
 
@@ -194,7 +194,60 @@ include 'View/titleOfComponents.php';
             list_food: jsonData,
           };
           console.log(datas)
+          // Lấy ngày hiện tại
+          let ngayHienTai = new Date();
+          let gioHienTai = new Date().getHours()
+          console.log(gioHienTai)
+          let nam = ngayHienTai.getFullYear();
+          let thang = ngayHienTai.getMonth() + 1;
+          let ngay = ngayHienTai.getDate();
 
+          let currentDay = `${nam}-${thang}-${ngay}`;
+          console.log(currentDay)
+
+          const pattern = /^0[0-9]{9}/;
+
+          if (!pattern.test(datas.phone)) {
+            e.preventDefault();
+            $("#label_phone").text("Số điện thoại không đúng").addClass("text-danger");
+            return;
+          }
+
+          if (datas.date_picker === '') {
+            e.preventDefault();
+            $("#label_date").text("Quý khách chưa chọn ngày").addClass("text-danger");
+            return;
+          }
+
+          if (currentDay === datas.date_picker) {
+            const arrTimeLine = {
+              1: 11,
+              2: 13,
+              3: 15,
+              4: 17,
+              5: 19,
+              6: 21,
+            };
+            const start = arrTimeLine[datas.timeBook] !== undefined ? arrTimeLine[datas.timeBook] : 1
+            console.log("Start: " + start);
+
+            if (+gioHienTai - start === 1) {
+              $.ajax({
+                // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
+                url: "http://localhost/Booking/index.php?act=booking",
+                data: datas,
+                method: "POST",
+                dataType: "json",
+              })
+              return;
+            }
+
+            if (gioHienTai > start) {
+              alert("Quý khách vui lòng chọn khoảng thời gian khác. Vì khoảng gian đã trôi qua !!!");
+              e.preventDefault();
+              return;
+            }
+          }
           $.ajax({
             // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
             // url: "http://localhost/DuAn1/webBooking/admin/index.php?act=formCreate",
