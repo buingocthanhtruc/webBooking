@@ -44,8 +44,7 @@ include 'View/titleOfComponents.php';
                   </div>
 
                   <div class="form-group form-default">
-                    <select class="form-select form-control" id="people" name="numberOfPeople"
-                      aria-label="Default select example" required>
+                    <select class="form-select form-control" id="people" name="numberOfPeople" aria-label="Default select example" required>
                       <?php
                       echo '<option selected>Số người</option>';
                       for ($i = 0; $i < 7; $i++) {
@@ -68,8 +67,7 @@ include 'View/titleOfComponents.php';
                   </div>
 
                   <div class="form-group form-default">
-                    <select class="form-select form-control" id="status" name="state"
-                      aria-label="Default select example">
+                    <select class="form-select form-control" id="status" name="state" aria-label="Default select example">
                       <option value="0">Chưa xác nhận</option>
                       <option value="1">Xác nhận</option>
                     </select>
@@ -77,8 +75,7 @@ include 'View/titleOfComponents.php';
                   </div>
 
                   <div class="form-group form-default">
-                    <select class="form-select form-control" id="status_pay" name="state"
-                      aria-label="Default select example">
+                    <select class="form-select form-control" id="status_pay" name="state" aria-label="Default select example">
                       <option value="0">Chưa thanh toán</option>
                       <option value="1">Thanh toán</option>
                     </select>
@@ -103,37 +100,35 @@ include 'View/titleOfComponents.php';
                             <li><a class="mr-4" data-toggle="tab" href="#menu1">Đồ uống</a></li> -->
 
                             <?php foreach ($allDanhMuc as $danhMuc) : ?>
-                            <li class="nav-item">
-                              <a href="<?= "#" . $danhMuc["id_group"] ?>" class="nav-link mr-4"
-                                data-toggle="tab"><?= $danhMuc["name"] ?> </a>
-                            </li>
+                              <li class="nav-item">
+                                <a href="<?= "#" . $danhMuc["id_group"] ?>" class="nav-link mr-4" data-toggle="tab"><?= $danhMuc["name"] ?> </a>
+                              </li>
                             <?php endforeach; ?>
 
                           </ul>
 
                           <div class="tab-content">
                             <?php foreach ($allDanhMuc as $danhMuc) : ?>
-                            <div id="<?= $danhMuc["id_group"] ?>" class="tab-pane fade in">
-                              <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
-                              <div class="d-flex align-items-center">
-                                <h6 class="col-3"><?= $food["name"] ?></h6>
-                                <span class=" col-2"><?= number_format($food["price"]) ?> VNĐ</span>
-                                <input type="hidden" class="product-name" value="<?= $food["name"] ?>">
-                                <input type="hidden" class="product-price" value="<?= $food["price"] ?>">
-                                <select class="form-select form-control product-quantity" name=""
-                                  aria-label="Default select example">
-                                  <?php
+                              <div id="<?= $danhMuc["id_group"] ?>" class="tab-pane fade in">
+                                <?php foreach (getFoodsByCategory($danhMuc["id"]) as $food) : ?>
+                                  <div class="d-flex align-items-center">
+                                    <h6 class="col-3"><?= $food["name"] ?></h6>
+                                    <span class=" col-2"><?= number_format($food["price"]) ?> VNĐ</span>
+                                    <input type="hidden" class="product-name" value="<?= $food["name"] ?>">
+                                    <input type="hidden" class="product-price" value="<?= $food["price"] ?>">
+                                    <select class="form-select form-control product-quantity" name="" aria-label="Default select example">
+                                      <?php
                                       echo '<option selected>Số lượng</option>';
                                       for ($i = 0; $i <= 50; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                       }
 
                                       ?>
-                                  <span class="form-bar"></span>
-                                </select>
+                                      <span class="form-bar"></span>
+                                    </select>
+                                  </div>
+                                <?php endforeach; ?>
                               </div>
-                              <?php endforeach; ?>
-                            </div>
                             <?php endforeach; ?>
                           </div>
                         </div>
@@ -153,61 +148,61 @@ include 'View/titleOfComponents.php';
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
       <script>
-      function createObject(e) {
-        // e.preventDefault();
-        const productData = [];
-        const productNames = document.querySelectorAll(".product-name");
-        const productPrices = document.querySelectorAll('.product-price');
-        const productQuantities = document.querySelectorAll('.product-quantity');
+        function createObject(e) {
+          // e.preventDefault();
+          const productData = [];
+          const productNames = document.querySelectorAll(".product-name");
+          const productPrices = document.querySelectorAll('.product-price');
+          const productQuantities = document.querySelectorAll('.product-quantity');
 
-        // Lặp qua từng cặp input và tạo đối tượng cho mỗi sản phẩm
-        for (let i = 0; i < productNames.length; i++) {
-          const productName = productNames[i].value;
-          const productPrice = productPrices[i].value;
-          const productQuantity = productQuantities[i].value;
+          // Lặp qua từng cặp input và tạo đối tượng cho mỗi sản phẩm
+          for (let i = 0; i < productNames.length; i++) {
+            const productName = productNames[i].value;
+            const productPrice = productPrices[i].value;
+            const productQuantity = productQuantities[i].value;
 
-          const product = {
-            "name": productName,
-            "price": +productPrice,
-            "quantity": +productQuantity
+            const product = {
+              "name": productName,
+              "price": +productPrice,
+              "quantity": +productQuantity
+            };
+
+            productData.push(product);
+          }
+          console.log(productData)
+          const jsonData = JSON.stringify(productData);
+          console.log(jsonData)
+
+
+          // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
+          const hidden = document.querySelector(".hidden_data");
+          hidden.value = jsonData
+          // console.log(hidden.value)
+          // console.log(datass)
+
+          const datas = {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            date_picker: $('#date_picker').val(),
+            timeBook: +$('#timeBook').val(),
+            people: $('#people').val(),
+            // id_of_user: +$('.id_of_user').val(),
+            list_food: jsonData,
+            status: +$('#status').val(), // admin: 1
+            status_pay: +$('#status_pay').val() // admin: 0
           };
+          console.log(datas)
 
-          productData.push(product);
+          $.ajax({
+            // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
+            url: "http://localhost/DuAn1/webBooking/admin/index.php?act=formCreate",
+            // url: "http://localhost/DuAn1/webBooking/index.php?act=booking",
+            data: datas,
+            method: "POST",
+            dataType: "json",
+          })
         }
-        console.log(productData)
-        const jsonData = JSON.stringify(productData);
-        console.log(jsonData)
-
-
-        // LƯU THÔNG TIN NGƯỜI DÙNG CHỌN MÓN VÀO INPUT HIDDEN NÀY ĐỂ KHI POST SẼ LẤY NHỮNG GIÁ TRỊ ĐÓ
-        const hidden = document.querySelector(".hidden_data");
-        hidden.value = jsonData
-        // console.log(hidden.value)
-        // console.log(datass)
-
-        const datas = {
-          name: $('#name').val(),
-          email: $('#email').val(),
-          phone: $('#phone').val(),
-          date_picker: $('#date_picker').val(),
-          timeBook: +$('#timeBook').val(),
-          people: $('#people').val(),
-          // id_of_user: +$('.id_of_user').val(),
-          list_food: jsonData,
-          status: +$('#status').val(),
-          status_pay: +$('#status_pay').val()
-        };
-        console.log(datas)
-
-        $.ajax({
-          // URL này phải đặt đúng URL ở máy mọi người (Vì Có thể AE sẽ đặt tên Folder khác nhau)
-          url: "http://localhost/DuAn1/webBooking/admin/index.php?act=formCreate",
-          // url: "http://localhost/DuAn1/webBooking/index.php?act=booking",
-          data: datas,
-          method: "POST",
-          dataType: "json",
-        })
-      }
-      const btnSubmit = document.querySelector('#btnSubmit');
-      btnSubmit.addEventListener('click', createObject)
+        const btnSubmit = document.querySelector('#btnSubmit');
+        btnSubmit.addEventListener('click', createObject)
       </script>

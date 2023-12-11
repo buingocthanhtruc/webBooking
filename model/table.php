@@ -8,7 +8,15 @@ function loadall_table()
 function update_table_temporary($id, $id_user, $id_table)
 {
   $sql = "UPDATE bill SET table_temporary = $id_table WHERE id = $id AND id_user = $id_user";
-  return pdo_query($sql);
+  // return pdo_query($sql);
+  pdo_execute($sql);
+}
+
+function insert_id_table($id, $id_user, $id_table)
+{
+  $sql = "UPDATE bill SET id_table = $id_table WHERE id = $id AND id_user = $id_user";
+  // return pdo_query($sql);
+  pdo_execute($sql);
 }
 
 function updateStatusTable($id, $status)

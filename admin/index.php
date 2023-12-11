@@ -85,7 +85,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 1) :
                         //     $id_table = $option;
                         // }
                         $id_table = $_POST['id_table'];
-                        update_id_table($id, $id_user, $id_table);
+                        insert_id_table($id, $id_user, $id_table);
                         echo '<h4 class="mt-3 pb-5 text-success text-center">Thành Công !!!</h4>';
                         echo "<script>
                         function reloadPage() {
